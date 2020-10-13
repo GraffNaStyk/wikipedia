@@ -4,7 +4,7 @@ header("X-Frame-Options: sameorigin");
 header("Content-Security-Policy: block-all-mixed-content; upgrade-insecure-requests; reflected-xss;");
 header("X-Permitted-Cross-Domain-Policies: all");
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", true);
+header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
 if (!file_exists(__DIR__.'/app/config/app.php'))

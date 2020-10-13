@@ -13,8 +13,13 @@ class LoginController extends Controller
     {
         parent::__construct();
     }
+    
+    public function index()
+    {
+        return $this->render();
+    }
 
-    public function index(Request $request)
+    public function make(Request $request)
     {
         if (! $this->validate($request->all(), $this->rules())) {
             $this->sendError();

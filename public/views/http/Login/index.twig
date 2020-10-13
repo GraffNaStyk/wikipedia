@@ -1,0 +1,27 @@
+{% block content %}
+  <form data-action="login/make" method="post">
+    <div class="modal-header">
+      <h5 class="modal-title">Logowanie</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form__grid">
+        {{ input({
+          class: 'wiki-input',
+          placeholder: 'Użytkownik',
+          name: 'name'
+        }) }}
+        {{ input({
+          class: 'wiki-input',
+          placeholder: 'hasło',
+          name: 'password'
+        }) }}
+      </div>
+    </div>
+    <div class="modal-footer">
+      <input type="submit" value="Zaloguj">
+    </div>
+  </form>
+{% endblock %}

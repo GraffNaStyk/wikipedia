@@ -1,12 +1,46 @@
 <aside class="d-flex flex-column">
   <div class="box">
-    <h3 class="box-header">
-      elo
+    <h3 class="box-header red">
+      Recent Activity
     </h3>
     <div class="box-body">
       <div class="article">
         <p>text</p>
       </div>
+      <div class="article">
+        <p>text</p>
+      </div>
+      <div class="article">
+        <p>text</p>
+      </div>
     </div>
+
+    <div class="box mt-4">
+      <h3 class="box-header orange">
+        Customer support ?
+      </h3>
+      <div class="box-body">
+        <form data-action="question" method="post">
+          <div class="form__grid">
+            {{ input({
+              class: 'wiki-input mt-3',
+              name: 'name',
+              placeholder: 'name',
+              style: 'width: 86%; margin: 0 auto'
+            }) }}
+            {{ input({
+              class: 'wiki-input my-3',
+              name: 'email',
+              placeholder: 'E-mail',
+              style: 'width: 86%; margin: 0 auto'
+            }) }}
+            {{ input({
+              class: 'wiki-inputt mb-3',
+              style: 'width: 86%; margin: 0 auto'
+            }) }}
+            <input class="mb-3" type="submit" style="width: 86%; margin: 0 auto" value="Wyślij">
+          </div>
+        </form>
+      </div>
   </div>
 </aside>

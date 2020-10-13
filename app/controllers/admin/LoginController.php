@@ -31,6 +31,7 @@ class LoginController extends Controller
         ])) $this->sendError();
         
         if ($user = User::select(['name', 'id', 'password'])
+            ->join(['rights', 'id', '=', 'rights.user_id'])
             ->where(['name', '=', $request->get('name')])
             ->findOrFail()
         ) {
