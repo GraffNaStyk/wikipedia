@@ -1,0 +1,162 @@
+:root {
+  --mainbackground: #252e39;
+  --textcolor: #d5d5d5;
+  --icocolor: #d5d5d5;
+  --orangecolor: #d77b31;
+  --inputbackground: #313c4a;
+  --inputborder: #43556a;
+}
+
+h1,h2,h3,h4,h5,h6,p,a,span,b {
+  color: var(--textcolor);
+  font-family: 'Nunito', sans-serif;
+}
+
+body {
+  background: url("../../../storage/public/bg.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.grid-box {
+  display: grid;
+  grid-template-columns: 10% 70% 20%;
+}
+
+label {
+  margin: 0!important;
+}
+
+span.err img {
+  width: 20px;
+}
+
+[tooltip]:before {
+  content: attr(tooltip);
+  position: absolute;
+  opacity: 0;
+  transition: all 0.15s ease;
+  padding: 2px 8px;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 0 0 3px 0 black;
+  width: 200px;
+}
+
+[tooltip]:hover:before {
+  opacity: 1;
+  background: #fbfbfb;
+  margin-left: 20px;
+  top: 22px;
+}
+
+[tooltip]:not([tooltip-persistent]):before {
+  pointer-events: none;
+  z-index: 500;
+}
+
+input, input:hover {
+  background: var(--inputbackground);
+  border: 1px solid var(--inputborder);
+  color: white;;
+  border-radius: 5px;
+  padding: .2rem .6rem;
+}
+
+input::placeholder {
+  color: #b9bec1;
+}
+
+.wiki-box {
+  background: var(--mainbackground);
+  padding: 0.6rem;
+  border-radius: 5px;
+  color: #949699;
+}
+
+.wiki-box__with_margin {
+  margin: 0.6rem;
+}
+
+.big {
+  padding: 0.8rem;
+}
+
+.big__with_margin {
+  margin: 0.8rem;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: .6s;
+}
+
+.menu-item:not(:first-child) {
+  border-top: 1px solid #949699;
+  margin-top: .4rem;
+}
+
+.menu-item p {
+  margin: 0;
+}
+
+.menu-item i, .menu-item img {
+  padding: 0.8rem 0 0.4rem 0;
+}
+
+.menu-item:hover {
+  cursor: pointer;
+  color: white;
+  transition: .6s;
+}
+
+.box, .box * {
+  border-radius: 8px;
+}
+
+.box .box-header {
+  color: white;
+  background: #e96900;
+  margin: 0;
+  padding: .3rem;
+}
+
+.box .box-body {
+  background: #fff;
+  color: #000;
+  padding: .4rem;
+}
+
+.box .box-body p {
+  margin: 0;
+}
+
+.wiki-box a {
+  color: var(--textcolor);
+  padding: 0 0.4rem;
+}
+
+.wiki-box a i {
+  color: var(--textcolor);
+}
+
+.alert  {
+  min-width: 340px;
+  text-align: center;
+  color: white !important;
+  border: 1px solid #c8c8c8 !important;
+  border-radius: 8px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.alert-success {
+  background: #15a31c !important;
+}
+
+.alert-danger {
+  background: #dd1c1e !important;
+}

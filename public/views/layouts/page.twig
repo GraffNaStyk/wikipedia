@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta http-equiv="Content-Language" content="pl">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="robots" content="index,follow,all">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="keywords" content="Graff PHP">
+  <link rel="shortcut icon" href="data:image/x-icon;" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+  <base href="{{ base() }}">
+  <title>{{ page.title }}</title>
+  {{ css|raw }}
+  <script>
+    document.url = '{{ url() }}';
+  </script>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="right-panel"></div>
+  <nav class="grid-box py-2">
+    <div class="logo mr-4">
+      LOGO HERE
+    </div>
+    <div class="d-flex">
+      <div class="wiki-box mr-4">
+        <form data-action="search/">
+          <input type="text" class="wiki-input" placeholder="Szukaj">
+        </form>
+      </div>
+      <div class="wiki-box big d-flex">
+        {% if session.user %}
+          <p class="m-0 user-welcome">Welcome, Graff</p>
+          <a href="{{ url() }}"> <i class="fa fa-bell"></i> </a>
+          <a href="{{ url('logout') }}"> <i class="fa fa-power-off"></i> </a>
+        {% else %}
+          <form data-action="login">
+            {{ input({
+              class: 'wiki-input',
+              placeholder: 'Użytkownik',
+              name: 'name'
+            }) }}
+            {{ input({
+              class: 'wiki-input',
+              placeholder: 'hasło',
+              name: 'password'
+            }) }}
+            {{ input({
+              type: 'submit',
+              value: 'Zaloguj',
+            }) }}
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+  <main id="main-page-wrapper" class="grid-box">
+    <div>
+      {% include('layouts/inc/left-aside.twig') %}
+    </div>
+    <div>
+      {% block content %}
+      {% endblock %}
+    </div>
+    <div>
+      {% include('layouts/inc/right-aside.twig') %}
+    </div>
+  </main>
+  <div id="modal" class="modal"></div>
+  <footer>
+  </footer>
+</div>
+
+{{ js|raw }}
+</body>
+</html>
