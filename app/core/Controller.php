@@ -11,6 +11,8 @@ use App\Facades\Http\Router;
 
 abstract class Controller
 {
+    protected array $user;
+    
     public function __construct()
     {
         $this->boot();
@@ -29,6 +31,10 @@ abstract class Controller
     
         if ($vars = Session::collectProvidedData())
             View::set($vars);
+        
+        if (Session::has('user')) {
+            $this->user = Session::get('user');
+        }
     
         Session::clearMsg();
     }
@@ -64,5 +70,10 @@ abstract class Controller
     public function sendError(string $message=null, int $status = 400, array $headers = []): string
     {
         return Response::json(['ok' => false, 'msg' => $message ?? Validator::getErrors()], $status, $headers);
+    }
+    
+    public function getDate()
+    {
+        return date('Y-m-d H:i:s');
     }
 }

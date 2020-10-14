@@ -1,9 +1,9 @@
-<?php namespace App\Controllers\Http;
+<?php
+namespace App\Controllers\Http;
 
 use App\Core\Controller;
-use App\Facades\Dotter\Has;
+use App\Facades\Faker\Hash;
 use App\Facades\Http\Request;
-use App\Facades\Url\Url;
 use App\Helpers\Session;
 use App\Model\User;
 
@@ -29,20 +29,20 @@ class LoginController extends Controller
             ->join(['rights', 'id', '=', 'rights.user_id'])
             ->findOrFail()
         ) {
-            if (password_verify($request->get('password'), $user['password'])) {
+            if (Hash::verify($request->get('password'), $user['password'])) {
                 Session::set(['user' => $user]);
                 $this->sendSuccess('Zalogowano poprawnie');
             }
-            
+
             $this->sendError('Niepoprawne dane');
         }
     }
     
-    private function rules()
+    private function rules(): array
     {
         return [
             'password' => 'required|min:4',
-            'name' => 'required'
+            'username' => 'required'
         ];
     }
 }

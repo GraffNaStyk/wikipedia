@@ -5,14 +5,25 @@ document.getElementById('main-page-wrapper').style.minHeight
   - document.getElementsByTagName('footer')[0].clientHeight
   - document.getElementsByTagName('nav')[0].clientHeight  - 1 + 'px';
 
-App.OnSubmitForms();
+setTimeout(() => {
+  App.OnSubmitForms();
+  App.RefreshSelects();
+}, 80);
 
 App.on('click', '.render', (e) => {
   e.preventDefault();
-  App.render({
-    url: e.target.dataset.url,
-    el: e.target.dataset.el
-  })
+  e.stopPropagation()
+  if(e.target.classList.contains('fa')) {
+    App.render({
+      url: e.target.parentElement.dataset.url,
+      el: e.target.parentElement.dataset.el
+    })
+  } else {
+    App.render({
+      url: e.target.dataset.url,
+      el: e.target.dataset.el
+    })
+  }
 });
 
 App.on('click', '[data-menu="toggle"]', (e) => {

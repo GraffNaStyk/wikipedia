@@ -1,4 +1,5 @@
-<?php namespace App\Facades\Faker;
+<?php
+namespace App\Facades\Faker;
 
 class Hash
 {
@@ -16,5 +17,10 @@ class Hash
     public static function crypt(string $password, int $cost = 12):string
     {
         return password_hash($password, PASSWORD_BCRYPT, ['cost' => $cost]);
+    }
+    
+    public static function verify($rawPassword, $hashPassword)
+    {
+        return password_verify($rawPassword, $hashPassword);
     }
 }

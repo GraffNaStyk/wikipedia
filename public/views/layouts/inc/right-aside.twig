@@ -1,4 +1,4 @@
-<aside class="d-flex flex-column">
+<aside class="flex-column d-none d-sm-none d-xs-none d-sm-none d-md-none d-lg-none d-xl-flex">
   <div class="box">
     <h3 class="box-header red">
       Recent Activity
@@ -21,26 +21,14 @@
       </h3>
       <div class="box-body">
         <form data-action="question" method="post">
-          <div class="form__grid">
-            {{ input({
-              class: 'wiki-input mt-3',
-              name: 'name',
-              placeholder: 'name',
-              style: 'width: 86%; margin: 0 auto'
-            }) }}
-            {{ input({
-              class: 'wiki-input my-3',
-              name: 'email',
-              placeholder: 'E-mail',
-              style: 'width: 86%; margin: 0 auto'
-            }) }}
-            {{ input({
-              class: 'wiki-inputt mb-3',
-              style: 'width: 86%; margin: 0 auto'
-            }) }}
-            <input class="mb-3" type="submit" style="width: 86%; margin: 0 auto" value="Wyślij">
+          <div class="d-flex justify-content-center align-items-center flex-column mx-3">
+            <label style="width: 100%;"><input class="wiki-input mt-3" name="username" placeholder="username" style="width: 100%;"> </label>
+            <label style="width: 100%;"><input class="wiki-input mt-3" name="email" placeholder="E-mail" style="width: 100%;"> </label>
+            <textarea class="wiki-input my-3" style="height: 100px; width: 100%;" placeholder="Message" name="message"></textarea>
+            <input class="mb-3" type="submit" style="width: 100%;" value="Wyślij">
           </div>
         </form>
       </div>
+    </div>
   </div>
 </aside>

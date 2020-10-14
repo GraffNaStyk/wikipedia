@@ -20,7 +20,7 @@ body {
   background-position: 50% 50%;
 }
 
-.grid-box {
+.grid-box, .grid-box-header {
   display: grid;
   grid-template-columns: 10% 70% 20%;
 }
@@ -57,7 +57,7 @@ span.err img {
   z-index: 500;
 }
 
-input, input:hover, button {
+input, input:hover, button, textarea {
   background: var(--inputbackground);
   border: 1px solid var(--inputborder);
   color: white;;
@@ -220,6 +220,7 @@ span.err {
 .box-body .recent__item {
   min-height: 150px;
   background: white;
+  padding: 1rem;
 }
 
 .box-body .recent__item:not(:last-child) {
@@ -233,8 +234,6 @@ span.err {
 }
 
 .box-body .recent__item h3 {
-  padding-top: 1rem;
-  padding-left: 1rem;
   color: #333;
 }
 
@@ -244,5 +243,22 @@ span.err {
 
 .box-body .recent__item p, .box-body .recent__item span  {
   color: #9f9f9f;
+}
 
+/*BREAKPOINTS*/
+
+@media only screen and (max-width: 1199px) {
+  .grid-box {
+    grid-template-columns: 10% 90%;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .grid-box {
+    grid-template-columns: 100%;
+  }
+
+  .grid-box-header {
+    grid-template-columns: 33% 33% 33%;
+  }
 }

@@ -61,7 +61,7 @@ export const render = (args) => {
 const modal = (result) => {
   const modal = document.getElementById('modal');
   modal.classList.add('d-block');
-  modal.setAttribute('style', 'background: rgba(0,0,0,0.7)');
+  modal.setAttribute('style', 'background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);');
   const content = document.querySelector('.modal-content');
   content.innerHTML += result;
 
@@ -227,10 +227,12 @@ export const toggleActive = (target, el) => {
 
 export const preloader =  () => {
   let loader = document.querySelector('.preloader');
-  loader.style.opacity = .9;
-  setTimeout(() => {
-    loader.remove();
-  }, 400)
+  if (loader !== null) {
+    loader.style.opacity = .9;
+    setTimeout(() => {
+      loader.remove();
+    }, 400)
+  }
 }
 
 const insertLoader = () => {
