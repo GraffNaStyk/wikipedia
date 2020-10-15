@@ -20,7 +20,8 @@
 <body>
 <div class="right-panel"></div>
 <div class="container-fluid">
-  <nav class="grid-box-header py-2">
+  <nav class="grid-box-header py-2 align-items-center">
+    <button class="menu__btn"> <i class="fa fa-bars"></i> </button>
     <div class="d-flex justify-content-center">
       <a href="{{ url() }}">
         <img src="{{ img('logo.png') }}" alt="">
@@ -51,22 +52,15 @@
     </div>
   </nav>
   <main id="main-page-wrapper" class="grid-box mt-3">
-    <div>
-      {% include('layouts/inc/left-aside.twig') %}
-    </div>
-    <div>
-      {% block content %}
-      {% endblock %}
-    </div>
-    <div>
-      {% include('layouts/inc/right-aside.twig') %}
-    </div>
+    {% include('layouts/inc/left-aside.twig') %}
+    {% block content %}
+    {% endblock %}
+    {% include('layouts/inc/right-aside.twig') %}
   </main>
   {% include 'components/modal.twig' %}
   <footer>
   </footer>
 </div>
-<script type="module" src="public/js/components/main.js"></script>
 {{ js|raw }}
 </body>
 </html>

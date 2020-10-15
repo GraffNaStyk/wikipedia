@@ -98,7 +98,7 @@ export const response = (res, selector) => {
       }
     }))
   } else {
-    throwCustomMessage(res, '.right-panel')
+    throwCustomMessage(res, selector)
   }
 };
 
@@ -217,6 +217,15 @@ export const toggle = (el, by) => {
     selector.classList.remove(`${by}`)
   } else {
     selector.classList.add(`${by}`)
+  }
+}
+
+export const toggleStyle = (el, styles) => {
+  let selector = document.querySelector(`${el}`);
+  if (selector.hasAttribute('style')) {
+    selector.removeAttribute('style')
+  } else {
+    selector.setAttribute('style', styles);
   }
 }
 

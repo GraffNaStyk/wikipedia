@@ -21,7 +21,7 @@ class Loader
         $cssString = null;
         foreach ($cssArr as $key => $css) {
             if ((bool) file_exists($css) === true) {
-                $cssString .= trim('<link rel="stylesheet" href="'.str_replace(app_path(), '', $css).'">'.PHP_EOL);
+                $cssString .= trim('<link rel="stylesheet" href="'.str_replace(app_path(), '', $css).'?'.time().'">'.PHP_EOL);
             }
         }
         
@@ -45,7 +45,7 @@ class Loader
         $jsString = null;
         foreach ($jsArr as $key => $js) {
             if ((bool) file_exists($js) === true) {
-                $jsString .= trim('<script type="module" src="'.str_replace(app_path(), '', $js).'"></script>'.PHP_EOL);
+                $jsString .= trim('<script type="module" src="'.str_replace(app_path(), '', $js).'?'.time().'"></script>'.PHP_EOL);
             }
         }
         

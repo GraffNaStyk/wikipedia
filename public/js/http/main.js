@@ -29,3 +29,8 @@ App.on('click', '.render', (e) => {
 App.on('click', '[data-menu="toggle"]', (e) => {
   App.toggle(e.target.dataset.target, 'd-flex');
 });
+
+App.on('click', '.menu__btn', (e) => {
+  console.log(e);
+  App.toggleStyle('.left__box', 'position: fixed; display: flex!important; width: 300px; left: 0; top:0;');
+})

@@ -245,6 +245,31 @@ span.err {
   color: #9f9f9f;
 }
 
+.menu__btn {
+  display: none;
+  border-radius: 5px;
+  width: 60px;
+  height: 60px;
+  background: var(--mainbackground);
+  align-items: center;
+  justify-content: center;
+}
+
+.menu__btn i {
+  font-size: 38px;
+}
+
+.left__menu__closer {
+  display: none;
+  position: absolute;
+
+}
+
+.main__box {
+  margin-left:1rem;
+  margin-right:1rem;
+}
+
 /*BREAKPOINTS*/
 
 @media only screen and (max-width: 1199px) {
@@ -259,6 +284,15 @@ span.err {
   }
 
   .grid-box-header {
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: 15% 15% 70%;
+  }
+
+  .menu__btn {
+    display: flex;
+  }
+
+  .main__box {
+    margin-left:0!important;
+    margin-right:0!important;
   }
 }

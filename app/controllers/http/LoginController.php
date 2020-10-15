@@ -25,10 +25,11 @@ class LoginController extends Controller
             $this->sendError();
         }
         
-        if ($user = User::where(['name', '=', $request->get('name')])
+        if ($user = User::where(['name', '=', $request->get('username')])
             ->join(['rights', 'id', '=', 'rights.user_id'])
             ->findOrFail()
         ) {
+
             if (Hash::verify($request->get('password'), $user['password'])) {
                 Session::set(['user' => $user]);
                 $this->sendSuccess('Zalogowano poprawnie');
@@ -36,6 +37,7 @@ class LoginController extends Controller
 
             $this->sendError('Niepoprawne dane');
         }
+        $this->sendError('Niepoprawne dane');
     }
     
     private function rules(): array
