@@ -46,7 +46,6 @@ class Items
             return false;
         }
         
-        $exist = false;
         $key = false;
         
         foreach ($item['attribute'] as $attr) {
@@ -54,16 +53,12 @@ class Items
             
             if (in_array($attr, self::$itemTypes)) {
                 $key = $attr;
-                $exist = true;
                 break;
             }
         }
         
-        if ($exist) {
-            return $key;
-        }
+        return $key;
         
-        return false;
     }
     
     protected static function getAttributes($item)
