@@ -1,8 +1,7 @@
 <?php namespace App\Controllers\Http;
 
 use App\Core\Controller;
-use App\Db\Db;
-use App\Model\Config;
+use App\Facades\Parser\Items;
 use App\Model\Menu;
 
 class IndexController extends Controller
@@ -15,6 +14,9 @@ class IndexController extends Controller
                 ->join(['images', 'icon_id', '=', 'images.id'])
                 ->get()
         ]);
+        
+        Items::parse();
+        
     }
 
     public function index()

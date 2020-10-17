@@ -33,45 +33,23 @@
 <section class="grid">
 
   <aside class="left-panel d-flex">
-    <a href="{{ url() }}"> <i class="fa fa-plane"></i> Dupa</a>
+    <a href="{{ url() }}"> <i class="fa fa-"></i> Menu</a>
 
-    <a href="#" class="has__parent"> <i class="fa fa-paint-brush"></i> Strona</a>
+    <a href="#" class="has__parent"> <i class="fa fa-paint-brush"></i> Profesje</a>
     <div class="parent">
       <a href="{{ url('appearance/colors') }}">Kolory</a>
       <a href="{{ url('appearance/seo') }}">Seo</a>
     </div>
 
-    <a href="#" class="has__parent"> <i class="fa fa-lock"></i> Klienci</a>
-    <div class="parent">
-      <a href="{{ url('clients') }}">nowy</a>
-      <a href="{{ url() }}">Lista</a>
-    </div>
-
   </aside>
 
   <main class="right-panel">
-    {% for msg in messages %}
-      <div class="alert alert-{{ color }}" role="alert">
-        {% if msg.field %}
-          [{{ msg.field }}] {{ msg.msg }}
-        {% else %}
-          {{ msg }}
-        {% endif %}
-      </div>
-    {% endfor %}
-
     {% block content %}
     {% endblock %}
   </main>
 
 </section>
-
-<div id="modal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    </div>
-  </div>
-</div>
+{% include 'components/modal.twig' %}
   {{ js|raw }}
 </body>
 </html>

@@ -45,6 +45,7 @@
           <p class="mx-2 mb-0 user-welcome">Welcome, Graff</p>
           <a class="mx-2" href="{{ url() }}"> <i class="fa fa-bell medium__size"></i> </a>
           <a class="mx-2" href="{{ url('logout') }}"> <i class="fa fa-power-off medium__size"></i> </a>
+          <a class="mx-2" href="{{ url('admin/dash') }}"> <i class="fa fa-wrench medium__size"></i> </a>
         {% else %}
           <button class="render px-4" data-el="modal" data-url="login">Zaloguj</button>
         {% endif %}

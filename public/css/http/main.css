@@ -13,6 +13,10 @@ h1,h2,h3,h4,h5,h6,p,a,span,b {
   font-family: 'Nunito', sans-serif;
 }
 
+* {
+  font-family: 'Nunito' sans-serif!important;
+}
+
 body {
   background: url("../../../storage/public/big.gif");
   background-repeat: no-repeat;
@@ -97,7 +101,7 @@ input::placeholder {
   transition: .6s;
 }
 
-.menu-item:not(:first-child) {
+.menu-item:not(:nth-child(2)) {
   border-top: 1px solid #949699;
   margin-top: .4rem;
 }
@@ -261,8 +265,6 @@ span.err {
 
 .left__menu__closer {
   display: none;
-  position: absolute;
-
 }
 
 .main__box {
@@ -289,6 +291,15 @@ span.err {
 
   .menu__btn {
     display: flex;
+  }
+
+  .left__menu__closer {
+    position: absolute;
+    color: white;
+    right: 12px;
+    font-size: 45px;
+    top: -19px;
+    cursor: pointer;
   }
 
   .main__box {

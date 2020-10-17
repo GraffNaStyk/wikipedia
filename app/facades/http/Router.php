@@ -142,7 +142,7 @@ final class Router
     private static function setBasic(bool $exist): void
     {
         //this case is for automaticly routes like controller/action when
-        if ((bool)$exist === false) {
+        if ((bool) $exist === false) {
             $route = explode('/', self::$url);
             
             if (self::$baseRouteProvider) {

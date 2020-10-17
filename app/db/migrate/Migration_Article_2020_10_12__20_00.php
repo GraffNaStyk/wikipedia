@@ -9,7 +9,6 @@ class Migration_Article_2020_10_12__20_00
 
        public function up(Schema $schema)
        {
-           echo 'test';
            $schema->int('id', 11)->primary();
            $schema->varchar('title', 50)->index();
            $schema->text('content')->null();

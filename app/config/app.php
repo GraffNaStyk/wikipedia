@@ -64,5 +64,7 @@ return [
         'js' => [
             'bootstrap', 'slim-select'
         ]
-    ]
+    ],
+    
+    'items_path' => storage_path('private/items.xml')
 ];
