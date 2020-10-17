@@ -1,16 +1,15 @@
 <?php
 
-use App\Facades\Migrations\Migration;
-
-if ((string) php_sapi_name() !== 'cli') {
-    header('location: index.php');
-}
+use \App\Facades\Dispatcher\Dispatcher;
 
 require_once __DIR__.'/index.php';
 
-$job = Migration::dispatch($argv);
+$job = Dispatcher::dispatch($argv);
+
+$job->register(['parser']);
 
 if ($job->do('parser')) {
     App\Facades\Parser\Items::parse();
-    exit;
 }
+
+$job->end();
