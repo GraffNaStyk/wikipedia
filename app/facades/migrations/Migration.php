@@ -8,7 +8,8 @@ class Migration
     protected static array $argv = [];
 
     protected static array $canDo = [
-        'make', 'up', 'down', 'dump'
+        'make', 'up', 'down', 'dump',
+        'parser'
     ];
 
     public static function dispatch(&$argv)

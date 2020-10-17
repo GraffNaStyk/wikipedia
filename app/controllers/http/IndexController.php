@@ -14,9 +14,6 @@ class IndexController extends Controller
                 ->join(['images', 'icon_id', '=', 'images.id'])
                 ->get()
         ]);
-        
-        Items::parse();
-        
     }
 
     public function index()
