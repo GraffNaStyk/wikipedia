@@ -6,23 +6,26 @@ class Items
 {
     protected static array $itemTypes = [
         'sword', 'distance', 'axe', 'fist',
-        'body', 'legs', 'feet'
+        'body', 'legs', 'feet', 'head'
     ];
     
     protected static array $attributes = [
-        'attack', 'defense', 'armor', 'description',
-        'range'
+        'attack', 'defense', 'armor',
+        'description', 'range'
     ];
     
-    protected static array $return = [
-        'axe' => [],
-        'sword' => [],
-        'fist' => [],
-        'distance' => [],
-        'body' => [],
-        'legs' => [],
-        'feet' => []
+    protected static array $mapTypeToModel = [
+        'sword' => 'Sword',
+        'distance' => 'Ball',
+        'axe' => 'Glover',
+        'fist' => 'Band',
+        'body' => 'Armor',
+        'legs' => 'Leg',
+        'feet' => 'Boots',
+        'head' => 'Helmet'
     ];
+    
+    protected static array $return = [];
     
     public static function parse()
     {
@@ -37,6 +40,14 @@ class Items
             }
         } else {
             exit('file not exist');
+        }
+        
+        foreach (self::$return as $key => $items) {
+            $model = app['model-provider'].self::$mapTypeToModel[$key];
+            
+            foreach ($items as $item) {
+                $model::insert($item);
+            }
         }
     }
     
@@ -65,7 +76,7 @@ class Items
     {
         $return = [
             'name' => $item['@attributes']['name'],
-            'cid' => $item['@attributes']['id']
+            'cid' => (int) $item['@attributes']['id']
         ];
 
         foreach ($item['attribute'] as $attr) {
