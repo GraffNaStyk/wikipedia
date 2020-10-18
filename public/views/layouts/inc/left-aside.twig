@@ -1,18 +1,36 @@
 <aside class="wiki-box flex-column d-none d-xs-none d-sm-none d-md-none d-lg-flex d-xs-none d-xl-flex left__box">
   <span class="left__menu__closer">×</span>
-  <div class="menu-item">
+  <a class="menu-item">
       <i class="fa fa-pencil"></i>
-      <p>Title</p>
-  </div>
-  <div class="is-parent">
+      Title
+  </a>
 
-  </div>
-  <div class="menu-item">
+  <a class="menu-item">
     <i class="fa fa-envelope"></i>
-    <p>Title Two</p>
+    Title Two
+  </a>
+
+  <a class="menu-item has__parent" href="#">
+    <i class="fa fa-clone"></i>
+    Weapons
+  </a>
+  <div class="is__parent">
+    <a href="{{ url('weapons/swords') }}">Swords</a>
+    <a href="{{ url('weapons/glovers') }}">Glovers</a>
+    <a href="{{ url('weapons/balls') }}">Balls</a>
+    <a href="{{ url('weapons/bands') }}">Bands</a>
   </div>
-  <div class="menu-item">
-    <i class="fa fa-magic"></i>
-    <p>Example item</p>
+
+  <a class="menu-item has__parent" href="#">
+    <i class="fa fa-italic"></i>
+    Items
+  </a>
+  <div class="is__parent">
+    <a href="{{ url('items/helmets') }}">Helmets</a>
+    <a href="{{ url('items/armors') }}">Armors</a>
+    <a href="{{ url('items/legs') }}">Legs</a>
+    <a href="{{ url('items/boots') }}">Boots</a>
+    <a href="{{ url('items/belts') }}">Belts</a>
+    <a href="{{ url('items/robes') }}">Robes</a>
   </div>
 </aside>

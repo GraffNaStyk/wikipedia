@@ -29,6 +29,10 @@ body {
   grid-template-columns: 10% 70% 20%;
 }
 
+#main-page-wrapper .main__box {
+  margin-bottom: .6rem;
+}
+
 label {
   margin: 0!important;
 }
@@ -99,15 +103,34 @@ input::placeholder {
   justify-content: center;
   align-items: center;
   transition: .6s;
+  text-decoration: none;
+}
+
+.menu-item:hover, .is__parent a:hover, a:hover {
+  text-decoration: none;
+}
+
+.is__parent {
+  display: none;
+  z-index: 100;
+  flex-direction: column;
+  background: var(--inputbackground);
+  width: 180px;
+  align-items: center;
+  border-radius: 6px;
+  margin-left: .6rem;
+}
+
+.is__parent a {
+  padding:0.3rem 0!important;
+  width: 100%;
+  text-align: center;
+  color: var(--textcolor)!important;
 }
 
 .menu-item:not(:nth-child(2)) {
   border-top: 1px solid #949699;
   margin-top: .4rem;
-}
-
-.menu-item p {
-  margin: 0;
 }
 
 .menu-item i, .menu-item img {
@@ -306,4 +329,15 @@ span.err {
     margin-left:0!important;
     margin-right:0!important;
   }
+}
+
+.table {
+  background: white;
+  border-bottom-left-radius: 6px!important;
+  border-bottom-right-radius: 6px!important;
+  margin: 0!important;
+}
+
+.table-responsive {
+  margin: 0!important;
 }

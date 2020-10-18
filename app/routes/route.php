@@ -11,4 +11,7 @@ Router::post('login/make', 'login/make');
 Router::get('logout', 'Logout/index');
 Router::get('logout', 'Logout/index');
 
+Router::get('weapons/{type}', 'Weapons/index');
+Router::get('items/{type}', 'Items/index');
+
 Router::run();

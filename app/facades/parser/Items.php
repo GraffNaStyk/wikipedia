@@ -6,7 +6,8 @@ class Items
 {
     protected static array $itemTypes = [
         'sword', 'distance', 'axe', 'fist',
-        'body', 'legs', 'feet', 'head'
+        'body', 'legs', 'feet', 'head', 'ring',
+        'necklace'
     ];
     
     protected static array $attributes = [
@@ -22,7 +23,9 @@ class Items
         'body' => 'Armor',
         'legs' => 'Leg',
         'feet' => 'Boots',
-        'head' => 'Helmet'
+        'head' => 'Helmet',
+        'ring' => 'Belt',
+        'necklace' => 'Robe'
     ];
     
     protected static array $return = [];

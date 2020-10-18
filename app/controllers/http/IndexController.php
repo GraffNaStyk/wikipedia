@@ -1,7 +1,8 @@
-<?php namespace App\Controllers\Http;
+<?php
+
+namespace App\Controllers\Http;
 
 use App\Core\Controller;
-use App\Facades\Parser\Items;
 use App\Model\Menu;
 
 class IndexController extends Controller
@@ -12,7 +13,8 @@ class IndexController extends Controller
         $this->set([
             'menu' => Menu::select(['name', 'images.path'])
                 ->join(['images', 'icon_id', '=', 'images.id'])
-                ->get()
+                ->get(),
+            'title' => 'Dashboard'
         ]);
     }
 
