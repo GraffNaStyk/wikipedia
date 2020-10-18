@@ -2,6 +2,8 @@
 
 namespace App\Facades\Parser;
 
+use App\Model\Item;
+
 class Items
 {
     protected static array $itemTypes = [
@@ -16,16 +18,16 @@ class Items
     ];
     
     protected static array $mapTypeToModel = [
-        'sword' => 'Sword',
-        'distance' => 'Ball',
-        'axe' => 'Glover',
-        'fist' => 'Band',
-        'body' => 'Armor',
-        'legs' => 'Leg',
-        'feet' => 'Boots',
-        'head' => 'Helmet',
-        'ring' => 'Belt',
-        'necklace' => 'Robe'
+        'sword' => 'swords',
+        'distance' => 'balls',
+        'axe' => 'glovers',
+        'fist' => 'bands',
+        'body' => 'armors',
+        'legs' => 'legs',
+        'feet' => 'boots',
+        'head' => 'helmets',
+        'ring' => 'belts',
+        'necklace' => 'robes'
     ];
     
     protected static array $return = [];
@@ -46,10 +48,9 @@ class Items
         }
         
         foreach (self::$return as $key => $items) {
-            $model = app['model-provider'].self::$mapTypeToModel[$key];
-            
             foreach ($items as $item) {
-                $model::insert($item);
+                $item['type'] = self::$mapTypeToModel[$key];
+                Item::insert($item);
             }
         }
     }

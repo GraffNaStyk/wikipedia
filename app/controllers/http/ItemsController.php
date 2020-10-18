@@ -4,37 +4,24 @@ namespace App\Controllers\Http;
 
 use App\Facades\Http\Request;
 
+use App\Helpers\Items;
+
 class ItemsController extends IndexController
 {
-    private array $map = [
-        'helmets' => 'Helmet',
-        'armors' => 'Armor',
-        'legs' => 'Leg',
-        'boots' => 'Boots',
-        'belts' => 'Belt',
-        'robes' => 'Robe'
-    ];
-    
     public function __construct()
     {
         parent::__construct();
     }
     
-    public function index(string $type)
+    public function index(string $type):void
     {
-        if (! isset($this->map[$type])) {
+        $result = Items::prepare($type);
+        
+        if (! $result['items']) {
             $this->redirect('');
         }
         
-        $model = app('model-provider').$this->map[$type];
-        
-        $this->render([
-            'items' => $model::select('*')
-                ->where(['armor', '<>', '0'])
-                ->order('armor')
-                ->get(),
-            'title' => ucfirst($type)
-        ]);
+        $this->render($result);
     }
 
     public function add()
