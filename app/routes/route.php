@@ -14,4 +14,6 @@ Router::get('logout', 'Logout/index');
 Router::get('weapons/{type}', 'Weapons/index');
 Router::get('items/{type}', 'Items/index');
 
+Router::get('article/show/{id}', 'Article/show');
+
 Router::run();

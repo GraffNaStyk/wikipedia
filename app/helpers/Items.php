@@ -7,9 +7,9 @@ use App\Model\Item;
 class Items
 {
     private static array $tableHeaders = [
-        'balls' => ['name', 'attack', 'defense', 'range', 'description'],
-        'armors' => ['name', 'armor', 'description'],
-        'weapons' => ['name', 'attack', 'defense', 'description'],
+        'balls' => ['name', 'level', 'attack', 'defense', 'range', 'description'],
+        'armors' => ['name', 'level', 'armor', 'description'],
+        'weapons' => ['name', 'level', 'attack', 'defense', 'description'],
     ];
     
     public static function prepare(string $type): array

@@ -34,8 +34,8 @@ class Items
     
     public static function parse()
     {
-        if (file_exists(app['items_path'])) {
-            foreach (simplexml_load_file(app['items_path']) as $key => $item) {
+        if (file_exists(app('items_path'))) {
+            foreach (simplexml_load_file(app('items_path')) as $key => $item) {
                 $item = get_object_vars($item);
                 $key = self::isInTypes($item);
                 

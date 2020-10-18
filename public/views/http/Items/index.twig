@@ -13,18 +13,9 @@
     <tbody>
     {% for item in items %}
       <tr>
-        <td>{{ item.name|capitalize }}</td>
-        {% if subType == 'weapons' or subType == 'balls' %}
-          <td>{{ item.attack }}</td>
-          <td>{{ item.defense }}</td>
-        {% endif %}
-        {% if subType == 'armors' %}
-          <td>{{ item.armor }}</td>
-        {% endif %}
-        {% if subType == 'balls' %}
-          <td>{{ item.range }}</td>
-        {% endif %}
-        <td>{{ item.description }}</td>
+        {% for value in item  %}
+          <td>{{ value|capitalize }}</td>
+        {% endfor %}
       </tr>
     {% endfor %}
     </tbody>

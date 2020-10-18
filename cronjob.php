@@ -10,6 +10,7 @@ $job->register(['parser']);
 
 if ($job->do('parser')) {
     App\Facades\Parser\Items::parse();
+    \App\Facades\Parser\Movements::parse();
 }
 
 $job->end();

@@ -66,5 +66,7 @@ return [
         ]
     ],
     
-    'items_path' => storage_path('private/items.xml')
+    'items_path' => storage_path('private/items.xml'),
+    
+    'movements_path' => storage_path('private/movements.xml'),
 ];

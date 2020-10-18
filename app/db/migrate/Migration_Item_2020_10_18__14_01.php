@@ -16,6 +16,7 @@ class Migration_Item_2020_10_18__14_01
         $schema->smallint('armor', 3)->implicitly(0);
         $schema->smallint('attack', 3)->implicitly(0);
         $schema->smallint('range', 3)->implicitly(0);
+        $schema->smallint('level', 3)->implicitly(0);
         $schema->varchar('type', 50);
         $schema->text('description')->null();
         $schema->run();
