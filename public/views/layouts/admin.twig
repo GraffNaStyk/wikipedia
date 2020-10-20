@@ -33,7 +33,7 @@
 <section class="grid">
 
   <aside class="left-panel d-flex">
-    <a href="{{ url() }}"> <i class="fa fa-"></i> Menu</a>
+    <a href="{{ url('dash') }}"> <i class="fa fa-"></i> Menu</a>
 
     <a href="#" class="has__parent"> <i class="fa fa-paint-brush"></i> Profesje</a>
     <div class="parent">
@@ -43,8 +43,8 @@
 
     <a href="#" class="has__parent"> <i class="fa fa-paint-brush"></i> Utwórz</a>
     <div class="parent">
-      <a href="{{ url('creator/page') }}">Podstronę</a>
-      <a href="{{ url('creator/table') }}">Tabelkę</a>
+      <a href="{{ url('pages') }}">Lista stron</a>
+      <a href="{{ url('pages/add') }}">Stronę</a>
     </div>
 
   </aside>

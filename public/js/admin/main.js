@@ -1,4 +1,5 @@
 import * as  App from '../app.js';
+
 let className;
 
 if (window.innerWidth > 991) {

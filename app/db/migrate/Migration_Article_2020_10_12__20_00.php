@@ -12,8 +12,8 @@ class Migration_Article_2020_10_12__20_00
            $schema->int('id', 11)->primary();
            $schema->varchar('title', 50)->index();
            $schema->text('content')->null();
-           $schema->text('config')->null();
-           $schema->varchar('type', 15);
+           $schema->varchar('url', 255);
+           $schema->tinyint('is_active',1)->implicitly(1);
            $schema->int('created_by', 11);
            $schema->int('updated_by', 11)->null();
            $schema->timestamp('created_at')->implicitly('CURRENT_TIMESTAMP');

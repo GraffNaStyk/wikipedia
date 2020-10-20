@@ -16,7 +16,7 @@ class Auth
     public static function guard(): void
     {
         if (!Session::has('user')) {
-            Router::redirect('login');
+            Router::redirect('',302, true);
         }
     }
     
