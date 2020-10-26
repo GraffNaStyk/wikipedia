@@ -1,4 +1,5 @@
 let loader = `<div class="preloader"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>`;
+let callbacks = [];
 
 export const post = async (args) => {
   let data;
@@ -32,6 +33,9 @@ export const get = async (fetch_url) => {
 };
 
 export const render = (args) => {
+  if (callbacks['beforeRender'] !== undefined) {
+    callbacks['beforeRender']();
+  }
   insertLoader();
   preloader();
   fetch(document.url + args.url, {
@@ -54,6 +58,9 @@ export const render = (args) => {
     setTimeout(() => {
       OnSubmitForms();
       RefreshSelects();
+      if (callbacks['afterRender'] !== undefined) {
+        callbacks['afterRender']();
+      }
     },100);
   })
 };
@@ -120,6 +127,7 @@ const throwCustomMessage = (res, selector) => {
 }
 
 export const on = (event, selector, fn) => {
+  console.log(selector);
   Array.from(document.querySelectorAll(`${selector}`)).forEach((item) => {
     item.addEventListener(`${event}`, eval(fn));
   });
@@ -247,3 +255,11 @@ export const preloader =  () => {
 const insertLoader = () => {
   document.body.insertAdjacentHTML('beforebegin', loader);
 };
+
+export const afterRender = (callback) => {
+  callbacks['afterRender'] = callback;
+}
+
+export const beforeRender = (callback) => {
+  callbacks['beforeRender'] = callback;
+}

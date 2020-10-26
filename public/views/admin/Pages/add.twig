@@ -1,0 +1,41 @@
+{% extends layout %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-9">
+      <div class="box">
+        <form data-action="pages/store">
+          <div data-component="app">
+
+          </div>
+          {{ input({
+            type:'submit',
+            value: 'Zapisz'
+          }) }}
+        </form>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="box">
+        <h3>Komponenty</h3>
+        <button
+         class="button render table__renderer"
+         data-url="pages/table/1"
+         data-counter="1"
+         data-el="app"
+         data-append="true">
+          Tabela
+        </button>
+        <button
+         class="button render"
+         data-url="pages/text/1"
+         data-counter="1"
+         data-el="app"
+         data-append="true">
+          Pole tekstowe
+        </button>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

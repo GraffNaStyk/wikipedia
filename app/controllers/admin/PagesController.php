@@ -26,6 +26,7 @@ class PagesController extends DashController implements ControllerInterface
     
     public function store(Request $request)
     {
+        pd($request->all());
         Article::insert([
             'title' => 'Test tabela',
             'content' => json_encode($request->all()),
@@ -52,5 +53,15 @@ class PagesController extends DashController implements ControllerInterface
     public function delete(int $id)
     {
 
+    }
+    
+    public function table(int $nr)
+    {
+        return $this->render(['nr' => $nr]);
+    }
+    
+    public function text(int $nr)
+    {
+        return $this->render(['nr' => $nr]);
     }
 }

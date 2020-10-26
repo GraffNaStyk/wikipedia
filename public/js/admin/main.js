@@ -61,13 +61,15 @@ App.on('click', '.render', (e) => {
   if(e.target.classList.contains('fa')) {
     App.render({
       url: e.target.parentElement.dataset.url,
-      el: e.target.parentElement.dataset.el
-    })
+      el: e.target.parentElement.dataset.el,
+      append: !!e.target.parentElement.dataset.append,
+    }, e)
   } else {
     App.render({
       url: e.target.dataset.url,
-      el: e.target.dataset.el
-    })
+      el: e.target.dataset.el,
+      append: !!e.target.dataset.append,
+    }, e)
   }
 });
 
