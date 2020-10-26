@@ -4,6 +4,7 @@ namespace App\Controllers\Http;
 
 use App\Core\Controller;
 use App\Facades\Parser\Movements;
+use App\Facades\Parser\Spells;
 use App\Model\Menu;
 
 class IndexController extends Controller
@@ -17,6 +18,7 @@ class IndexController extends Controller
                 ->get(),
             'title' => 'Dashboard'
         ]);
+        pd(Spells::parse(), true);
     }
 
     public function index()

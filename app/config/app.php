@@ -69,4 +69,6 @@ return [
     'items_path' => storage_path('private/items.xml'),
     
     'movements_path' => storage_path('private/movements.xml'),
+    
+    'spells_path' => storage_path('private/spells.xml'),
 ];
