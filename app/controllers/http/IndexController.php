@@ -18,7 +18,6 @@ class IndexController extends Controller
                 ->get(),
             'title' => 'Dashboard'
         ]);
-        pd(Spells::parse(), true);
     }
 
     public function index()
