@@ -1,0 +1,26 @@
+{% extends layout %}
+
+{% block content %}
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nazwa</th>
+        <th>Lvl</th>
+        <th>Train Points</th>
+        <th>Ki</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for spell in spells %}
+      <tr>
+        <td>{{ spell.name|capitalize }}</td>
+        <td>{{ spell.lvl }}</td>
+        <td>{{ spell.train_points }}</td>
+        <td>{{ spell.mana }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

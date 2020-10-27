@@ -33,4 +33,14 @@
     <a href="{{ url('items/belts') }}">Belts</a>
     <a href="{{ url('items/robes') }}">Robes</a>
   </div>
+
+  <a class="menu-item has__parent" href="#">
+    <i class="fa fa-italic"></i>
+    Proffesions
+  </a>
+  <div class="is__parent">
+    {% for vocation in vocations %}
+      <a href="{{ url('vocations/show/'~vocation.name) }}">{{ vocation.name }}</a>
+    {% endfor %}
+  </div>
 </aside>

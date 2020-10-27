@@ -85,14 +85,14 @@ abstract class Builder extends Field
         if ($this->onDuplicate === true) {
             $this->query .= ' ON DUPLICATE KEY UPDATE ';
             foreach ($this->data as $key => $field) {
-                if ((string) $field !== '') {
+                if ((string) $field !== '' || (string) $key !== 'id') {
                     $this->query .= "`{$key}` = :{$key}, ";
                 }
             }
         }
     
         $this->query = rtrim($this->query, ', ');
-        
+        print $this->query.PHP_EOL;
         return true;
     }
     

@@ -6,6 +6,7 @@ use App\Core\Controller;
 use App\Facades\Parser\Movements;
 use App\Facades\Parser\Spells;
 use App\Model\Menu;
+use App\Model\Vocation;
 
 class IndexController extends Controller
 {
@@ -16,7 +17,8 @@ class IndexController extends Controller
             'menu' => Menu::select(['name', 'images.path'])
                 ->join(['images', 'icon_id', '=', 'images.id'])
                 ->get(),
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'vocations' => Vocation::order('name', 'asc')->all()
         ]);
     }
 
