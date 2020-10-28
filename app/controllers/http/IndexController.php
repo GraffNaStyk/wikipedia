@@ -3,6 +3,7 @@
 namespace App\Controllers\Http;
 
 use App\Core\Controller;
+use App\Facades\Parser\Monsters;
 use App\Facades\Parser\Movements;
 use App\Facades\Parser\Spells;
 use App\Model\Menu;
@@ -20,6 +21,8 @@ class IndexController extends Controller
             'title' => 'Dashboard',
             'vocations' => Vocation::order('name', 'asc')->all()
         ]);
+
+        Monsters::parse();
     }
 
     public function index()

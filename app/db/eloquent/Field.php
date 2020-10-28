@@ -39,7 +39,7 @@ abstract class Field
         return $field;
     }
 
-    protected function checkHowToConnectValue($val, $trim = false)
+    protected function checkHowToConnectValue($val, $trim = false, $isJoin = false)
     {
         if(strpos($val, 'CASE') !== false)
             return $val .', ';
@@ -56,13 +56,21 @@ abstract class Field
             $table = $val[0];
             $val = explode('as', $val[1]);
             $val[0] =  $this->checkIfValueIsStar($val[0]);
-            $returnValues = "`{$this->trim($table)}`.{$this->trim($val[0])} as `{$this->trim($val[1])}`, ";
+            if ($isJoin) {
+                $returnValues = "{$this->trim($val[0])} as `{$this->trim($val[1])}`, ";
+            } else {
+                $returnValues = "`{$this->trim($table)}`.{$this->trim($val[0])} as `{$this->trim($val[1])}`, ";
+            }
         }
         //case when you write (field as tablefield)
         else if (strpos($val = strtolower($val), ' as ') !== false) {
             $val = explode('as', $val);
             $val[0] = $this->checkIfValueIsStar($val[0]);
-            $returnValues = "`{$this->trim($this->table)}`.{$this->trim($val[0])} as `{$this->trim($val[1])}`, ";
+            if ($isJoin) {
+                $returnValues = "{$this->trim($val[0])} as `{$this->trim($val[1])}`, ";
+            } else {
+                $returnValues = "`{$this->trim($this->table)}`.{$this->trim($val[0])} as `{$this->trim($val[1])}`, ";
+            }
         }
         //case when you write (table.field)
         else if (strpos($val, '.') !== false) {
@@ -72,7 +80,11 @@ abstract class Field
         }
         //case when you write (field)
         else {
-            $returnValues = "`{$this->trim($this->table)}`.`{$this->trim($val)}`, ";
+            if ($isJoin) {
+                $returnValues = "`{$this->trim($val)}`, ";
+            } else {
+                $returnValues = "`{$this->trim($this->table)}`.`{$this->trim($val)}`, ";
+            }
         }
 
         if($trim)

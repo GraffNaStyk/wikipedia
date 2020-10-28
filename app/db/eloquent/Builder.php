@@ -35,14 +35,14 @@ abstract class Builder extends Field
 
         if (!empty($this->$table)) {
             foreach ((array) $this->$table['field'] as $key => $value) {
-                $join .= " {$this->$table['connector'][$iterator]} `{$this->$table['table'][$iterator]}` ON
+                $join .= " {$this->$table['connector'][$iterator]} {$this->checkHowToConnectValue($this->$table['table'][$iterator], true, true)} ON
                            {$this->checkHowToConnectValue($this->$table['field'][$iterator], true)}
                            {$this->$table['comparison'][$iterator]} {$this->checkHowToConnectValue($this->$table['value'][$iterator], true)} ";
                 ++$iterator;
             }
-
             return rtrim($join);
         }
+
         return '';
     }
 
@@ -92,7 +92,7 @@ abstract class Builder extends Field
         }
     
         $this->query = rtrim($this->query, ', ');
-        print $this->query.PHP_EOL;
+
         return true;
     }
     
@@ -144,7 +144,7 @@ abstract class Builder extends Field
                 
                 ++$iterator;
             }
-            
+
             return rtrim($where, ' ');
         }
         return '';

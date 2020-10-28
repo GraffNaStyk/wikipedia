@@ -14,17 +14,17 @@ class VocationsController extends IndexController
 
     public function show(string $name)
     {
-        $spells = Vocation::select(['spells.*'])
-            ->join(['ct_vocations_spells', 'vocations.id', '=', 'ct_vocations_spells.vocation_id'])
-            ->join(['spells', 'spells.id', '=', 'ct_vocations_spells.spell_id'])
+        $spells = Vocation::select(['s.*'])
+            ->join(['ct_vocations_spells as ct', 'vocations.id', '=', 'ct.vocation_id'])
+            ->join(['spells as s', 's.id', '=', 'ct.spell_id'])
             ->where(['vocations.name', '=', $name])
-            ->order('spells.lvl', 'asc')
+            ->order('s.lvl', 'asc')
             ->get();
-        
+
         if (empty($spells)) {
             $this->redirect('');
         }
-        
+
         $this->render([
             'spells' => $spells,
             'title' => $name
