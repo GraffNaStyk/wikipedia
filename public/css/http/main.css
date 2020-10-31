@@ -18,10 +18,9 @@ h1,h2,h3,h4,h5,h6,p,a,span,b {
 }
 
 body {
-  background: url("../../../storage/public/big.gif");
-  background-repeat: no-repeat;
+  background: url("../../../storage/public/big.gif") no-repeat center center fixed;
   background-size: cover;
-  background-position: 50% 50%;
+  background-attachment: fixed;
 }
 
 .grid-box, .grid-box-header {
@@ -340,4 +339,17 @@ span.err {
 
 .table-responsive {
   margin: 0!important;
+}
+
+.wiki__box--search {
+  display: flex;
+}
+
+@media only screen and (max-width: 720px) {
+  .wiki__box--search {
+    display: none!important;
+  }
+  .grid-box-header {
+    grid-template-columns: 25% 25% 25%;
+  }
 }

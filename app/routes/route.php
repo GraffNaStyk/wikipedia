@@ -17,4 +17,6 @@ Router::get('article/show/{id}', 'Article/show');
 
 Router::get('vocations/show/{name}', 'Vocations/show');
 
+Router::get('monsters/{page}', 'monsters/index');
+
 Router::run();

@@ -15,7 +15,14 @@ abstract class Builder extends Field
 
     protected function buildOrder()
     {
-        return " ORDER BY {$this->checkHowToConnectValue($this->order['by'], true)} {$this->order['type']}";
+        $tmp = '';
+
+        foreach ($this->order['by'] as $order) {
+            $tmp .= $this->checkHowToConnectValue($order, true) . ', ';
+        }
+    
+        $tmp = rtrim($tmp, ', ');
+        return " ORDER BY {$tmp} {$this->order['type']}";
     }
 
     protected function buildGroup()
@@ -157,7 +164,7 @@ abstract class Builder extends Field
                 if(is_null($value) === true || (string) $value === '') {
                     $this->data[$key] = null;
                 } else {
-                    $this->data[$key] = $value;
+                    $this->data[$key] = trim($value);
                 }
             }
         }

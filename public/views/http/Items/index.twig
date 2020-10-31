@@ -13,8 +13,17 @@
     <tbody>
     {% for item in items %}
       <tr>
-        {% for value in item  %}
-          <td>{{ value|capitalize }}</td>
+        {% for key,value in item %}
+          {% if loop.index <= headerCount %}
+            <td>
+              <div>
+                {{ value|capitalize }}
+                {% if loop.index == 1 %}
+                  <img src="{{ img(item.path~item.hash~'.gif') }}" alt="">
+                {% endif %}
+              </div>
+            </td>
+          {% endif %}
         {% endfor %}
       </tr>
     {% endfor %}

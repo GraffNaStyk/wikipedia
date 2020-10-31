@@ -3,9 +3,6 @@
 namespace App\Controllers\Http;
 
 use App\Core\Controller;
-use App\Facades\Parser\Monsters;
-use App\Facades\Parser\Movements;
-use App\Facades\Parser\Spells;
 use App\Model\Menu;
 use App\Model\Vocation;
 
@@ -19,10 +16,8 @@ class IndexController extends Controller
                 ->join(['images', 'icon_id', '=', 'images.id'])
                 ->get(),
             'title' => 'Dashboard',
-            'vocations' => Vocation::order('name', 'asc')->all()
+            'vocations' => Vocation::order(['name'], 'asc')->all()
         ]);
-
-        Monsters::parse();
     }
 
     public function index()

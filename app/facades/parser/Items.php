@@ -2,10 +2,15 @@
 
 namespace App\Facades\Parser;
 
+use App\Facades\Faker\Faker;
+use App\Helpers\Storage;
+use App\Model\Image;
 use App\Model\Item;
 
 class Items
 {
+    const PG_URL = 'https://priogames.com/images/items/';
+    
     protected static array $itemTypes = [
         'sword', 'distance', 'axe', 'fist',
         'body', 'legs', 'feet', 'head', 'ring',
@@ -34,6 +39,7 @@ class Items
     
     public static function parse()
     {
+        $others = [];
         if (file_exists(app('items_path'))) {
             foreach (simplexml_load_file(app('items_path')) as $key => $item) {
                 $item = get_object_vars($item);
@@ -41,6 +47,8 @@ class Items
                 
                 if ((bool) $key === true) {
                     self::$return[$key][] = self::getAttributes($item);
+                } else {
+                    $others[] = $item;
                 }
             }
         } else {
@@ -51,8 +59,11 @@ class Items
             foreach ($items as $item) {
                 $item['type'] = self::$mapTypeToModel[$key];
                 Item::insert($item);
+                self::getImage((int) $item['cid'], $item['name']);
             }
         }
+        
+        self::parseOtherItems($others);
     }
     
     protected static function isInTypes($item)
@@ -92,5 +103,70 @@ class Items
         }
         
         return $return;
+    }
+    
+    protected static function parseOtherItems(array $others)
+    {
+        $items  = [];
+        foreach ($others as $other) {
+            if (isset($other['attribute'])) {
+                $insert = false;
+                $data = [];
+                if (empty(get_object_vars($other['attribute']))) {
+                    foreach ($other['attribute'] as $attr) {
+                        $attr = get_object_vars($attr);
+        
+                        if ($attr['@attributes']['key'] === 'weight') {
+                            $insert = true;
+                            $data['weight'] = $attr['@attributes']['value'];
+                        }
+                        if ($attr['@attributes']['key'] === 'description') {
+                            $data['description'] = $attr['@attributes']['value'];
+                        }
+                    }
+                } else {
+                    $item = get_object_vars($other['attribute']);
+                    
+                    if ($item['@attributes']['key'] === 'weight') {
+                        $insert = true;
+                        $data['weight'] = $item['@attributes']['value'];
+                    }
+                    if ($item['@attributes']['key'] === 'description') {
+                        $insert = true;
+                        $data['description'] = $item['@attributes']['value'];
+                    }
+                }
+                
+                if ($insert && (bool) preg_match('/dead/i', $other['@attributes']['name']) === false) {
+                    $data['name'] = $other['@attributes']['name'];
+                    $data['cid'] = (int) $other['@attributes']['id'];
+                    $data['type'] = 'item';
+                    Item::insert($data);
+                    self::getImage((int) $other['@attributes']['id'], $other['@attributes']['name']);
+                }
+            }
+        }
+    }
+    
+    protected static function getImage(int $cid, string $name)
+    {
+        if ($cid === 0) {
+            return false;
+        }
+        
+        Storage::disk('public')->make('images/');
+        exec('wget '.self::PG_URL.$cid.'_1.gif -P '. storage_path('public/images/'));
+        
+        if (is_file(storage_path('public/images/'.$cid.'_1.gif'))) {
+            $hash = Faker::hash(50);
+            rename(storage_path('public/images/'.$cid.'_1.gif'), storage_path('public/images/'.$hash.'.gif'));
+            Image::insert([
+                'name' => $name,
+                'cid' => $cid,
+                'hash' => $hash,
+                'path' => 'images/',
+                'created_by' => 1
+            ]);
+        }
     }
 }

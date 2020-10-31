@@ -18,13 +18,15 @@ class Items
         
         switch ($type) {
             case 'balls':
-                $return['items'] = Item::select(self::$tableHeaders[$type])
+                $return['items'] = Item::select([...self::$tableHeaders[$type], ...['i.path', 'i.hash']])
+                    ->leftJoin(['images as i', 'items.cid', '=', 'i.cid'])
                     ->where(['type', '=', $type])
                     ->where(['attack', '<>', 0])
                     ->order('attack')
                     ->get();
                 $return['headers'] = self::$tableHeaders[$type];
                 $return['subType'] = 'balls';
+                $return['headerCount'] = count(self::$tableHeaders[$type]);
                 break;
             case 'armors':
             case 'legs':
@@ -32,24 +34,28 @@ class Items
             case 'helmets':
             case 'belts':
             case 'robes':
-            $return['items'] = Item::select(self::$tableHeaders['armors'])
+            $return['items'] = Item::select([...self::$tableHeaders['armors'], ...['i.path', 'i.hash']])
+                    ->leftJoin(['images as i', 'items.cid', '=', 'i.cid'])
                     ->where(['type', '=', $type])
                     ->where(['armor', '<>', 0])
                     ->order('armor')
                     ->get();
             $return['headers'] = self::$tableHeaders['armors'];
             $return['subType'] = 'armors';
+            $return['headerCount'] = count(self::$tableHeaders['armors']);
                 break;
             case 'swords':
             case 'glovers':
             case 'bands':
-            $return['items'] = Item::select(self::$tableHeaders['weapons'])
+            $return['items'] = Item::select([...self::$tableHeaders['weapons'], ...['i.path', 'i.hash']])
+                    ->leftJoin(['images as i', 'items.cid', '=', 'i.cid'])
                     ->where(['type', '=', $type])
                     ->where(['attack', '<>', 0])
                     ->order('attack')
                     ->get();
             $return['headers'] = self::$tableHeaders['weapons'];
             $return['subType'] = 'weapons';
+            $return['headerCount'] = count(self::$tableHeaders['weapons']);
                 break;
         }
         

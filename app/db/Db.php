@@ -77,7 +77,7 @@ class Db extends Builder
         return $this;
     }
 
-    public function order(string $by, string $type = null)
+    public function order(array $by, string $type = null)
     {
         $this->order['by'] = $by;
         $this->order['type'] = $type ?? 'ASC';

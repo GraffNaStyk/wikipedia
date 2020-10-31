@@ -18,6 +18,7 @@ class Migration_Item_2020_10_18__14_01
         $schema->smallint('range', 3)->implicitly(0);
         $schema->smallint('level', 3)->implicitly(0);
         $schema->varchar('type', 50);
+        $schema->int('weight', 10)->implicitly(0);
         $schema->text('description')->null();
         $schema->run();
     }
