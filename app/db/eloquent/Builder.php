@@ -157,6 +157,19 @@ abstract class Builder extends Field
         return '';
     }
     
+    protected function buildWhereInQuery()
+    {
+        $in = implode("', '", $this->whereIn['value'])."'";
+        $value = str_replace(',', '', $this->checkHowToConnectValue($this->whereIn['field']));
+        if (isset($this->where['field'][0])) {
+            $whereIn = " AND {$value} IN ('{$in})";
+        } else {
+            $whereIn = " WHERE {$value} IN ('{$in})";
+        }
+
+        return $whereIn;
+    }
+    
     protected function setData()
     {
         if(is_array($this->data)) {

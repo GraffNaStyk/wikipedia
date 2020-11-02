@@ -1,8 +1,6 @@
 <?php
-namespace App\Db\Eloquent;
 
-use stdClass;
-use ReflectionClass;
+namespace App\Db\Eloquent;
 
 abstract class Field
 {

@@ -101,6 +101,12 @@ class Db extends Builder
         $this->limit = $limit;
         return $this;
     }
+    
+    public function offset($offset = null)
+    {
+        $this->offset = $offset;
+        return $this;
+    }
 
     public function first()
     {
@@ -129,6 +135,9 @@ class Db extends Builder
 
         if (!empty($this->where))
             $this->query .= $this->buildWhereQuery();
+    
+        if (!empty($this->whereIn))
+            $this->query .= $this->buildWhereInQuery();
 
         if (!empty($this->group))
             $this->query .= $this->buildGroup();
@@ -138,6 +147,9 @@ class Db extends Builder
 
         if (!empty($this->limit))
             $this->query .= " LIMIT {$this->limit}";
+    
+        if (!empty($this->offset))
+            $this->query .= " OFFSET {$this->offset}";
 
         if($this->debug)
             $this->develop();
@@ -188,6 +200,16 @@ class Db extends Builder
     public function rightJoin(array $join)
     {
         $this->push('rightJoin', $join[1], $join[2], $join[3], 'RIGHT JOIN', $join[0]);
+        return $this;
+    }
+    
+    public function whereIn(array $in)
+    {
+        $this->whereIn = [
+            'field' => $in[0],
+            'value' => $in[1]
+        ];
+
         return $this;
     }
 

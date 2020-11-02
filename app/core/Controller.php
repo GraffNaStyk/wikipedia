@@ -13,6 +13,8 @@ abstract class Controller
 {
     protected array $user;
     
+    const PER_PAGE = 25;
+    
     public function __construct()
     {
         $this->boot();
