@@ -2,7 +2,7 @@
 
 use App\Controllers\ControllerInterface;
 use App\Facades\Http\Request;
-use App\Model\Article;
+use App\Model\Page;
 
 class ArticleController extends IndexController implements ControllerInterface
 {
@@ -33,7 +33,7 @@ class ArticleController extends IndexController implements ControllerInterface
 
     public function show(int $id)
     {
-       $article = Article::where(['id', '=', $id])->first()->get();
+       $article = Page::where(['id', '=', $id])->first()->get();
        $article['content'] = json_decode($article['content'], true);
        return $this->render(['article' => $article]);
     }

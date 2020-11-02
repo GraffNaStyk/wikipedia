@@ -2,6 +2,8 @@
 use App\Facades\Http\Router;
 
 Router::group(['prefix' => 'admin', 'as' => 'App\Controllers\Admin', 'base' => 'login'], function () {
+    Router::get('components/add/{id}', 'PagesComponents/add');
+    Router::post('pages/components/store', 'PagesComponents/store');
 });
 
 Router::get('login/index', 'Login/index');

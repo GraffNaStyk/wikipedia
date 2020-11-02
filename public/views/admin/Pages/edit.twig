@@ -1,0 +1,19 @@
+{% extends layout %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-10">
+      <div class="box">
+        <h3>{{ page.title }}</h3>
+        {% for component in components %}
+            {% include '/admin/PagesComponents/'~component.type~'.twig' %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="box">
+        <button class="render" data-el="modal" data-url="components/add/{{ page.id }}" style="width: 180px;">Dodaj</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
