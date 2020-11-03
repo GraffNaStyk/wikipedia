@@ -1,0 +1,36 @@
+{% block content %}
+  <form data-action="pages/components/update" method="post">
+    <div class="modal-header">
+      <h5 class="modal-title">Ustaw dane dla tabeli</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form__grid">
+        {{ input({
+          type: 'text',
+          value: rows,
+          class: 'form-control',
+          placeholder: 'Wiersze',
+          name: 'rows'
+        }) }}
+        {{ input({
+          type: 'text',
+          value: cols,
+          class: 'form-control',
+          placeholder: 'Kolumny',
+          name: 'cols'
+        }) }}
+        {{ input({
+          type: 'hidden',
+          value: id,
+          name: 'id'
+        }) }}
+      </div>
+    </div>
+    <div class="modal-footer">
+      <input type="submit" value="Save changes">
+    </div>
+  </form>
+{% endblock %}

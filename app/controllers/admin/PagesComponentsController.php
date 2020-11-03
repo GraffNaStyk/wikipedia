@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Facades\Http\Request;
+use App\Helpers\Table;
 use App\Model\PageComponent;
 
 class PagesComponentsController extends DashController
@@ -15,6 +16,10 @@ class PagesComponentsController extends DashController
         [
             'value' => 'text',
             'text' => 'Tekst'
+        ],
+        [
+            'value' => 'separator',
+            'text' => 'Separator'
         ]
     ];
     
@@ -46,7 +51,25 @@ class PagesComponentsController extends DashController
 
     public function update(Request $request)
     {
-
+        if (! $this->validate($request->all(), [
+            'id' => 'required|int',
+            'rows' => 'int|max:999',
+            'cols' => 'int|max:99',
+        ])) $this->sendError();
+        
+        if ($request->has('rows') && $request->has('cols')) {
+            $request->set('data', json_encode(
+                Table::prepareRowsAndCols(
+                    $request->get('rows'),
+                    $request->get('cols'),
+                    (array) json_decode(PageComponent::select(['data'])->where(['id', '=', $request->get('id')])->findOrFail()['data'])
+                )
+            ));
+        }
+        
+        PageComponent::update($request->all());
+    
+        $this->sendSuccess('Zaktualizowano poprawnie');
     }
 
     public function show(int $id)
@@ -56,11 +79,18 @@ class PagesComponentsController extends DashController
 
     public function edit(int $id)
     {
-
+        if ($component = PageComponent::where(['id', '=', $id])->findOrFail()) {
+            $this->render(['component' => $component]);
+        }
     }
 
     public function delete(int $id)
     {
 
+    }
+    
+    public function setTableRows(int $id)
+    {
+        return $this->render(['id' => $id]);
     }
 }

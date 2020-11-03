@@ -127,7 +127,6 @@ const throwCustomMessage = (res, selector) => {
 }
 
 export const on = (event, selector, fn) => {
-  console.log(selector);
   Array.from(document.querySelectorAll(`${selector}`)).forEach((item) => {
     item.addEventListener(`${event}`, eval(fn));
   });

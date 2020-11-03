@@ -115,7 +115,7 @@ abstract class Builder extends Field
                 continue;
             }
             if ((string) $value !== '') {
-                $this->query .= "{$key} = :{$key}, ";
+                $this->query .= "`{$key}` = :{$key}, ";
             }
         }
         
@@ -172,9 +172,9 @@ abstract class Builder extends Field
     
     protected function setData()
     {
-        if(is_array($this->data)) {
+        if (is_array($this->data)) {
             foreach ($this->data as $key => $value) {
-                if(is_null($value) === true || (string) $value === '') {
+                if (is_null($value) === true || (string) $value === '') {
                     $this->data[$key] = null;
                 } else {
                     $this->data[$key] = trim($value);

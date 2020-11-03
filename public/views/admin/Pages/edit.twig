@@ -1,19 +1,40 @@
 {% extends layout %}
 
 {% block content %}
-  <div class="row">
-    <div class="col-10">
-      <div class="box">
-        <h3>{{ page.title }}</h3>
-        {% for component in components %}
-            {% include '/admin/PagesComponents/'~component.type~'.twig' %}
-        {% endfor %}
-      </div>
-    </div>
-    <div class="col-2">
-      <div class="box">
-        <button class="render" data-el="modal" data-url="components/add/{{ page.id }}" style="width: 180px;">Dodaj</button>
-      </div>
-    </div>
-  </div>
+<div class="box">
+  <h3>{{ page.title }}</h3>
+  <table class="table" id="table">
+    <thead class="thead-dark">
+    <tr>
+      <td>Id</td>
+      <td>Komponent</td>
+      <td>Aktywny</td>
+      <td class="position-sticky">
+        <button class="render btn-sm" data-el="modal" data-url="pages/components/add/{{ page.id }}"> <i class="fa fa-plus"></i> </button>
+        <a class="btn-sm is_button" target="_blank" href="{{ base('page/show/'~page.id~'/'~page.link) }}">Podlgąd</a>
+      </td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for component in components %}
+      <tr>
+        <td>{{ component.id }}</td>
+        <td>{{ component.type|capitalize }}</td>
+        <td>{{ component.is_active == 1 ? 'Tak' : 'Nie' }}</td>
+        <td class="position-sticky">
+          {% if component.type == 'table' %}
+            <button class="render btn-sm" data-el="modal" data-url="pages/components/set/table/{{ page.id }}"> <i class="fa fa-cog"></i> </button>
+          {% endif %}
+          &nbsp;
+          {% if component.type != 'separator' %}
+            <button class="render btn-sm" data-el="modal" data-url="pages/components/edit/{{ component.id }}">Edycja</button>
+          {% endif %}
+          &nbsp;
+          <a class="is_button btn-sm" href="{{ url('pages/edit/'~page.id) }}">Deaktywuj</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

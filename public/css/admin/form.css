@@ -30,7 +30,7 @@ input[type="color"] {
   width: 100%;
 }
 
-button, input[type="submit"] {
+button, input[type="submit"], a.is_button {
   color: rgba(0,0,0,0.6);
   background: transparent;
   border: 1px solid #c8c8c8;
@@ -40,10 +40,16 @@ button, input[type="submit"] {
   width: 200px;
 }
 
-button:hover, input[type="submit"]:hover {
+button:hover, input[type="submit"]:hover, a.is_button:hover {
   background: #323c48;
   color: white;
   transition: .6s;
+  text-decoration: none;
+}
+
+button.btn-sm, a.is_button {
+  width: auto;
+  padding: .25rem .5rem;
 }
 
 .form__grid {

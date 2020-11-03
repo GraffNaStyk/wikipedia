@@ -35,7 +35,7 @@ class Url
         $link = strtolower(trim(preg_replace('~[^\\pL\d]+~u', '-', $link)));
         $link = iconv('utf-8', 'us-ascii//TRANSLIT', $link);
         $link = preg_replace('~[^-\w]+~', '', $link);
-        return substr($link, 0, -1);
+        return $link;
     }
     
     public static function isLocalhost(): bool

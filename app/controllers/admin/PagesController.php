@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\ControllerInterface;
 use App\Facades\Http\Request;
+use App\Facades\Url\Url;
 use App\Helpers\Session;
 use App\Model\Page;
 use App\Model\PageComponent;
@@ -17,17 +18,19 @@ class PagesController extends DashController implements ControllerInterface
 
     public function index()
     {
-    
+        return $this->render([
+            'pages' => Page::all()
+        ]);
     }
     
     public function add()
     {
-        $this->render();
+        return $this->render();
     }
     
     public function store(Request $request)
     {
-        if(!$this->validate($request->all(), [
+        if (!$this->validate($request->all(), [
             'title' => 'required|min:10'
         ])) $this->sendError();
         
@@ -57,6 +60,8 @@ class PagesController extends DashController implements ControllerInterface
         if (!$page) {
             $this->redirect('pages');
         }
+    
+        $page['link'] = Url::link($page['title']);
 
         $components = PageComponent::where(['page_id', '=', $id])
             ->order(['order'])
