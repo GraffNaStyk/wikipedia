@@ -3,6 +3,7 @@
 namespace App\Controllers\Http;
 
 use App\Model\Page;
+use App\Model\PageComponent;
 
 class PagesController extends IndexController
 {
@@ -16,12 +17,25 @@ class PagesController extends IndexController
 
     }
     
-
     public function show(int $id)
     {
-       $article = Page::where(['id', '=', $id])->first()->get();
-       pd($article);
-       $article['content'] = json_decode($article['content'], true);
-       return $this->render(['article' => $article]);
+        $page = Page::where(['id', '=', $id])
+            ->where(['is_active', '=', 1])
+            ->where(['type', '<>', 'null'])
+            ->findOrFail();
+        
+        $components = PageComponent::select(['type', 'data'])
+            ->where(['page_id', '=', $id])
+            ->where(['is_active', '=', 1])
+            ->order(['order'])
+            ->get();
+        
+        foreach ($components as $key => $component){
+            $components[$key]['data'] = json_decode($component['data'], true);
+            $components[$key]['iterations'] = count($components[$key]['data']['cols']);
+        }
+        
+        
+        return $this->render(['page' => $page, 'components' => $components]);
     }
 }

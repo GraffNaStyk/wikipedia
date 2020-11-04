@@ -1,0 +1,36 @@
+{% extends layout %}
+
+{% block content %}
+  <div class="box">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Id</td>
+          <td>Nazwa</td>
+          <td>Aktywna</td>
+          <td class="position-sticky">
+            <button class="btn-sm render" data-url="pages/add" data-el="modal"> <i class="fa fa-plus"></i> </button>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+      {% for page in pages %}
+       <tr>
+         <td>{{ page.id }}</td>
+         <td>{{ page.title }}</td>
+         <td>{{ page.is_active == 1 ? 'Tak' : 'Nie' }}</td>
+         <td class="position-sticky">
+           <a class="is_button btn-sm" href="{{ url('pages/edit/'~page.id) }}">Edycja</a>
+           &nbsp;
+           <a class="is_button btn-sm" href="{{ url('pages/edit/'~page.id) }}">Podgląd</a>
+           &nbsp;
+           <a class="is_button btn-sm" href="{{ url('pages/active/'~page.is_active~'/'~page.id) }}">
+            {{ page.is_active == 1 ? 'Deaktywuj' : 'Aktywuj' }}
+           </a>
+         </td>
+       </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

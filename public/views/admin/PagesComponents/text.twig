@@ -1,9 +1,3 @@
 {% block content %}
-  <form data-action="pages/components/update/{{ component.id }}">
-    <textarea class="form-control" name="text[{{ nr }}]" id="" cols="15" rows="10"></textarea>
-    {{ input({
-      type:'submit',
-      value: 'Zapisz'
-    }) }}
-  </form>
+    <textarea class="form-control" name="data[text]" id="" cols="15" rows="10">{{ data.text }}</textarea>
 {% endblock %}

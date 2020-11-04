@@ -3,7 +3,6 @@
 namespace App\Controllers\Admin;
 
 use App\Facades\Http\Request;
-use App\Helpers\Table;
 use App\Model\PageComponent;
 
 class PagesComponentsController extends DashController
@@ -53,20 +52,10 @@ class PagesComponentsController extends DashController
     {
         if (! $this->validate($request->all(), [
             'id' => 'required|int',
-            'rows' => 'int|max:999',
-            'cols' => 'int|max:99',
         ])) $this->sendError();
         
-        if ($request->has('rows') && $request->has('cols')) {
-            $request->set('data', json_encode(
-                Table::prepareRowsAndCols(
-                    $request->get('rows'),
-                    $request->get('cols'),
-                    (array) json_decode(PageComponent::select(['data'])->where(['id', '=', $request->get('id')])->findOrFail()['data'])
-                )
-            ));
-        }
-        
+        $request->set('data', json_encode($request->get('data')));
+
         PageComponent::update($request->all());
     
         $this->sendSuccess('Zaktualizowano poprawnie');
@@ -80,7 +69,9 @@ class PagesComponentsController extends DashController
     public function edit(int $id)
     {
         if ($component = PageComponent::where(['id', '=', $id])->findOrFail()) {
-            $this->render(['component' => $component]);
+            $component['data'] = (array) json_decode($component['data'], true);
+            $component['iterations'] = count($component['data']['cols']);
+            $this->render($component);
         }
     }
 
@@ -89,8 +80,15 @@ class PagesComponentsController extends DashController
 
     }
     
-    public function setTableRows(int $id)
+    public function active(int $active, int $id, int $pageId)
     {
-        return $this->render(['id' => $id]);
+        if ($active === 1) {
+            $active = 0;
+        } else {
+            $active = 1;
+        }
+        
+        PageComponent::where(['id', '=', $id])->update(['is_active' => $active]);
+        $this->redirect('pages/edit/'.$pageId);
     }
 }

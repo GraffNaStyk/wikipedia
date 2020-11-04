@@ -81,4 +81,16 @@ class PagesController extends DashController implements ControllerInterface
     {
     
     }
+    
+    public function active(int $active, int $id)
+    {
+        if ($active === 1) {
+            $active = 0;
+        } else {
+            $active = 1;
+        }
+        
+        Page::where(['id', '=', $id])->update(['is_active' => $active]);
+        $this->redirect('pages');
+    }
 }

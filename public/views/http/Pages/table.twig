@@ -1,21 +1,19 @@
-{% extends layout %}
-
 {% block content %}
   <div class="table-responsive">
     <table class="table table-striped table-bordered">
       <thead>
       <tr>
-        {% for head in article.content.header %}
-          <th>{{ head|capitalize }}</th>
+        {% for col in component.data.cols %}
+          <td>{{ col }}</td>
         {% endfor %}
       </tr>
       </thead>
       <tbody>
-      {% for key,item in article.content.body %}
+      {% for key,row in component.data.rows %}
         <tr>
-        {% for value in item  %}
-          <td>{{ value }}</td>
-        {% endfor %}
+          {% for i in 1..component.iterations %}
+            {{ cycle('<td>'~row[i]~'</td>', i)|raw }}
+          {% endfor %}
         </tr>
       {% endfor %}
       </tbody>

@@ -6,8 +6,10 @@ Router::group(['prefix' => 'admin', 'as' => 'App\Controllers\Admin', 'base' => '
     Router::get('pages/components/edit/{id}', 'PagesComponents/edit');
     Router::post('pages/components/store', 'PagesComponents/store');
     Router::post('pages/components/update', 'PagesComponents/update');
+    Router::get('pages/components/active/{active}/{id}/{pageId}', 'PagesComponents/active');
     
-    Router::get('pages/components/set/table/{id}', 'PagesComponents/setTableRows');
+    Router::get('pages/table/components/edit/{id}', 'TableComponent/edit');
+    Router::post('pages/table/components/update', 'TableComponent/update');
 });
 
 Router::get('login/index', 'Login/index');

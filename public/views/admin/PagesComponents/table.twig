@@ -1,5 +1,25 @@
-
-
 {% block content %}
-
+  <h5>Kolumny</h5>
+    {% for key,col in data.cols %}
+      {{ input({
+        type:'text',
+        name:'data[cols]['~key~']',
+        class: 'form-control',
+        value: col
+      }) }}
+    {% endfor %}
+  <hr>
+  <h5>Wiersze</h5>
+  {% for key,row in data.rows %}
+    {% for i in 1..iterations %}
+      {{ cycle(input({
+        type:'text',
+        name:'data[rows]['~key~']['~i~']',
+        class: 'form-control',
+        value: row[i]
+      }), i)
+      }}
+    {% endfor %}
+    <br>
+  {% endfor %}
 {% endblock %}

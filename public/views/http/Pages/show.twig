@@ -1,0 +1,7 @@
+{% extends layout %}
+
+{% block content %}
+  {% for component in components %}
+    {% include 'http/Pages/'~component.type~'.twig' %}
+  {% endfor %}
+{% endblock %}

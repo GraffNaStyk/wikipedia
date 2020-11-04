@@ -1,5 +1,5 @@
 {% block content %}
-  <form data-action="pages/components/update" method="post">
+  <form data-action="pages/table/components/update" method="post">
     <div class="modal-header">
       <h5 class="modal-title">Ustaw dane dla tabeli</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -10,16 +10,18 @@
       <div class="form__grid">
         {{ input({
           type: 'text',
-          value: rows,
+          value: table.rows,
           class: 'form-control',
           placeholder: 'Wiersze',
+          label: 'Wiersze',
           name: 'rows'
         }) }}
         {{ input({
           type: 'text',
-          value: cols,
+          value: table.cols,
           class: 'form-control',
           placeholder: 'Kolumny',
+          label: 'Kolumny',
           name: 'cols'
         }) }}
         {{ input({

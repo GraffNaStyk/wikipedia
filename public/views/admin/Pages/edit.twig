@@ -23,14 +23,16 @@
         <td>{{ component.is_active == 1 ? 'Tak' : 'Nie' }}</td>
         <td class="position-sticky">
           {% if component.type == 'table' %}
-            <button class="render btn-sm" data-el="modal" data-url="pages/components/set/table/{{ page.id }}"> <i class="fa fa-cog"></i> </button>
+            <button class="render btn-sm" data-el="modal" data-url="pages/table/components/edit/{{ component.id }}"> <i class="fa fa-cog"></i> </button>
           {% endif %}
           &nbsp;
           {% if component.type != 'separator' %}
             <button class="render btn-sm" data-el="modal" data-url="pages/components/edit/{{ component.id }}">Edycja</button>
           {% endif %}
           &nbsp;
-          <a class="is_button btn-sm" href="{{ url('pages/edit/'~page.id) }}">Deaktywuj</a>
+          <a class="is_button btn-sm" href="{{ url('pages/components/active/'~component.is_active~'/'~component.id~'/'~page.id) }}">
+            {{ component.is_active == 1 ? 'Deaktywuj' : 'Aktywuj' }}
+          </a>
         </td>
       </tr>
     {% endfor %}
