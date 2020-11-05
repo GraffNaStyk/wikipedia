@@ -11,6 +11,29 @@ use App\Model\PageComponent;
 
 class PagesController extends DashController implements ControllerInterface
 {
+    protected array $types = [
+        [
+            'value' => 'quest',
+            'text' => 'Quest'
+        ],
+        [
+            'value' => 'map',
+            'text' => 'Mapa'
+        ],
+        [
+            'value' => 'tutorial',
+            'text' => 'Tutorial'
+        ],
+        [
+            'value' => 'saga',
+            'text' => 'Saga'
+        ],
+        [
+            'value' => 'systems',
+            'text' => 'Systems'
+        ],
+    ];
+    
     public function __construct()
     {
         parent::__construct();
@@ -25,18 +48,20 @@ class PagesController extends DashController implements ControllerInterface
     
     public function add()
     {
-        return $this->render();
+        return $this->render(['types' => $this->types]);
     }
     
     public function store(Request $request)
     {
         if (!$this->validate($request->all(), [
-            'title' => 'required|min:10'
+            'title' => 'required|min:10',
+            'type' => 'required'
         ])) $this->sendError();
         
         Page::insert([
             'title' => $request->get('title'),
-            'created_by' => $this->user['id']
+            'created_by' => $this->user['id'],
+            'active' => 0
         ]);
         
         $this->sendSuccess('Strona dodana', 'pages/edit/'.Page::lastId());

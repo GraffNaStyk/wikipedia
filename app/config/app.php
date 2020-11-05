@@ -62,7 +62,7 @@ return [
         ],
         
         'js' => [
-            'bootstrap', 'slim-select'
+            'bootstrap', 'slim-select', 'vanilla.graff'
         ]
     ],
     

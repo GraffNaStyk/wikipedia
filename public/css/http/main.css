@@ -158,6 +158,18 @@ input::placeholder {
 
 .box-body .article {
   padding: .8rem .5rem;
+  color: white;
+  text-decoration: none;
+}
+
+.box-body .article a {
+  color: white;
+  text-decoration: none;
+}
+
+.box-body .article a span {
+  font-size: 40px;
+  line-height: 5px;
 }
 
 .box-body .article:not(:last-child) {
@@ -352,4 +364,13 @@ span.err {
   .grid-box-header {
     grid-template-columns: 25% 25% 25%;
   }
+}
+
+
+.page__items {
+  padding: 0 15px 15px 15px;
+}
+
+.page__items .page__item:not(last-child) {
+  margin-bottom: 10px;
 }

@@ -24,18 +24,21 @@ class PagesController extends IndexController
             ->where(['type', '<>', 'null'])
             ->findOrFail();
         
-        $components = PageComponent::select(['type', 'data'])
-            ->where(['page_id', '=', $id])
-            ->where(['is_active', '=', 1])
-            ->order(['order'])
-            ->get();
-        
-        foreach ($components as $key => $component){
-            $components[$key]['data'] = json_decode($component['data'], true);
-            $components[$key]['iterations'] = count($components[$key]['data']['cols']);
+        if ($page) {
+            $components = PageComponent::select(['type', 'data'])
+                ->where(['page_id', '=', $id])
+                ->where(['is_active', '=', 1])
+                ->order(['order'])
+                ->get();
+    
+            foreach ($components as $key => $component){
+                $components[$key]['data'] = json_decode($component['data'], true);
+                $components[$key]['iterations'] = count($components[$key]['data']['cols']);
+            }
+    
+            return $this->render(['page' => $page, 'components' => $components, 'title' => $page['title']]);
+        } else {
+            $this->redirect('');
         }
-        
-        
-        return $this->render(['page' => $page, 'components' => $components]);
     }
 }

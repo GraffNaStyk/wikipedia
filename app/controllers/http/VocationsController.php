@@ -18,7 +18,7 @@ class VocationsController extends IndexController
             ->join(['ct_vocations_spells as ct', 'vocations.id', '=', 'ct.vocation_id'])
             ->join(['spells as s', 's.id', '=', 'ct.spell_id'])
             ->where(['vocations.name', '=', $name])
-            ->order('s.lvl', 'asc')
+            ->order(['s.lvl'], 'asc')
             ->get();
 
         if (empty($spells)) {

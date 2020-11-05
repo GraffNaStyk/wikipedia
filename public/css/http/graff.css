@@ -1,0 +1,28 @@
+#graff-gallery {overflow: hidden;position: fixed; display: flex; justify-content: center; align-items: center; top:0; left: 0; bottom: 0; right: 0; background: rgba(0,0,0,0.95);}
+#graff {display: grid; justify-content: center; flex-wrap: wrap; grid-gap: 10px; grid-template-columns: auto auto auto auto}
+#graff img {cursor: pointer;}
+#graff-gallery #gallery-content {margin: 0 130px; z-index: 100; display: flex; justify-content: center; align-items: center;}
+#graff-gallery #gallery-content #closer {text-align: center; color: white; position: absolute; right: 50px; z-index: 10; font-size: 26px; top: 11px; cursor: pointer;}
+#graff-gallery #gallery-content #list {text-align: center; color: white; position: absolute; right: 85px; z-index: 10; font-size: 22px; top: 14px; cursor: pointer;}
+#graff-gallery #gallery-content #displayer {max-width: 100%; height: auto; margin: 0 auto; opacity: 0;}
+#graff-gallery #gallery-content #graff-left-arrow {cursor: pointer;position: absolute;left:50px;color: white;font-size: 50px;display: flex;justify-content: center;top: 0;bottom: 0;align-items: center;}
+#graff-gallery #gallery-content #graff-right-arrow {cursor: pointer;position: absolute;right: 50px;color: white;font-size: 50px;display: flex;justify-content: center;top: 0;bottom: 0;align-items: center;}
+#graff-gallery #gallery-content #graff-right-arrow:hover,#graff-left-arrow:hover {transform: scale(1.2); transition: all .2s ease-in-out;}
+#graff-gallery #gallery-content #counter {position: absolute;display: flex;left: 50px;top: 15px;}
+#graff-gallery #gallery-content #counter span {color: white; font-weight: bold;}
+#graff-gallery #gallery-content #graffBoxList img {height: 70px; width:70px; margin-right: 4px; cursor: pointer; overflow: hidden;}
+#graff-gallery .small-closer {z-index: 20;position: absolute;bottom: 42px;color: white;right: 14px;font-size: 24px; cursor: pointer;}
+.fadeOutdsdjpadoaj32onvpo345 {opacity: 0;transition: opacity 600ms;}
+#graff-gallery #gallery-content #graff-right-arrow::before, #graff-left-arrow::before  {background: rgba(0,0,0,0.25); padding: 0 10px;}
+#graff-gallery #gallery-content #graffBoxList { border-top: 1px solid white; scrollbar-width: thin!important; opacity: 0.2; background: transparent; position: absolute; bottom: 0; height: 70px; width: 100%; overflow-y: scroll;}
+#graff-gallery #gallery-content #graffBoxList:hover {opacity: 1; transition: 0.7s;}
+@media screen and (max-width: 1366px) {  #graff-gallery #gallery-content  {margin: 0 100px;} }
+@media screen and (max-width: 991px) {  #graff {grid-template-columns: auto auto auto;} }
+@media screen and (max-width: 576px) {  #graff {grid-template-columns: auto auto;} #graff-gallery #gallery-content  {margin: 0 60px;} #graff-gallery #gallery-content #list {font-size: 40px} #graff-gallery #gallery-content #closer {font-size: 40px} #graff-gallery #gallery-content #counter {font-size: 36px;} #graff-gallery #gallery-content #graff-right-arrow {font-size: 60px;} #graff-gallery #gallery-content #graff-left-arrow {font-size: 60px;} #graff-gallery .small-closer {right: 9px; font-size: 30px;}}
+@media screen and (max-width: 480px) {#graff-gallery #gallery-content #graff-left-arrow {left: 15px;} #graff-gallery #gallery-content #graff-right-arrow {right: 15px;} #graff-gallery #gallery-content .closer {right: 17px;} #graff-gallery #gallery-content #list {right: 60px} #graff-gallery #gallery-content #closer {right: 23px} #graff-gallery #gallery-content #counter {left: 12px;}}
+@media screen and (max-width: 420px) {  #graff-gallery #gallery-content  {margin: 0 10px;} }
+@keyframes cf3FadeInOut { 0% {opacity:0;} 10% {opacity:0.1;} 20% {opacity:0.2;} 30% {opacity:0.3;} 40% {opacity:0.4;} 50% {opacity:0.5;} 60% {opacity:0.6;} 70% {opacity:0.7;} 80% {opacity:0.8;} 90% {opacity:0.9;} 100% {opacity:1;} }
+.animator {opacity: 0;animation-name: cf3FadeInOut;animation-timing-function: ease-in-out;animation-duration: 0.4s;animation-direction: alternate;}
+#graff-gallery #gallery-content #graffBoxList::-webkit-scrollbar {width: 12px;}
+#graff-gallery #gallery-content #graffBoxList::-webkit-scrollbar-track {-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);border-radius: 10px;}
+#graff-gallery #gallery-content #graffBoxList::-webkit-scrollbar-thumb {border-radius: 10px;-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);}

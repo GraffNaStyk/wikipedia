@@ -4,15 +4,11 @@
       Recent Activity
     </h3>
     <div class="box-body">
-      <div class="article">
-        <p>text</p>
-      </div>
-      <div class="article">
-        <p>text</p>
-      </div>
-      <div class="article">
-        <p>text</p>
-      </div>
+      {% for item in last_updated %}
+        <div class="article">
+          <a href="{{ url(item.link) }}">{{ item.title }}  <span>»</span></a>
+        </div>
+      {% endfor %}
     </div>
 
     <div class="box mt-4">

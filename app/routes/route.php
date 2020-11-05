@@ -10,6 +10,8 @@ Router::group(['prefix' => 'admin', 'as' => 'App\Controllers\Admin', 'base' => '
     
     Router::get('pages/table/components/edit/{id}', 'TableComponent/edit');
     Router::post('pages/table/components/update', 'TableComponent/update');
+    
+    Router::get('images/find/{name}', 'Images@find');
 });
 
 Router::get('login/index', 'Login/index');

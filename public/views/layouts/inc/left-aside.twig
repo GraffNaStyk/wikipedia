@@ -1,17 +1,20 @@
 <aside class="wiki-box flex-column d-none d-xs-none d-sm-none d-md-none d-lg-flex d-xs-none d-xl-flex left__box">
   <span class="left__menu__closer">×</span>
-  <a class="menu-item">
-      <i class="fa fa-pencil"></i>
-      Title
-  </a>
 
-  <a class="menu-item">
-    <i class="fa fa-envelope"></i>
-    Title Two
-  </a>
+  {% if menu.quest is not empty %}
+    <a class="menu-item has__parent" href="#">
+      <img src="{{ img('menu/quests.png') }}" alt="">
+      Quests
+    </a>
+    <div class="is__parent">
+      {% for quest in menu.quest %}
+        <a href="{{ url(quest.link) }}">{{ quest.title }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
 
   <a class="menu-item has__parent" href="#">
-    <i class="fa fa-clone"></i>
+    <img src="{{ img('menu/weapons.png') }}" alt="">
     Weapons
   </a>
   <div class="is__parent">
@@ -22,8 +25,8 @@
   </div>
 
   <a class="menu-item has__parent" href="#">
-    <i class="fa fa-italic"></i>
-    Items
+    <img src="{{ img('menu/equipments.png') }}" alt="">
+    Equipments
   </a>
   <div class="is__parent">
     <a href="{{ url('items/helmets') }}">Helmets</a>
@@ -35,8 +38,8 @@
   </div>
 
   <a class="menu-item has__parent" href="#">
-    <i class="fa fa-italic"></i>
-    Proffesions
+    <img src="{{ img('menu/professions.png') }}" alt="">
+    Professions
   </a>
   <div class="is__parent">
     {% for vocation in vocations %}
@@ -45,7 +48,7 @@
   </div>
 
   <a class="menu-item" href="{{ url('monsters') }}">
-    <i class="fa fa-pencil"></i>
+    <img src="{{ img('menu/monsters.png') }}" alt="">
     Monsters
   </a>
 </aside>

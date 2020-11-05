@@ -7,6 +7,7 @@
         <tr>
           <td>Id</td>
           <td>Nazwa</td>
+          <td>Typ</td>
           <td>Aktywna</td>
           <td class="position-sticky">
             <button class="btn-sm render" data-url="pages/add" data-el="modal"> <i class="fa fa-plus"></i> </button>
@@ -18,6 +19,7 @@
        <tr>
          <td>{{ page.id }}</td>
          <td>{{ page.title }}</td>
+         <td>{{ page.type }}</td>
          <td>{{ page.is_active == 1 ? 'Tak' : 'Nie' }}</td>
          <td class="position-sticky">
            <a class="is_button btn-sm" href="{{ url('pages/edit/'~page.id) }}">Edycja</a>

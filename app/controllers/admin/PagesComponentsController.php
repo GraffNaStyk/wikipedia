@@ -19,6 +19,10 @@ class PagesComponentsController extends DashController
         [
             'value' => 'separator',
             'text' => 'Separator'
+        ],
+        [
+            'value' => 'image',
+            'text' => 'Zdjęcie'
         ]
     ];
     

@@ -1,0 +1,11 @@
+{% block content %}
+<div id="graff">
+  <img src="{{ img(component.data.img) }}" alt="">
+</div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      GraffBox({gap: '5px', columns: 'auto auto auto auto auto'});
+    });
+  </script>
+{% endblock %}
