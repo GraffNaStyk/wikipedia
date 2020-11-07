@@ -107,7 +107,6 @@ class Items
     
     protected static function parseOtherItems(array $others)
     {
-        $items  = [];
         foreach ($others as $other) {
             if (isset($other['attribute'])) {
                 $insert = false;
@@ -165,7 +164,8 @@ class Items
                 'cid' => $cid,
                 'hash' => $hash,
                 'path' => 'images/',
-                'created_by' => 1
+                'created_by' => 1,
+                'ext' => '.gif'
             ]);
         }
     }

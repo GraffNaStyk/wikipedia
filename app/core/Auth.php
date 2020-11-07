@@ -9,7 +9,7 @@ class Auth
 {
     private static array $methods = [
         1 => ['index', 'show'],
-        2 => ['add', 'edit', 'store', 'update'],
+        2 => ['add', 'edit', 'store', 'update', 'upload', 'order', 'active'],
         3 => ['delete']
     ];
     

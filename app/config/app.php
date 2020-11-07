@@ -58,11 +58,11 @@ return [
      */
     'is_loaded' => [
         'css' => [
-            'bootstrap', 'slim-select', 'alerts', 'box', 'buttons', 'form', 'modal', 'table', 'loader'
+            'bootstrap', 'slim-select', 'alerts', 'box', 'buttons', 'form', 'modal', 'table', 'loader', 'glightbox.min'
         ],
         
         'js' => [
-            'bootstrap', 'slim-select', 'vanilla.graff'
+            'bootstrap', 'slim-select', 'glightbox.min'
         ]
     ],
     

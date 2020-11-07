@@ -1,0 +1,7 @@
+{% block content %}
+  <div class="d-flex flex-wrap align-items-center">
+    {% for img in images %}
+      <img style="margin: 5px;" {{ tooltip(img.name) }} src="{{ img(img.path~img.hash~'.'~img.ext) }}" alt="">
+    {% endfor %}
+  </div>
+{% endblock %}

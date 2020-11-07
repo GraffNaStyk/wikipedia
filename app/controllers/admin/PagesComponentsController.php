@@ -58,7 +58,7 @@ class PagesComponentsController extends DashController
             'id' => 'required|int',
         ])) $this->sendError();
         
-        $request->set('data', json_encode($request->get('data')));
+        $request->set('data', json_encode($request->get('data'), JSON_UNESCAPED_UNICODE));
 
         PageComponent::update($request->all());
     

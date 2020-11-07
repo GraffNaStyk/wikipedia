@@ -35,8 +35,12 @@ class PagesController extends IndexController
                 $components[$key]['data'] = json_decode($component['data'], true);
                 $components[$key]['iterations'] = count($components[$key]['data']['cols']);
             }
-    
-            return $this->render(['page' => $page, 'components' => $components, 'title' => $page['title']]);
+//            pd($components, true);
+            return $this->render([
+                'page' => $page,
+                'components' => $components,
+                'title' => $page['title']
+            ]);
         } else {
             $this->redirect('');
         }

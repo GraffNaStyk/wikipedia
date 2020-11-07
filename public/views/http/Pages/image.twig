@@ -1,11 +1,12 @@
 {% block content %}
-<div id="graff">
-  <img src="{{ img(component.data.img) }}" alt="">
-</div>
 
-  <script>
+  <a href="{{ img(component.data.img) }}" class="glightbox">
+    <img src="{{ img(component.data.img) }}" alt="image">
+  </a>
+
+  <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
-      GraffBox({gap: '5px', columns: 'auto auto auto auto auto'});
+      const lightbox = GLightbox();
     });
   </script>
 {% endblock %}

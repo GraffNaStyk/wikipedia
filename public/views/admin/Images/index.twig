@@ -1,0 +1,22 @@
+{% extends layout %}
+
+{% block content %}
+  <div class="box">
+   <h3>Zdjęcia</h3>
+    <button class="render mb-3" data-url="images/show/all" data-el="app">Pokaż wszystkie</button>
+    <button class="render mb-3" data-el="modal" data-url="images/add">Dodaj nowe</button>
+    <form data-action="images/show" data-el="app">
+      <div class="form__gird">
+        {{ input({
+          type: 'text',
+          name: 'search',
+          class: 'form-control',
+          placeholder: 'Wyszukaj'
+        }) }}
+      </div>
+    </form>
+    <div data-component="app">
+
+    </div>
+  </div>
+{% endblock %}

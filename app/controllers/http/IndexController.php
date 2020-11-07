@@ -49,7 +49,7 @@ class IndexController extends Controller
         $return = [];
         $pages = Page::select(['id', 'title', 'type', 'created_at'])
             ->where(['is_active', '=', 1])
-            ->order(['created_at'])
+            ->order(['created_at'], 'desc')
             ->limit(3)
             ->get();
     
@@ -69,7 +69,7 @@ class IndexController extends Controller
         $return = [];
         $pages = Page::select(['id', 'title', 'type', 'updated_at'])
             ->where(['is_active', '=', 1])
-            ->order(['updated_at'])
+            ->order(['updated_at'], 'desc')
             ->limit(3)
             ->get();
         

@@ -46,7 +46,7 @@ const prevent = (e) => {
     return false;
   }
 
-  if (e.target.href.split('/').pop() === '#')
+  if (e.target.href !== undefined && e.target.href.split('/').pop() === '#')
     e.preventDefault();
 };
 

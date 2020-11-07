@@ -54,14 +54,15 @@ class PagesController extends DashController implements ControllerInterface
     public function store(Request $request)
     {
         if (!$this->validate($request->all(), [
-            'title' => 'required|min:10',
+            'title' => 'required|min:4',
             'type' => 'required'
         ])) $this->sendError();
         
         Page::insert([
             'title' => $request->get('title'),
             'created_by' => $this->user['id'],
-            'active' => 0
+            'type' => $request->get('type'),
+            'is_active' => 0
         ]);
         
         $this->sendSuccess('Strona dodana', 'pages/edit/'.Page::lastId());

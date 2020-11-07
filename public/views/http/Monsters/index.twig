@@ -20,7 +20,7 @@
         <td>
           {% for item in monster.loot %}
             <b style="color: black;" {{ tooltip(item.description) }} >{{ item.name }} </b>
-            <img style=" cursor: pointer;" {{ tooltip(item.description) }} src="{{ img(item.path~item.hash~'.gif') }}" alt="">
+            <img style=" cursor: pointer;" {{ tooltip(item.description) }} src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
             <b style="color: black;"> ({{ item.chance }}%)</b>
             <br>
           {% endfor %}

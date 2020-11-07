@@ -51,4 +51,10 @@
     <img src="{{ img('menu/monsters.png') }}" alt="">
     Monsters
   </a>
+  {% if menu.map is not empty %}
+    <a class="menu-item" href="{{ url(menu.map.0.link) }}">
+      <img src="{{ img('menu/maps.png') }}" alt="">
+      Maps
+    </a>
+  {% endif %}
 </aside>

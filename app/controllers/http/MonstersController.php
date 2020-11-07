@@ -33,7 +33,7 @@ class MonstersController extends IndexController
         );
         
         foreach ($monsters as $key => $monster) {
-            $items = CtMonsterLoot::select(['i.name', 'chance', 'img.path', 'img.hash', 'i.description'])
+            $items = CtMonsterLoot::select(['i.name', 'chance', 'img.path', 'img.hash', 'i.description', 'img.ext'])
                 ->join(['items as i', 'i.cid', '=', 'item_id'])
                 ->join(['images as img', 'i.cid', '=', 'img.cid'])
                 ->where(['monster_id', '=', $monster['id']])

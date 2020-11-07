@@ -18,7 +18,7 @@ class Items
         
         switch ($type) {
             case 'balls':
-                $return['items'] = Item::select([...self::$tableHeaders[$type], ...['i.path', 'i.hash']])
+                $return['items'] = Item::select([...self::$tableHeaders[$type], ...['i.path', 'i.hash', 'i.ext']])
                     ->leftJoin(['images as i', 'items.cid', '=', 'i.cid'])
                     ->where(['type', '=', $type])
                     ->where(['attack', '<>', 0])
@@ -34,7 +34,7 @@ class Items
             case 'helmets':
             case 'belts':
             case 'robes':
-            $return['items'] = Item::select([...self::$tableHeaders['armors'], ...['i.path', 'i.hash']])
+            $return['items'] = Item::select([...self::$tableHeaders['armors'], ...['i.path', 'i.hash', 'i.ext']])
                     ->leftJoin(['images as i', 'items.cid', '=', 'i.cid'])
                     ->where(['type', '=', $type])
                     ->where(['armor', '<>', 0])
@@ -47,7 +47,7 @@ class Items
             case 'swords':
             case 'glovers':
             case 'bands':
-            $return['items'] = Item::select([...self::$tableHeaders['weapons'], ...['i.path', 'i.hash']])
+            $return['items'] = Item::select([...self::$tableHeaders['weapons'], ...['i.path', 'i.hash', 'i.ext']])
                     ->leftJoin(['images as i', 'items.cid', '=', 'i.cid'])
                     ->where(['type', '=', $type])
                     ->where(['attack', '<>', 0])

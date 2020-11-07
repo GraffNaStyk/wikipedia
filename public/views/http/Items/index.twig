@@ -19,7 +19,7 @@
               <div>
                 {{ value|capitalize }}
                 {% if loop.index == 1 %}
-                  <img src="{{ img(item.path~item.hash~'.gif') }}" alt="">
+                  <img src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
                 {% endif %}
               </div>
             </td>
