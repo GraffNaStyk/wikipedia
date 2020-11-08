@@ -75,6 +75,10 @@ class PagesComponentsController extends DashController
         if ($component = PageComponent::where(['id', '=', $id])->findOrFail()) {
             $component['data'] = (array) json_decode($component['data'], true);
             $component['iterations'] = count($component['data']['cols']);
+
+            if ($component['type'] === 'image') {
+                $component['width'] = '570px';
+            }
             $this->render($component);
         }
     }

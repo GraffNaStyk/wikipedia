@@ -1,3 +1,30 @@
 {% block content %}
-    <textarea class="form-control" name="data[text]" id="" cols="15" rows="10">{{ data.text }}</textarea>
+  <div class="row">
+    <div class="col-2">
+      <form data-action="images/show" data-el="app">
+        <div class="form__gird">
+          {{ input({
+            type: 'text',
+            name: 'search',
+            class: 'form-control',
+            placeholder: 'Wyszukaj zdjęcie'
+          }) }}
+        </div>
+      </form>
+      <div data-component="app">
+
+      </div>
+    </div>
+    <div class="col-10">
+      <form data-action="pages/components/update" method="post">
+        <textarea class="form-control" name="data[text]" id="" cols="15" rows="10">{{ data.text }}</textarea>
+          {{ input({
+              type: 'hidden',
+              name: 'id',
+              value: id
+          }) }}
+        <input type="submit" value="Save changes">
+      </form>
+    </div>
+  </div>
 {% endblock %}

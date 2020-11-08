@@ -182,6 +182,11 @@ export const OnSubmitForms = () => {
           });
         }
       })
+      if (callbacks['afterRender'] !== undefined) {
+        setTimeout(() => {
+          callbacks['afterRender']();
+        }, 300);
+      }
     }
   });
 }

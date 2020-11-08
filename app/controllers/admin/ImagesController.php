@@ -7,6 +7,7 @@ use App\Facades\Http\Request;
 use App\Facades\Http\Response;
 use App\Helpers\Storage;
 use App\Model\Image;
+use App\Model\PageComponent;
 
 class ImagesController extends DashController
 {
@@ -86,6 +87,19 @@ class ImagesController extends DashController
         }
         
         Response::json($response);
+    }
+
+    public function draw(int $componentId)
+    {
+        $component = PageComponent::select(['data'])
+            ->where(['id', '=', $componentId])
+            ->first()
+            ->get();
+        if ($component) {
+            return $this->render(['img' => json_decode($component['data'], true)['img']]);
+        } else {
+            $this->redirect('');
+        }
     }
     
 }

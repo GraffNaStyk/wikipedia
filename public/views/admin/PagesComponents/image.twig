@@ -2,7 +2,10 @@
 <div class="form__grid">
   {{ select({
     url: 'images/find',
-    name: 'data[img]'
+    name: 'data[img]',
   }) }}
+</div>
+<div class="text-center">
+  <img src="{{ img(data.img) }}" alt="" class="img-fluid">
 </div>
 {% endblock %}
