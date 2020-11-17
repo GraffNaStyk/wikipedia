@@ -3,6 +3,7 @@
 namespace App\Db\Migrate;
 
 use App\Facades\Migrations\Schema;
+use App\Helpers\Storage;
 
 class Migration_Image_2020_10_12__19_59
 {
@@ -24,6 +25,7 @@ class Migration_Image_2020_10_12__19_59
     
     public function down(Schema $schema)
     {
+        Storage::remove('public/images/');
         $schema->clear();
     }
 }

@@ -25,6 +25,5 @@ class Migration_Menu_2020_10_12__18_52
 
        public function down(Schema $schema)
        {
-           $schema->clear();
        }
 }

@@ -374,3 +374,25 @@ span.err {
 .page__items .page__item:not(last-child) {
   margin-bottom: 10px;
 }
+
+.search__result {
+  position: absolute;
+  left: 0;
+  top: 65px;
+  width: 100%;
+  background: var(--mainbackground);
+  border-radius: 4px;
+  max-height: 300px;
+  overflow-y: scroll;
+  z-index: 200;
+}
+
+.search__result a {
+  transition: .6s;
+}
+
+.search__result a:hover {
+  text-decoration: none!important;
+  background: var(--inputbackground);
+  transition: .6s;
+}

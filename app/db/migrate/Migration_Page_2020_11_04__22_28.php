@@ -19,6 +19,5 @@ class Migration_Page_2020_11_04__22_28
 
     public function down(Schema $schema)
     {
-        $schema->clear();
     }
 }

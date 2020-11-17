@@ -28,8 +28,8 @@
       </a>
     </div>
     <div class="d-flex">
-      <div class="wiki-box big mr-4 wiki__box--search">
-        <form data-action="search/">
+      <div class="wiki-box big mr-4 wiki__box--search position-relative">
+        <form data-el="app" data-action="search/">
           <div class="form__grid">
           {{ input({
             class: 'wiki-input',
@@ -39,6 +39,9 @@
           }) }}
           </div>
         </form>
+        <div data-component="app">
+
+        </div>
       </div>
       <div class="wiki-box big d-flex align-items-center">
         {% if session.user %}

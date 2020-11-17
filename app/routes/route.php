@@ -21,12 +21,17 @@ Router::get('logout', 'Logout/index');
 Router::get('logout', 'Logout/index');
 
 Router::get('weapons/{type}', 'Weapons/index');
+Router::get('items/show/{name}', 'Items@show');
 Router::get('items/{type}', 'Items/index');
+
+Router::get('monsters/show/{name}', 'Monsters@show');
 
 Router::get('page/show/{id}/{link}', 'Pages/show');
 
 Router::get('vocations/show/{name}', 'Vocations/show');
 
 Router::get('monsters/{page}', 'monsters/index');
+
+Router::post('search', 'Search@index');
 
 Router::run();

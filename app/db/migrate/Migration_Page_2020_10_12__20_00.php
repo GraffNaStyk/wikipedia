@@ -3,7 +3,7 @@ namespace App\Db\Migrate;
 
 use App\Facades\Migrations\Schema;
 
-class Migration_Pages_2020_10_12__20_00
+class Migration_Page_2020_10_12__20_00
 {
        public string $model = 'Page';
 
@@ -21,6 +21,5 @@ class Migration_Pages_2020_10_12__20_00
 
        public function down(Schema $schema)
        {
-           $schema->clear();
        }
 }

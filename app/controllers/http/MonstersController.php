@@ -52,4 +52,27 @@ class MonstersController extends IndexController
         }
         $this->render(['monsters' => $monsters]);
     }
+    
+    public function show(string $name)
+    {
+        $monster = Monster::select('*')->where(['name', '=', $name])
+                    ->findOrFail();
+        
+        if ($monster) {
+            $loot = CtMonsterLoot::select(['i.name', 'chance', 'img.path', 'img.hash', 'i.description', 'img.ext'])
+                ->join(['items as i', 'i.cid', '=', 'item_id'])
+                ->join(['images as img', 'i.cid', '=', 'img.cid'])
+                ->where(['monster_id', '=', $monster['id']])
+                ->order(['ct_monsters_loot.chance'], 'desc')
+                ->get();
+            
+            return $this->render([
+                'title' => 'Monsters',
+                'monster' => $monster,
+                'loot' => $loot
+            ]);
+        } else {
+            $this->redirect('');
+        }
+    }
 }

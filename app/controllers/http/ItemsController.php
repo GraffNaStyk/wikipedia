@@ -5,6 +5,9 @@ namespace App\Controllers\Http;
 use App\Facades\Http\Request;
 
 use App\Helpers\Items;
+use App\Model\CtMonsterLoot;
+use App\Model\Item;
+use App\Model\Monster;
 
 class ItemsController extends IndexController
 {
@@ -23,34 +26,25 @@ class ItemsController extends IndexController
         
         $this->render($result);
     }
-
-    public function add()
+    
+    public function show(string $name)
     {
+        $item = Item::select(['i.hash', 'i.path', 'i.ext', 'items.*'])->where(['items.name', '=', $name])
+            ->leftJoin(['images as i', 'i.cid', '=', 'items.cid'])
+            ->findOrFail();
+    
+        $item['weight'] = $item['weight'] / 100 . '.00 oz';
 
-    }
-
-    public function store(Request $request)
-    {
-
-    }
-
-    public function update(Request $request)
-    {
-
-    }
-
-    public function show(int $id)
-    {
-
-    }
-
-    public function edit(int $id)
-    {
-
-    }
-
-    public function delete(int $id)
-    {
-
+        $loot = CtMonsterLoot::select(['m.name', 'ct_monsters_loot.chance'])
+            ->join(['monsters as m', 'm.id', '=', 'ct_monsters_loot.monster_id'])
+            ->where(['ct_monsters_loot.item_id', '=', $item['cid']])
+            ->order(['ct_monsters_loot.chance'], 'desc')
+            ->get();
+        
+        return $this->render([
+            'title' => 'Items',
+            'item' => $item,
+            'loot' => $loot
+        ]);
     }
 }

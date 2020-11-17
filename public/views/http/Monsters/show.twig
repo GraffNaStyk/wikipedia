@@ -1,0 +1,44 @@
+{% extends layout %}
+
+{% block content %}
+<div class="row p-2">
+  <div class="col-sm-6">
+    <h3>{{ monster.name|capitalize }}</h3>
+    <div class="my-2 pb-2" style="border-bottom: 1px solid white;">
+      {% if monster.health %}
+        <span>  <b>health:</b> &nbsp; {{ monster.health }}</span>  &nbsp;
+      {% endif %}
+      {% if monster.experience %}
+        <span> <b>experience:</b> &nbsp; {{ monster.experience }}</span> &nbsp;
+      {% endif %}
+      {% if monster.speed %}
+        <span> <b>speed:</b> &nbsp; {{ monster.speed }}</span> &nbsp;
+      {% endif %}
+      {% if monster.race %}
+        <span> <b>race:</b> &nbsp; {{ monster.race }}</span> &nbsp;
+      {% endif %}
+    </div>
+    {% if item.description %}
+      <p>
+        {{ item.description }}
+      </p>
+    {% endif %}
+  </div>
+  <div class="col-sm-6">
+    <h3>Loot:</h3>
+    {% if loot %}
+      <div class="d-flex flex-column">
+        {% for item in loot %}
+           <a style="color: white;" href="{{ url('items/show/'~item.name) }}">
+             <img src="{{ img('images/'~item.hash~'.'~item.ext) }}" alt="">
+             &nbsp;
+             {{ item.name }} &nbsp; - {{ item.chance }}%
+           </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>This monster no have loot</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

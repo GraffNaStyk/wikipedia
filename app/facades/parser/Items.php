@@ -19,7 +19,7 @@ class Items
     
     protected static array $attributes = [
         'attack', 'defense', 'armor',
-        'description', 'range'
+        'description', 'range', 'weight'
     ];
     
     protected static array $mapTypeToModel = [
@@ -36,6 +36,8 @@ class Items
     ];
     
     protected static array $return = [];
+    
+    private bool $isForceUpload = false;
     
     public static function parse()
     {
@@ -153,20 +155,22 @@ class Items
             return false;
         }
         
-        Storage::disk('public')->make('images/');
-        exec('wget '.self::PG_URL.$cid.'_1.gif -P '. storage_path('public/images/'));
-        
-        if (is_file(storage_path('public/images/'.$cid.'_1.gif'))) {
-            $hash = Faker::hash(50);
-            rename(storage_path('public/images/'.$cid.'_1.gif'), storage_path('public/images/'.$hash.'.gif'));
-            Image::insert([
-                'name' => $name,
-                'cid' => $cid,
-                'hash' => $hash,
-                'path' => 'images/',
-                'created_by' => 1,
-                'ext' => '.gif'
-            ]);
+        if (empty(Image::where(['name', '=', $name])->findOrFail())) {
+            Storage::disk('public')->make('images/');
+            exec('wget '.self::PG_URL.$cid.'_1.gif -P '. storage_path('public/images/'));
+    
+            if (is_file(storage_path('public/images/'.$cid.'_1.gif'))) {
+                $hash = Faker::hash(50);
+                rename(storage_path('public/images/'.$cid.'_1.gif'), storage_path('public/images/'.$hash.'.gif'));
+                Image::insert([
+                    'name' => $name,
+                    'cid' => $cid,
+                    'hash' => $hash,
+                    'path' => 'images/',
+                    'created_by' => 1,
+                    'ext' => '.gif'
+                ]);
+            }
         }
     }
 }

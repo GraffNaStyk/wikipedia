@@ -73,4 +73,6 @@ return [
     'spells_path' => storage_path('private/spells.xml'),
     
     'monsters_path' => storage_path('private/monsters.xml'),
+    
+    'npcs_path' => storage_path('private/sellior.lua'),
 ];

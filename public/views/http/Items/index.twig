@@ -17,10 +17,10 @@
           {% if loop.index <= headerCount %}
             <td>
               <div>
-                {{ value|capitalize }}
                 {% if loop.index == 1 %}
-                  <img src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
+                  <img src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt=""> &nbsp;
                 {% endif %}
+                {{ value|capitalize }}
               </div>
             </td>
           {% endif %}

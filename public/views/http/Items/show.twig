@@ -1,0 +1,46 @@
+{% extends layout %}
+
+{% block content %}
+<div class="row p-2">
+  <div class="col-sm-6">
+    <h3>{{ item.name|capitalize }}</h3>
+    <img class="text-center" src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
+    <div class="my-2 pb-2" style="border-bottom: 1px solid white;">
+      {% if item.defense %}
+        <span>  <b>defense:</b> &nbsp; {{ item.defense }}</span>  &nbsp;
+      {% endif %}
+      {% if item.armor %}
+        <span> <b>armor:</b> &nbsp; {{ item.armor }}</span> &nbsp;
+      {% endif %}
+      {% if item.attack %}
+        <span> <b>attack:</b> &nbsp; {{ item.attack }}</span> &nbsp;
+      {% endif %}
+      {% if item.range %}
+        <span> <b>range:</b> &nbsp; {{ item.range }}</span> &nbsp;
+      {% endif %}
+      {% if item.weight %}
+        <span> <b>weight:</b> &nbsp; {{ item.weight }}</span> &nbsp;
+      {% endif %}
+    </div>
+    {% if item.description %}
+      <p>
+        {{ item.description }}
+      </p>
+    {% endif %}
+  </div>
+  <div class="col-sm-6">
+    <h3>Loot from:</h3>
+    {% if loot %}
+      <div class="d-flex flex-column">
+        {% for item in loot %}
+           <a style="color: white;" href="{{ url('monsters/show/'~item.name) }}">
+             {{ item.name }} &nbsp; - {{ item.chance }}%
+           </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>This item cannot be loot</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
