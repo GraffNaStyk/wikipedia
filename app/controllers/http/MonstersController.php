@@ -67,7 +67,7 @@ class MonstersController extends IndexController
                 ->get();
             
             return $this->render([
-                'title' => 'Monsters',
+                'title' => 'Monster - '.ucfirst($monster['name']),
                 'monster' => $monster,
                 'loot' => $loot
             ]);

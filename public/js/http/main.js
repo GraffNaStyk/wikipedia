@@ -65,3 +65,27 @@ const menu = (e) => {
 App.on('click', 'a', prevent);
 // enable all submenu functions
 App.on('click', 'a.has__parent', menu);
+
+App.on('click', 'button[data-toggle="buyable"]', (e) => {
+  e.target.classList.remove('button__not__active');
+  e.target.classList.add('is__tab__button__active');
+  let selector = document.querySelector('button[data-toggle="sellable"]');
+  selector.classList.remove('is__tab__button__active')
+  selector.classList.add('button__not__active')
+  let hideTab = document.querySelector('div[data-target="sellable"]');
+  hideTab.setAttribute('style', 'display:none;')
+  let showTab = document.querySelector('div[data-target="buyable"]');
+  showTab.setAttribute('style', '');
+});
+
+App.on('click', 'button[data-toggle="sellable"]', (e) => {
+  e.target.classList.remove('button__not__active');
+  e.target.classList.add('is__tab__button__active');
+  let selector = document.querySelector('button[data-toggle="buyable"]');
+  selector.classList.remove('is__tab__button__active')
+  selector.classList.add('button__not__active')
+  let hideTab = document.querySelector('div[data-target="buyable"]');
+  hideTab.setAttribute('style', 'display:none;')
+  let showTab = document.querySelector('div[data-target="sellable"]');
+  showTab.setAttribute('style', '');
+});

@@ -151,14 +151,18 @@ class Items
     
     protected static function getImage(int $cid, string $name)
     {
-        if ($cid === 0) {
+        if (app('force_update_images') === false) {
             return false;
         }
         
-        if (empty(Image::where(['name', '=', $name])->findOrFail())) {
+        if ($cid === 0 || $cid === null) {
+            return false;
+        }
+        
+        if (empty(Image::where(['cid', '=', $cid])->findOrFail())) {
             Storage::disk('public')->make('images/');
             exec('wget '.self::PG_URL.$cid.'_1.gif -P '. storage_path('public/images/'));
-    
+
             if (is_file(storage_path('public/images/'.$cid.'_1.gif'))) {
                 $hash = Faker::hash(50);
                 rename(storage_path('public/images/'.$cid.'_1.gif'), storage_path('public/images/'.$hash.'.gif'));
@@ -168,7 +172,7 @@ class Items
                     'hash' => $hash,
                     'path' => 'images/',
                     'created_by' => 1,
-                    'ext' => '.gif'
+                    'ext' => 'gif'
                 ]);
             }
         }

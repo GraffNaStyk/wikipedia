@@ -13,6 +13,7 @@ if ($job->do('parser') || $job->do('parse')) {
     \App\Facades\Parser\Movements::parse();
     \App\Facades\Parser\Spells::parse();
     \App\Facades\Parser\Monsters::parse();
+    \App\Facades\Parser\Npcs::parse();
 }
 
 $job->end();

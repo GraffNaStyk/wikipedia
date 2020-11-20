@@ -2,8 +2,7 @@
 
 {% block content %}
 <div class="row p-2">
-  <div class="col-sm-6">
-    <h3>{{ monster.name|capitalize }}</h3>
+  <div class="col-12">
     <div class="my-2 pb-2" style="border-bottom: 1px solid white;">
       {% if monster.health %}
         <span>  <b>health:</b> &nbsp; {{ monster.health }}</span>  &nbsp;
@@ -24,15 +23,20 @@
       </p>
     {% endif %}
   </div>
-  <div class="col-sm-6">
-    <h3>Loot:</h3>
+  <div class="col-12">
+    <button class="w-100">Loot:</button>
     {% if loot %}
       <div class="d-flex flex-column">
         {% for item in loot %}
-           <a style="color: white;" href="{{ url('items/show/'~item.name) }}">
-             <img src="{{ img('images/'~item.hash~'.'~item.ext) }}" alt="">
-             &nbsp;
-             {{ item.name }} &nbsp; - {{ item.chance }}%
+           <a class="link loot__list d-flex p-1 align-items-center justify-content-between" href="{{ url('items/show/'~item.name) }}">
+             <b>
+               <img src="{{ img('images/'~item.hash~'.'~item.ext) }}" alt="">
+               &nbsp;
+               {{ item.name }}
+             </b>
+             <span>
+               {{ item.chance }}%
+             </span>
            </a>
         {% endfor %}
       </div>

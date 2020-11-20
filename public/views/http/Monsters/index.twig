@@ -14,13 +14,15 @@
     <tbody>
     {% for monster in monsters %}
       <tr>
-        <td><a href="{{ url('monsters/show/'~monster.name) }}">{{ monster.name }}</a></td>
+        <td><a class="link" href="{{ url('monsters/show/'~monster.name) }}"><b>{{ monster.name }}</b></a></td>
         <td>{{ monster.health }}</td>
         <td>{{ monster.experience }}</td>
         <td>
           {% for item in monster.loot %}
-            <b style="color: black;" {{ tooltip(item.description) }} >{{ item.name }} </b>
-            <img style=" cursor: pointer;" {{ tooltip(item.description) }} src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
+            <a href="{{ url('items/show/'~item.name) }}">
+              <b style="color: black;" {{ tooltip(item.description) }} >{{ item.name }} </b>
+              <img style=" cursor: pointer;" {{ tooltip(item.description) }} src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
+            </a>
             <b style="color: black;"> ({{ item.chance }}%)</b>
             <br>
           {% endfor %}

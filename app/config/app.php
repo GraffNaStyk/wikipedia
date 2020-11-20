@@ -74,5 +74,7 @@ return [
     
     'monsters_path' => storage_path('private/monsters.xml'),
     
-    'npcs_path' => storage_path('private/sellior.lua'),
+    'npcs_path' => storage_path('private/npcs'),
+    
+    'force_update_images' => false
 ];

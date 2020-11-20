@@ -1,0 +1,20 @@
+{% extends layout %}
+
+{% block content %}
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <td>Name</td>
+      </tr>
+    </thead>
+    <tbody>
+    {% for npc in npcs %}
+      <tr>
+        <td><a class="link d-flex" href="{{ url(npc.link) }}"><b>{{ npc.name }}</b></a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

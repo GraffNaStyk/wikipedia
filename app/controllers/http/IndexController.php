@@ -5,6 +5,7 @@ namespace App\Controllers\Http;
 use App\Core\Controller;
 use App\Facades\Url\Url;
 use App\Model\Menu;
+use App\Model\Npc;
 use App\Model\Page;
 use App\Model\Vocation;
 
@@ -19,6 +20,7 @@ class IndexController extends Controller
             'vocations' => Vocation::order(['name'], 'asc')->all(),
             'last_added' => $this->createLastAdded(),
             'last_updated' => $this->createLastUpdated(),
+            'npc' => Npc::count()['total']
         ]);
     }
 
