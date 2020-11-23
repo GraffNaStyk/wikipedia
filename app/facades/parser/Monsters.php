@@ -5,7 +5,7 @@ namespace App\Facades\Parser;
 use App\Model\CtMonsterLoot;
 use App\Model\Monster;
 
-class Monsters
+class Monsters extends Facade
 {
     protected static array $monsters = [];
     protected static int $iterator = 0;
@@ -17,12 +17,13 @@ class Monsters
         if (file_exists(app('monsters_path'))) {
             foreach (simplexml_load_file(app('monsters_path')) as $key => $item) {
                 $item = get_object_vars($item);
+ 
                 if (is_file($file = dirname(app('monsters_path')).'/'.$item['@attributes']['file'])) {
                     $monster = get_object_vars(simplexml_load_file($file));
-                    
                     self::basic($monster['@attributes']);
                     self::health(get_object_vars($monster['health']));
                     self::loot(get_object_vars($monster['loot']));
+                    self::$monsters[self::$iterator]['cid'] = (int) get_object_vars($monster['look'])['@attributes']['type'];
                     
                     self::$iterator++;
                 }
@@ -32,21 +33,25 @@ class Monsters
         }
         
         foreach (self::$monsters as $monster) {
+
+            if ($monster['cid'] === 0 || $monster['cid'] === null) {
+                continue;
+            }
+            
             $tmp = $monster['loot'];
             unset($monster['loot']);
             Monster::insert($monster);
+            $monsterId = Monster::lastId();
+            self::getImage($monster['cid'], $monster['name'],'outfits');
             
-            if ($tmp) {
-                $monsterId = Monster::lastId();
-                if ((int) $monsterId !== 0) {
-                    foreach ($tmp as $item) {
-                        CtMonsterLoot::insert([
-                            'item_id' => $item['id'],
-                            'count' => $item['count'],
-                            'chance' => $item['chance'],
-                            'monster_id' => $monsterId
-                        ]);
-                    }
+            if ($tmp && (int) $monsterId !== 0) {
+                foreach ($tmp as $item) {
+                    CtMonsterLoot::insert([
+                        'item_id' => $item['id'],
+                        'count' => $item['count'],
+                        'chance' => $item['chance'],
+                        'monster_id' => $monsterId
+                    ]);
                 }
             }
         }
@@ -71,6 +76,7 @@ class Monsters
     {
         foreach ($monster['item'] as $item) {
             $item = get_object_vars($item);
+            
             self::$monsters[self::$iterator]['loot'][] = [
                 'id' => $item['@attributes']['id'],
                 'count' => $item['@attributes']['countmax'],

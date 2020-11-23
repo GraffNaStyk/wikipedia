@@ -10,6 +10,7 @@ class Migration_Monster_2020_10_27__22_10
     public function up(Schema $schema)
     {
         $schema->int('id', 11)->primary();
+        $schema->int('cid', 11)->index()->unique();
         $schema->varchar('name', 100)->index()->unique();
         $schema->varchar('race', 50)->index();
         $schema->int('health', 11);

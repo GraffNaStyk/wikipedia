@@ -64,12 +64,12 @@ abstract class Controller
         return Validator::make($request, $rules);
     }
     
-    public function sendSuccess(?string $message, string $to = null, int $status = 200 ,array $headers = []): string
+    public function sendSuccess(?string $message, string $to = null, int $status = 201 ,array $headers = []): string
     {
         return Response::json(['ok' => true, 'msg' => [$message ?? 'Dane zostały zapisane'], 'to' => $to], $status, $headers);
     }
     
-    public function sendError(string $message=null, int $status = 400, array $headers = []): string
+    public function sendError(string $message=null, int $status = 200, array $headers = []): string
     {
         return Response::json(['ok' => false, 'msg' => $message ?? Validator::getErrors()], $status, $headers);
     }

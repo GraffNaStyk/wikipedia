@@ -16,12 +16,16 @@
         {% for key,value in item %}
           {% if loop.index <= headerCount %}
             <td>
-              <div>
-                {% if loop.index == 1 %}
+              {% if loop.index == 1 %}
+                <a href="{{ url('items/show/'~item.name) }}" class="link">
                   <img src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt=""> &nbsp;
-                {% endif %}
-                {{ value|capitalize }}
-              </div>
+                  <b>                {{ value|capitalize }}</b>
+                </a>
+              {% else  %}
+                <div>
+                  {{ value|capitalize }}
+                </div>
+              {% endif %}
             </td>
           {% endif %}
         {% endfor %}

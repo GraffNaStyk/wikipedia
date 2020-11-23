@@ -136,6 +136,27 @@ input::placeholder {
   align-items: center;
   border-radius: 6px;
   margin-left: .6rem;
+  border: 1px solid var(--inputborder);
+  overflow: auto;
+  max-height: 400px;
+  scrollbar-color: var(--inputborder) white;
+  scrollbar-width: thin;
+}
+
+.search__result::-webkit-scrollbar, .is__parent::-webkit-scrollbar {
+  width: 10px;
+}
+
+.search__result::-webkit-scrollbar-track, .is__parent::-webkit-scrollbar {
+  background: var(--inputborder);
+}
+
+.search__result::-webkit-scrollbar-thumb, .is__parent::-webkit-scrollbar {
+  background: var(--inputborder);
+}
+
+.search__result::-webkit-scrollbar-thumb:hover, .is__parent::-webkit-scrollbar {
+  background: var(--inputborder);
 }
 
 .is__parent a {
@@ -178,16 +199,13 @@ input::placeholder {
   padding: .8rem .5rem;
   color: white;
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
-.box-body .article a {
+.box-body .article div {
   color: white;
   text-decoration: none;
-}
-
-.box-body .article a span {
-  font-size: 40px;
-  line-height: 5px;
 }
 
 .box-body .article:not(:last-child) {
@@ -319,6 +337,16 @@ span.err {
   display: none;
 }
 
+.left__menu__closer, .mobile__search__closer {
+  display: none;
+  position: absolute;
+  width: 24px;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 150;
+}
+
 .main__box {
   margin-left:1rem;
   margin-right:1rem;
@@ -361,12 +389,12 @@ i {
     display: flex;
   }
 
-  .left__menu__closer {
+  .left__menu__closer svg {
     position: absolute;
     color: white;
-    right: 12px;
-    font-size: 45px;
-    top: -19px;
+    right: 14px;
+    width: 26px;
+    top: 8px;
     cursor: pointer;
   }
 
@@ -389,17 +417,69 @@ i {
 
 .wiki__box--search {
   display: flex;
+  position: relative;
+  margin-right: 1.5rem;
+}
+
+.wiki-box__mobile-container {
+  height: 62px;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  width: 60px;
+  background: var(--mainbackground);
+  border-radius: 5px;
+  font-size: 34px;
+  cursor: pointer;
+}
+
+.mobile__closer {
+  display: none;
 }
 
 @media only screen and (max-width: 720px) {
   .wiki__box--search {
     display: none!important;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    position: absolute!important;
+    margin-right: 0!important;
+    top: 12px;
+  }
+  .wiki__box--search form, .wiki__box--search form div label input {
+    width: 100%;
+  }
+
+  .wiki__box--search form div {
+    display: block;
+  }
+
+  .mobile__closer {
+    position: absolute;
+    font-size: 30px;
+    right: 20px;
+    top: 11px;
   }
   .grid-box-header {
-    grid-template-columns: 25% 25% 25%;
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+  .wiki-box__mobile-container {
+    display: flex;
   }
 }
 
+@media only screen and (max-width: 555px) {
+  .grid-box-header {
+    grid-template-columns: 15% 25% 25% 25%;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .wiki__box--search__for__mobile {
+    display: flex;
+  }
+}
 
 .page__items {
   padding: 0 15px 15px 15px;
@@ -419,6 +499,8 @@ i {
   max-height: 300px;
   overflow-y: scroll;
   z-index: 200;
+  scrollbar-color: var(--inputborder) white;
+  scrollbar-width: thin;
 }
 
 .search__result a {
@@ -428,5 +510,17 @@ i {
 .search__result a:hover {
   text-decoration: none!important;
   background: var(--inputbackground);
+  transition: .6s;
+}
+
+.right_arrow__item {
+  transition: .6s;
+  margin-left: .5rem;
+  width: 18px;
+}
+
+a.link:hover .right_arrow__item {
+  margin-left: 1.5rem;
+  width: 22px;
   transition: .6s;
 }

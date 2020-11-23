@@ -114,12 +114,17 @@ class Storage
         }
     }
 
-    public function get($path = null, $pattern = '*', $glob_type = GLOB_BRACE)
+    public function get($path = null, $pattern = '*', $glob_type = GLOB_BRACE, $replace=true)
     {
         $path = self::$disk . '/' . $path;
         $result = [];
-
-        foreach (glob($path.$pattern, $glob_type) as $key => $value) {
+        $images = glob($path.$pattern, $glob_type);
+        
+        if  ($replace === false) {
+            return $images;
+        }
+        
+        foreach ($images as $key => $value) {
             $result[$key] = str_replace(storage_path(), '', $value);
         }
 

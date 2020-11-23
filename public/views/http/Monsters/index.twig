@@ -14,7 +14,12 @@
     <tbody>
     {% for monster in monsters %}
       <tr>
-        <td><a class="link" href="{{ url('monsters/show/'~monster.name) }}"><b>{{ monster.name }}</b></a></td>
+        <td>
+          <a class="link" href="{{ url('monsters/show/'~monster.name) }}">
+            <img src="{{ img(monster.path~monster.hash~'.'~monster.ext) }}" alt="">
+            <b>{{ monster.name }}</b>
+          </a>
+        </td>
         <td>{{ monster.health }}</td>
         <td>{{ monster.experience }}</td>
         <td>

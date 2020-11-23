@@ -31,15 +31,17 @@ class ItemsController extends IndexController
     
     public function show(string $name)
     {
-        $item = Item::select(['i.hash', 'i.path', 'i.ext', 'items.*', 'i.cid'])->where(['items.name', '=', $name])
+        $item = Item::select(['i.hash', 'i.path', 'i.ext', 'items.*', 'i.cid'])
+            ->where(['items.name', '=', $name])
             ->leftJoin(['images as i', 'i.cid', '=', 'items.cid'])
             ->findOrFail();
         
         if ($item) {
-            $item['weight'] = $item['weight'] / 100 . '.00 oz';
+            $item['weight'] = $item['weight'] / 100 . ' oz';
     
-            $loot = CtMonsterLoot::select(['m.name', 'ct_monsters_loot.chance'])
+            $loot = CtMonsterLoot::select(['m.name', 'ct_monsters_loot.chance', 'i.hash', 'i.path', 'i.ext'])
                 ->join(['monsters as m', 'm.id', '=', 'ct_monsters_loot.monster_id'])
+                ->join(['images as i', 'i.cid', '=', 'm.cid'])
                 ->where(['ct_monsters_loot.item_id', '=', $item['cid']])
                 ->order(['ct_monsters_loot.chance'], 'desc')
                 ->get();

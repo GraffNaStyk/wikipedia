@@ -2,15 +2,10 @@
 
 namespace App\Facades\Parser;
 
-use App\Facades\Faker\Faker;
-use App\Helpers\Storage;
-use App\Model\Image;
 use App\Model\Item;
 
-class Items
+class Items extends Facade
 {
-    const PG_URL = 'https://priogames.com/images/items/';
-    
     protected static array $itemTypes = [
         'sword', 'distance', 'axe', 'fist',
         'body', 'legs', 'feet', 'head', 'ring',
@@ -61,7 +56,7 @@ class Items
             foreach ($items as $item) {
                 $item['type'] = self::$mapTypeToModel[$key];
                 Item::insert($item);
-                self::getImage((int) $item['cid'], $item['name']);
+                self::getImage((int) $item['cid'], $item['name'], 'items');
             }
         }
         
@@ -143,37 +138,8 @@ class Items
                     $data['cid'] = (int) $other['@attributes']['id'];
                     $data['type'] = 'item';
                     Item::insert($data);
-                    self::getImage((int) $other['@attributes']['id'], $other['@attributes']['name']);
+                    self::getImage((int) $other['@attributes']['id'], $other['@attributes']['name'], 'items');
                 }
-            }
-        }
-    }
-    
-    protected static function getImage(int $cid, string $name)
-    {
-        if (app('force_update_images') === false) {
-            return false;
-        }
-        
-        if ($cid === 0 || $cid === null) {
-            return false;
-        }
-        
-        if (empty(Image::where(['cid', '=', $cid])->findOrFail())) {
-            Storage::disk('public')->make('images/');
-            exec('wget '.self::PG_URL.$cid.'_1.gif -P '. storage_path('public/images/'));
-
-            if (is_file(storage_path('public/images/'.$cid.'_1.gif'))) {
-                $hash = Faker::hash(50);
-                rename(storage_path('public/images/'.$cid.'_1.gif'), storage_path('public/images/'.$hash.'.gif'));
-                Image::insert([
-                    'name' => $name,
-                    'cid' => $cid,
-                    'hash' => $hash,
-                    'path' => 'images/',
-                    'created_by' => 1,
-                    'ext' => 'gif'
-                ]);
             }
         }
     }

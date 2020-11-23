@@ -4,6 +4,7 @@
 <div class="row p-2">
   <div class="col-12">
     <div class="my-2 pb-2" style="border-bottom: 1px solid white;">
+      <img class="mr-4" src="{{ img(monster.path~monster.hash~'.'~monster.ext) }}" alt="">
       {% if monster.health %}
         <span>  <b>health:</b> &nbsp; {{ monster.health }}</span>  &nbsp;
       {% endif %}

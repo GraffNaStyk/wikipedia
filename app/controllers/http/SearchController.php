@@ -27,7 +27,7 @@ class SearchController extends IndexController
         }
         
         $monsters = Monster::select(['monsters.name', 'images.path', 'images.ext', 'images.hash'])
-            ->leftJoin(['images', 'monsters.id', '=', 'images.cid'])
+            ->leftJoin(['images', 'monsters.cid', '=', 'images.cid'])
             ->where(['monsters.name', 'like', '%'.$request->get('search').'%'])
             ->get();
     
@@ -46,5 +46,4 @@ class SearchController extends IndexController
         
        return $this->render(['data' => [...$items, ...$monsters, ...$npc]]);
     }
-    
 }

@@ -1,24 +1,30 @@
 {% block content %}
   <div class="d-flex flex-column search__result">
-    {% for item in data %}
-      {% if item.type == 'item' %}
-        <a href="{{ url('items/show/'~item.name) }}" class="p-2">
-          <img class="mr-3" src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
-          <b>{{ item.name }}</b>
+    {% if data %}
+      {% for item in data %}
+        {% if item.type == 'item' %}
+          <a href="{{ url('items/show/'~item.name) }}" class="p-2">
+            <img class="mr-3" src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
+            <b>{{ item.name }}</b>
+          </a>
+        {% endif %}
+        {% if item.type == 'monster' %}
+          <a href="{{ url('monsters/show/'~item.name) }}" class="p-2">
+            <img class="mr-3" style="width:32px;" src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
+            <b>{{ item.name }}</b>
+          </a>
+        {% endif %}
+        {% if item.type == 'npc' %}
+          <a href="{{ url('npc/show/'~item.id~'/'~item.link) }}" class="p-2">
+            <img class="mr-3" src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
+            <b>{{ item.name }}</b>
+          </a>
+        {% endif %}
+      {% endfor %}
+      {% else %}
+        <a href="#" class="p-2">
+          <b>Result not found</b>
         </a>
-      {% endif %}
-      {% if item.type == 'monster' %}
-        <a href="{{ url('monsters/show/'~item.name) }}" class="p-2">
-          <img class="mr-3" src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
-          <b>{{ item.name }}</b>
-        </a>
-      {% endif %}
-      {% if item.type == 'npc' %}
-        <a href="{{ url('npc/show/'~item.id~'/'~item.link) }}" class="p-2">
-          <img class="mr-3" src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
-          <b>{{ item.name }}</b>
-        </a>
-      {% endif %}
-    {% endfor %}
+    {% endif %}
   </div>
 {% endblock %}

@@ -59,7 +59,8 @@
       <button class="w-100 mb-4">Loot from:</button>
       <div class="d-flex flex-column">
         {% for item in loot %}
-           <a class="link d-flex justify-content-between p-1 loot__list" href="{{ url('monsters/show/'~item.name) }}">
+           <a class="link d-flex justify-content-between p-1 loot__list align-items-center ju" href="{{ url('monsters/show/'~item.name) }}">
+             <img style="width: 40px; height: 40px;" src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
              <b>{{ item.name }}</b> <span>{{ item.chance }}%</span>
            </a>
         {% endfor %}
@@ -70,3 +71,4 @@
   </div>
 </div>
 {% endblock %}
+
