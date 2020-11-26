@@ -58,6 +58,7 @@ export const render = (args) => {
     setTimeout(() => {
       OnSubmitForms();
       RefreshSelects();
+      reloadEvents();
       if (callbacks['afterRender'] !== undefined) {
         callbacks['afterRender']();
       }
@@ -109,7 +110,7 @@ export const response = (res, selector, action) => {
   }
 };
 
-const throwCustomMessage = (res, selector) => {
+export const throwCustomMessage = (res, selector) => {
   let min = Math.ceil(500);
   let max = Math.floor(150000);
   let rand = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -266,4 +267,11 @@ export const afterRender = (callback) => {
 
 export const beforeRender = (callback) => {
   callbacks['beforeRender'] = callback;
+}
+
+export const reloadEvents = () => {
+  window.addEventListener('paste', (e) => {
+    let fileInput = document.querySelector('input[name="file"]');
+    fileInput.files = e.clipboardData.files;
+  }, false);
 }

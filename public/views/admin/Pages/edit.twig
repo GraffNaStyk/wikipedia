@@ -3,6 +3,8 @@
 {% block content %}
 <div class="box">
   <h3>{{ page.title }}</h3>
+  <button class="render mb-3" data-el="modal" data-url="images/add">Dodaj nowe zdjęcie</button>
+  <button class="render mb-3" data-el="modal" data-url="images/set">Edytuj zdjęcie</button>
   <table class="table" id="table">
     <thead class="thead-dark">
     <tr>
@@ -26,7 +28,7 @@
             <button class="render btn-sm" data-el="modal" data-url="pages/table/components/edit/{{ component.id }}"> <i class="fa fa-cog"></i> </button>
           {% endif %}
 
-          {% if component.type == 'image' %}
+          {% if component.type == 'image' and component.data %}
             <a class="btn-sm" href="{{ url('images/draw/'~component.id) }}"> <i class="fa fa-paint-brush"></i> </a>
           {% endif %}
           &nbsp;

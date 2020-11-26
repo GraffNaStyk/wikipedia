@@ -92,7 +92,7 @@ class PagesController extends DashController implements ControllerInterface
         $components = PageComponent::where(['page_id', '=', $id])
             ->order(['order'])
             ->get();
-        
+
         foreach ($components as $key => $component) {
             $components[$key]['data'] = (array) json_decode($component['data'], true);
         }

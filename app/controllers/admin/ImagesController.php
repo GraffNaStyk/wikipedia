@@ -33,9 +33,19 @@ class ImagesController extends DashController
         ])) $this->sendError();
         
         $hash = Faker::hash(50);
-        Storage::disk('public')
-            ->upload($request->file('file'), '/images/', $hash);
         
+        if ((bool) strpos($request->get('img'), ',')) {
+            $img = substr($request->get('img'), strpos($request->get('img'), ',') + 1);
+            $img = str_replace( ' ', '+', $img);
+            file_put_contents(
+                storage_path('public/images/'.$hash.'.jpg'),
+                base64_decode($img)
+            );
+        } else {
+            Storage::disk('public')
+                ->upload($request->file('file'), '/images/', $hash);
+        }
+
         Image::insert([
             'name' => $request->get('name'),
             'path' => 'images/',
@@ -82,24 +92,28 @@ class ImagesController extends DashController
         foreach ($images as $img) {
             $response[] = [
                 'text' => '<img style="width: 20px;" src="storage/public/'.$img['path'].$img['hash'].'.'.$img['ext'].'">'. $img['name'],
-                'value' => $img['path'].$img['hash'].'.'.$img['ext']
+                'value' => $img['id']
             ];
         }
         
         Response::json($response);
     }
-
-    public function draw(int $componentId)
+    
+    public function draw(int $imageId)
     {
-        $component = PageComponent::select(['data'])
-            ->where(['id', '=', $componentId])
-            ->first()
-            ->get();
-        if ($component) {
-            return $this->render(['img' => json_decode($component['data'], true)['img']]);
+        if ($img = Image::select('*')->where(['id', '=', $imageId])->findOrFail()) {
+            return $this->render(['img' => $img['path'].$img['hash'].'.'.$img['ext']]);
         } else {
             $this->redirect('');
         }
     }
     
+    public function setImage(Request $request)
+    {
+        if ($request->has('img')) {
+            $this->sendSuccess('Zaraz nastąpi przekierowanie', 'images/draw/'.$request->get('img'));
+        } else {
+            return $this->render();
+        }
+    }
 }
