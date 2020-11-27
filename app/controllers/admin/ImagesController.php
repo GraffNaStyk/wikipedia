@@ -7,7 +7,6 @@ use App\Facades\Http\Request;
 use App\Facades\Http\Response;
 use App\Helpers\Storage;
 use App\Model\Image;
-use App\Model\PageComponent;
 
 class ImagesController extends DashController
 {
@@ -101,7 +100,8 @@ class ImagesController extends DashController
     
     public function draw(int $imageId)
     {
-        if ($img = Image::select('*')->where(['id', '=', $imageId])->findOrFail()) {
+        $img = Image::select('*')->where(['id', '=', $imageId])->findOrFail();
+        if ($img) {
             return $this->render(['img' => $img['path'].$img['hash'].'.'.$img['ext']]);
         } else {
             $this->redirect('');
