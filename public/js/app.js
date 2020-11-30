@@ -274,4 +274,35 @@ export const reloadEvents = () => {
     let fileInput = document.querySelector('input[name="file"]');
     fileInput.files = e.clipboardData.files;
   }, false);
+
+  on('change', 'input[name="createGrid"]', (e) => {
+    let i = parseInt(e.target.value);
+    let possible = {
+      1: 12,
+      2: 6,
+      3: 4,
+      4: 3,
+      6: 2,
+    };
+
+    if (possible[i] !== undefined) {
+      let replace = possible[i];
+      let start = `
+<div class="row">
+`;
+      let div = `<div class="col-md-VALUE col-xl-VALUE col-sm-12">
+`;
+      let ret = start;
+
+      for (let it = 0; it < i; it++) {
+        ret += div.replaceAll('VALUE', replace);
+        ret += `
+</div>
+`;
+      }
+
+      ret += '</div>';
+      document.querySelector('[name="data[text]"]').value += ret;
+    }
+  })
 }

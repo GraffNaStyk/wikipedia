@@ -1,7 +1,7 @@
 <?php
 use App\Facades\Http\Router;
 
-Router::group(['prefix' => 'admin', 'as' => 'App\Controllers\Admin', 'base' => 'login'], function () {
+Router::group(['prefix' => 'admin', 'as' => 'App\Controllers\Admin', 'base' => 'dash'], function () {
     Router::get('pages/components/add/{id}', 'PagesComponents@add');
     Router::get('pages/components/edit/{id}', 'PagesComponents@edit');
     Router::post('pages/components/store', 'PagesComponents@store');

@@ -482,7 +482,11 @@ i {
 }
 
 .page__items {
-  padding: 0 15px 15px 15px;
+  padding: 15px;
+}
+
+.page__items p, .page__items span, .page__items a, .page__items div {
+  color: white;
 }
 
 .page__items .page__item:not(last-child) {
