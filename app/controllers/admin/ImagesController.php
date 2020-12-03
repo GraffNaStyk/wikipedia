@@ -28,7 +28,7 @@ class ImagesController extends DashController
     public function store(Request $request)
     {
         if ($request->has('img')) {
-            if (! $this->validate(array_merge($request->file(), $request->all()), [
+            if (! $this->validate($request->all(), [
                 'name' => 'required|min:3|unique:'.Image::class,
                 'img' => 'required'
             ])) $this->sendError();

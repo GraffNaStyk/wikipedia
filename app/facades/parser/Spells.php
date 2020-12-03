@@ -14,7 +14,7 @@ class Spells
     
     public static function parse()
     {
-        if (file_exists(app('spells_path'))) {
+        if (is_readable(app('spells_path'))) {
             foreach (simplexml_load_file(app('spells_path')) as $key => $item) {
                 $item = get_object_vars($item);
        
@@ -38,13 +38,15 @@ class Spells
         foreach (self::$spells as $spell) {
             $tmpVoc = $spell['vocations'];
             unset($spell['vocations']);
-            Spell::insert($spell);
-            $id = Spell::lastId();
-            
-            if (!empty($tmpVoc) && (int) $id !== 0) {
-                foreach ($tmpVoc as $vocation) {
-                    if ($vocId = Vocation::select(['id'])->where(['name', '=', $vocation])->findOrFail()) {
-                        CtVocSpell::insert(['vocation_id' => $vocId['id'], 'spell_id' => $id]);
+            if ((bool) $spell['mana']) {
+                Spell::insert($spell);
+                $id = Spell::lastId();
+    
+                if (!empty($tmpVoc) && (int) $id !== 0) {
+                    foreach ($tmpVoc as $vocation) {
+                        if ($vocId = Vocation::select(['id'])->where(['name', '=', $vocation])->findOrFail()) {
+                            CtVocSpell::insert(['vocation_id' => $vocId['id'], 'spell_id' => $id]);
+                        }
                     }
                 }
             }

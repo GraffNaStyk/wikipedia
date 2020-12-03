@@ -361,7 +361,7 @@ hr.white {
 }
 
 a.link b {
-  color: #337ab7;
+  color: #478fcc;
 }
 
 i {
@@ -527,4 +527,14 @@ a.link:hover .right_arrow__item {
   margin-left: 1.5rem;
   width: 22px;
   transition: .6s;
+}
+
+td.position-relative span.counter {
+  right:10px;
+  top: 8px;
+  font-weight: bold;
+  padding: 4px;
+  border-radius: 6px;
+  background: #1cbd1c;
+  color: white;
 }

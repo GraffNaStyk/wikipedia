@@ -40,6 +40,7 @@ class NpcController extends IndexController
             ->leftJoin(['items as i', 'ct.item_cid', '=', 'i.cid'])
             ->leftJoin(['images as img', 'i.cid', '=', 'img.cid'])
             ->where(['npcs.id', '=', $id])
+            ->where(['i.name', '<>', 'null'])
             ->order(['ct.price'])
             ->get();
 

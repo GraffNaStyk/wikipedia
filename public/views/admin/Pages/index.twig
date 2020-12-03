@@ -2,6 +2,28 @@
 
 {% block content %}
   <div class="box">
+    <h3>Wyszukaj</h3>
+    <form action="{{ url('pages') }}" method="post">
+      <div class="form__grid">
+        {{ input({
+          class: 'form-control',
+          name: 'title',
+          label: 'Nazwa',
+          value: search.title
+        }) }}
+        {{ select({
+          class: 'form-control',
+          name: 'type',
+          data: types,
+          label: 'Typ',
+          selected: search.type
+        }) }}
+      </div>
+      {{ input({
+        class: 'form-control',
+        type: 'submit'
+      }) }}
+    </form>
     <table class="table table-striped">
       <thead>
         <tr>

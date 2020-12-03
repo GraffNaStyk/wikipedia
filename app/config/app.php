@@ -76,5 +76,9 @@ return [
     
     'npcs_path' => storage_path('private/npcs'),
     
+    'quests_path' => storage_path('private/quest_system.json'),
+    
+    'achievements_path' => storage_path('private/achievement_system.json'),
+    
     'force_update_images' => false
 ];

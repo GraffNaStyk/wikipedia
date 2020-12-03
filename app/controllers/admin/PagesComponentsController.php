@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Facades\Http\Request;
+use App\Model\Page;
 use App\Model\PageComponent;
 
 class PagesComponentsController extends DashController
@@ -43,6 +44,7 @@ class PagesComponentsController extends DashController
         ])) $this->sendError();
         
         PageComponent::insert($request->all());
+        Page::where(['id', '=', $request->get('id')])->update(['updated_at' => date('Y-m-d H:i:s')]);
         
         $this->sendSuccess('Dodano poprawnie');
 
@@ -93,6 +95,7 @@ class PagesComponentsController extends DashController
         }
         
         PageComponent::where(['id', '=', $id])->update(['is_active' => $active]);
+        Page::where(['id', '=', $pageId])->update(['updated_at' => date('Y-m-d H:i:s')]);
         $this->redirect('pages/edit/'.$pageId);
     }
 }

@@ -12,48 +12,50 @@ class Npcs
     
     public static function parse()
     {
-        foreach (glob(app('npcs_path').'/*', GLOB_BRACE) as $key => $npc) {
-            $npc = get_object_vars(simplexml_load_file($npc))['@attributes'];
-            static::$npcs[$key]['name'] = $npc['name'];
-            
-            $path = app('npcs_path').'/scripts/'.str_replace(static::$toRemove, '', $npc['script']);
-            $npc = file_get_contents($path);
-            
-            static::$npcs[$key]['sellable'] = self::getSellable($npc);
-            static::$npcs[$key]['buyable'] = self::getBuyable($npc);
-        }
-
-        foreach (static::$npcs as $npc) {
-            if (empty($npc['name'])) {
-                continue;
-            }
-
-            if ($res = Npc::select(['id'])->where(['name' ,'=', $npc['name']])->findOrFail()) {
-                $id = $res['id'];
-            } else {
-                Npc::insert(['name' => $npc['name']]);
-                $id = Npc::lastId();
-            }
-            
-            foreach ($npc['sellable'] as $item) {
-                CtNpcItem::insert([
-                    'npc_id' => $id,
-                    'item_cid' => $item['cid'],
-                    'price' => $item['price'],
-                    'type' => 'buy'
-                ]);
+        if (is_readable(app('npcs_path'))) {
+            foreach (glob(app('npcs_path') . '/*', GLOB_BRACE) as $key => $npc) {
+                $npc = get_object_vars(simplexml_load_file($npc))['@attributes'];
+                static::$npcs[$key]['name'] = $npc['name'];
+        
+                $path = app('npcs_path') . '/scripts/' . str_replace(static::$toRemove, '', $npc['script']);
+                $npc = file_get_contents($path);
+        
+                static::$npcs[$key]['sellable'] = self::getSellable($npc);
+                static::$npcs[$key]['buyable'] = self::getBuyable($npc);
             }
     
-            foreach ($npc['buyable'] as $item) {
-                CtNpcItem::insert([
-                    'npc_id' => $id,
-                    'item_cid' => $item['cid'],
-                    'price' => $item['price'],
-                    'type' => 'sell'
-                ]);
+            foreach (static::$npcs as $npc) {
+                if (empty($npc['name'])) {
+                    continue;
+                }
+        
+                if ($res = Npc::select(['id'])->where(['name', '=', $npc['name']])->findOrFail()) {
+                    $id = $res['id'];
+                }
+                else {
+                    Npc::insert(['name' => $npc['name']]);
+                    $id = Npc::lastId();
+                }
+        
+                foreach ($npc['sellable'] as $item) {
+                    CtNpcItem::insert([
+                        'npc_id' => $id,
+                        'item_cid' => $item['cid'],
+                        'price' => $item['price'],
+                        'type' => 'buy'
+                    ]);
+                }
+        
+                foreach ($npc['buyable'] as $item) {
+                    CtNpcItem::insert([
+                        'npc_id' => $id,
+                        'item_cid' => $item['cid'],
+                        'price' => $item['price'],
+                        'type' => 'sell'
+                    ]);
+                }
             }
         }
-        
     }
     
     private static function getSellable(string $plainScript): array

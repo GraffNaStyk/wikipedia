@@ -8,7 +8,7 @@ class Movements
 {
     public static function parse()
     {
-        if (file_exists(app('movements_path'))) {
+        if (is_readable(app('movements_path'))) {
             foreach (simplexml_load_file(app('movements_path')) as $event) {
                 $event = get_object_vars($event)['@attributes'];
                 

@@ -19,7 +19,7 @@
               {% if loop.index == 1 %}
                 <a href="{{ url('items/show/'~item.name) }}" class="link">
                   <img src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt=""> &nbsp;
-                  <b>                {{ value|capitalize }}</b>
+                  <b>{{ value|capitalize }}</b>
                 </a>
               {% else  %}
                 <div>

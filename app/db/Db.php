@@ -216,6 +216,7 @@ class Db extends Builder
     private function execute()
     {
         $this->setData();
+        
         if (preg_match('/^(INSERT|UPDATE|DELETE)/', $this->query)) {
             try {
                 if (self::$db->prepare($this->query)->execute($this->data)) {
@@ -252,7 +253,7 @@ class Db extends Builder
         $this->data = $data;
         $this->buildUpdateQuery();
 
-        if($this->execute())
+        if ($this->execute())
             return true;
 
         return false;
@@ -263,7 +264,7 @@ class Db extends Builder
         $this->data = $data;
         $this->buildSaveQuery();
 
-        if($this->execute())
+        if ($this->execute())
             return true;
 
         return false;
@@ -273,7 +274,7 @@ class Db extends Builder
     {
         $this->query = "DELETE FROM `{$this->table}` {$this->buildWhereQuery()}";
 
-        if($this->execute())
+        if ($this->execute())
             return true;
 
         return false;
@@ -283,13 +284,13 @@ class Db extends Builder
     {
         $result = $this->get();
 
-        if(empty($result) === true)
+        if (empty($result) === true)
             return false;
 
-        if(isset($result[1]))
+        if (isset($result[1]))
             return false;
 
-        if(isset($result[0]))
+        if (isset($result[0]))
             return $result[0];
 
         return false;
@@ -314,6 +315,7 @@ class Db extends Builder
     private function develop()
     {
         $statement = $this->query;
+        
         foreach ($this->data as $key => $item) {
             $statement = str_replace(':'.$key, "'".$item."'", $statement);
         }

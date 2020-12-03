@@ -37,7 +37,7 @@ class Items extends Facade
     public static function parse()
     {
         $others = [];
-        if (file_exists(app('items_path'))) {
+        if (is_readable(app('items_path'))) {
             foreach (simplexml_load_file(app('items_path')) as $key => $item) {
                 $item = get_object_vars($item);
                 $key = self::isInTypes($item);

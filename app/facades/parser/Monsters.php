@@ -14,44 +14,42 @@ class Monsters extends Facade
     
     public static function parse()
     {
-        if (file_exists(app('monsters_path'))) {
+        if (is_readable(app('monsters_path'))) {
             foreach (simplexml_load_file(app('monsters_path')) as $key => $item) {
                 $item = get_object_vars($item);
- 
-                if (is_file($file = dirname(app('monsters_path')).'/'.$item['@attributes']['file'])) {
+        
+                if (is_file($file = dirname(app('monsters_path')) . '/' . $item['@attributes']['file'])) {
                     $monster = get_object_vars(simplexml_load_file($file));
                     self::basic($monster['@attributes']);
                     self::health(get_object_vars($monster['health']));
                     self::loot(get_object_vars($monster['loot']));
-                    self::$monsters[self::$iterator]['cid'] = (int) get_object_vars($monster['look'])['@attributes']['type'];
-                    
+                    self::$monsters[self::$iterator]['cid'] = (int)get_object_vars($monster['look'])['@attributes']['type'];
+            
                     self::$iterator++;
                 }
             }
-        } else {
-            exit('file not exist');
-        }
+    
+            foreach (self::$monsters as $monster) {
         
-        foreach (self::$monsters as $monster) {
-
-            if ($monster['cid'] === 0 || $monster['cid'] === null) {
-                continue;
-            }
-            
-            $tmp = $monster['loot'];
-            unset($monster['loot']);
-            Monster::insert($monster);
-            $monsterId = Monster::lastId();
-            self::getImage($monster['cid'], $monster['name'],'outfits');
-            
-            if ($tmp && (int) $monsterId !== 0) {
-                foreach ($tmp as $item) {
-                    CtMonsterLoot::insert([
-                        'item_id' => $item['id'],
-                        'count' => $item['count'],
-                        'chance' => $item['chance'],
-                        'monster_id' => $monsterId
-                    ]);
+                if ($monster['cid'] === 0 || $monster['cid'] === null) {
+                    continue;
+                }
+        
+                $tmp = $monster['loot'];
+                unset($monster['loot']);
+                Monster::insert($monster);
+                $monsterId = Monster::lastId();
+                self::getImage($monster['cid'], $monster['name'], 'outfits');
+        
+                if ($tmp && (int)$monsterId !== 0) {
+                    foreach ($tmp as $item) {
+                        CtMonsterLoot::insert([
+                            'item_id' => $item['id'],
+                            'count' => $item['count'],
+                            'chance' => $item['chance'],
+                            'monster_id' => $monsterId
+                        ]);
+                    }
                 }
             }
         }
@@ -60,7 +58,7 @@ class Monsters extends Facade
     protected static function basic($monster)
     {
         self::$monsters[self::$iterator] = [
-            'name' => $monster['name'],
+            'name' => trim($monster['name']),
             'experience' => $monster['experience'],
             'race' => $monster['race'],
             'speed' => $monster['speed'],

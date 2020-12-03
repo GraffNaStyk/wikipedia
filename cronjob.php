@@ -14,6 +14,8 @@ if ($job->do('parser') || $job->do('parse')) {
     \App\Facades\Parser\Spells::parse();
     \App\Facades\Parser\Monsters::parse();
     \App\Facades\Parser\Npcs::parse();
+    \App\Facades\Parser\Quests::parse();
+    \App\Facades\Parser\Achievements::parse();
 }
 
 $job->end();

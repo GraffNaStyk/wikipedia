@@ -2,6 +2,7 @@
 namespace App\Core;
 
 use App\Facades\Http\Response;
+use App\Facades\Parser\Achievements;
 use App\Facades\Validator\Validator;
 use App\Helpers\Loader;
 use App\Helpers\Session;
@@ -15,8 +16,11 @@ abstract class Controller
     
     const PER_PAGE = 25;
     
+    const REQUEST_PER_SECOND = 2;
+    
     public function __construct()
     {
+        $this->perSecond();
         $this->boot();
     }
     
@@ -77,5 +81,21 @@ abstract class Controller
     public function getDate()
     {
         return date('Y-m-d H:i:s');
+    }
+    
+    private function perSecond()
+    {
+        $flash = Session::getFlash();
+        
+        if (! Session::hasFlash('last_request')) {
+            Session::flash('last_request', time(), 5);
+        } else {
+            Session::flash('request_count', ((int) $flash['request_count']+1), 5);
+        }
+        
+        if ($flash['request_count'] > self::REQUEST_PER_SECOND && $flash['last_request'] > strtotime('- 1 seconds')) {
+            http_response_code(431);
+            exit(require_once view_path('errors/too-many-requests.php'));
+        }
     }
 }

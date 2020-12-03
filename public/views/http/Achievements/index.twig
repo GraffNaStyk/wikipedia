@@ -1,0 +1,26 @@
+{% extends layout %}
+
+{% block content %}
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td class="position-relative">Status points <span class="position-absolute counter">{{ points }}</span></td>
+      </tr>
+    </thead>
+    <tbody>
+    {% for achievement in achievements %}
+      <tr>
+        <td>
+          {{ achievement.name }}
+        </td>
+        <td>
+          {{ achievement.status_points }}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

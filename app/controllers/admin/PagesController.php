@@ -2,14 +2,12 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\ControllerInterface;
 use App\Facades\Http\Request;
 use App\Facades\Url\Url;
-use App\Helpers\Session;
 use App\Model\Page;
 use App\Model\PageComponent;
 
-class PagesController extends DashController implements ControllerInterface
+class PagesController extends DashController
 {
     protected array $types = [
         [
@@ -39,10 +37,28 @@ class PagesController extends DashController implements ControllerInterface
         parent::__construct();
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if (! empty($request->all())) {
+            $pages = Page::select('*');
+
+            if ($request->has('title')) {
+                $pages->where(['title', 'like', '%'.$request->get('title').'%']);
+            }
+            
+            if ($request->has('type')) {
+                $pages->where(['type', '=', $request->get('type')]);
+            }
+            
+            $pages = $pages->get();
+        } else {
+            $pages = Page::all();
+        }
+        
         return $this->render([
-            'pages' => Page::all()
+            'pages' => $pages,
+            'types' => $this->types,
+            'search' => $request->all(),
         ]);
     }
     
@@ -101,11 +117,6 @@ class PagesController extends DashController implements ControllerInterface
             'page' => $page,
             'components' => $components
         ]);
-    }
-    
-    public function delete(int $id)
-    {
-    
     }
     
     public function active(int $active, int $id)

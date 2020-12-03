@@ -8,17 +8,10 @@
     </svg>
   </span>
 
-  {% if menu.quest is not empty %}
-    <a class="menu-item has__parent" href="#">
-      <img src="{{ img('menu/quests.png') }}" alt="">
-      Quests
-    </a>
-    <div class="is__parent">
-      {% for quest in menu.quest %}
-        <a href="{{ url(quest.link) }}">{{ quest.title }}</a>
-      {% endfor %}
-    </div>
-  {% endif %}
+  <a class="menu-item" href="{{ url('quests') }}">
+    <img src="{{ img('menu/quests.png') }}" alt="">
+    Quests
+  </a>
 
   <a class="menu-item has__parent" href="#">
     <img src="{{ img('menu/weapons.png') }}" alt="">
@@ -68,4 +61,10 @@
     <img style="width: 29px;" src="{{ img('menu/npc.png') }}" alt="">
     Npc
   </a>
+  {% if achievements %}
+    <a class="menu-item" href="{{ url('achievements') }}">
+      <img style="width: 29px;" src="{{ img('menu/achievement.png') }}" alt="">
+      Achievements
+    </a>
+  {% endif %}
 </aside>
