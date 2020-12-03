@@ -11,6 +11,7 @@ class MonstersController extends IndexController
     public function __construct()
     {
         parent::__construct();
+        $this->set(['title' => 'Monsters']);
     }
 
     public function index(int $page=1)

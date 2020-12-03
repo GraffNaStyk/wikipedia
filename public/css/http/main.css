@@ -14,7 +14,7 @@ h1,h2,h3,h4,h5,h6,p,a,span,b {
 }
 
 * {
-  font-family: 'Nunito' sans-serif!important;
+  font-family: 'Nunito';
 }
 
 body {
@@ -41,9 +41,13 @@ a.loot__list:hover {
   background: var(--inputbackground);
 }
 
-.grid-box, .grid-box-header {
+.grid-box {
   display: grid;
   grid-template-columns: 10% 70% 20%;
+}
+
+.grid-box-header {
+  display: flex;
 }
 
 #main-page-wrapper .main__box {
@@ -225,7 +229,7 @@ input::placeholder {
   color: var(--textcolor);
 }
 
-.alert  {
+.alert {
   min-width: 340px;
   text-align: center;
   color: white !important;
@@ -368,6 +372,10 @@ i {
   color: var(--textcolor);
 }
 
+.social__items {
+  display: flex;
+}
+
 /*BREAKPOINTS*/
 
 @media only screen and (max-width: 1199px) {
@@ -401,6 +409,10 @@ i {
   .main__box {
     margin-left:0!important;
     margin-right:0!important;
+  }
+
+  .social__items {
+    display: none;
   }
 }
 
@@ -471,7 +483,7 @@ i {
 
 @media only screen and (max-width: 555px) {
   .grid-box-header {
-    grid-template-columns: 15% 25% 25% 25%;
+    grid-template-columns: 17% 25% 25% 25%;
   }
 }
 
@@ -537,4 +549,8 @@ td.position-relative span.counter {
   border-radius: 6px;
   background: #1cbd1c;
   color: white;
+}
+
+.social__items a img {
+  width: 65px;
 }

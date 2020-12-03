@@ -32,12 +32,12 @@ App.on('click', '[data-menu="toggle"]', (e) => {
 
 App.on('click', '.menu__btn', (e) => {
   App.toggle('.left__menu__closer', 'd-flex')
-  App.toggleStyle('.left__box', 'position: fixed; display: flex!important; width: 100%; left: 0; top:0; z-index: 100; overflow: auto; max-height: 600px;');
+  App.toggleStyle('.left__box', 'position: fixed; display: flex!important; width: 100%; left: 0; top:0; z-index: 100; overflow: auto;');
 })
 
 App.on('click', '.left__menu__closer', (e) => {
   App.toggle('.left__menu__closer', 'd-flex')
-  App.toggleStyle('.left__box', 'position: fixed; display: flex!important; width: 100%; left: 0; top:0; z-index: 100; overflow: auto; max-height: 600px;');
+  App.toggleStyle('.left__box', 'position: fixed; display: flex!important; width: 100%; left: 0; top:0; z-index: 100; overflow: auto;');
 })
 
 const prevent = (e) => {

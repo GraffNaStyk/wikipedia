@@ -80,5 +80,7 @@ return [
     
     'achievements_path' => storage_path('private/achievement_system.json'),
     
+    'sagas_path' => storage_path('private/saga_system.json'),
+    
     'force_update_images' => false
 ];

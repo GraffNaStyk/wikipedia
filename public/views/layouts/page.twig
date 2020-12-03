@@ -20,7 +20,7 @@
 <body>
 <div class="right-panel"></div>
 <div class="container-fluid">
-  <nav class="grid-box-header py-2 align-items-center">
+  <nav class="grid-box-header py-2 align-items-center justify-content-between">
     <button class="menu__btn"> <i class="fa fa-bars"></i> </button>
     <div class="d-flex justify-content-center">
       <a href="{{ url() }}">
@@ -40,11 +40,10 @@
             style: 'margin: 0',
             name: 'search'
           }) }}
-
           </div>
           <span class="mobile__search__closer">
-            <svg x="0px" y="0px" viewBox="0 0 496.096 496.096" fill="#aaa">
-              <path d="M259.41,247.998L493.754,13.654c3.123-3.124,3.123-8.188,0-11.312c-3.124-3.123-8.188-3.123-11.312,0L248.098,236.686
+           <svg x="0px" y="0px" viewBox="0 0 496.096 496.096" fill="#aaa" style="height: 26px;">
+             <path d="M259.41,247.998L493.754,13.654c3.123-3.124,3.123-8.188,0-11.312c-3.124-3.123-8.188-3.123-11.312,0L248.098,236.686
                 L13.754,2.342C10.576-0.727,5.512-0.639,2.442,2.539c-2.994,3.1-2.994,8.015,0,11.115l234.344,234.344L2.442,482.342
                 c-3.178,3.07-3.266,8.134-0.196,11.312s8.134,3.266,11.312,0.196c0.067-0.064,0.132-0.13,0.196-0.196L248.098,259.31
                 l234.344,234.344c3.178,3.07,8.242,2.982,11.312-0.196c2.995-3.1,2.995-8.016,0-11.116L259.41,247.998z"/>
@@ -64,6 +63,20 @@
           <button class="render px-4" data-el="modal" data-url="login">Zaloguj</button>
         {% endif %}
       </div>
+    </div>
+    <div class="social__items">
+      <a href="https://www.youtube.com/c/vulturgra" target="_blank">
+        <img src="{{ img('social/yt.png') }}" alt="">
+      </a>
+      <a href="https://facebook.com/priorityservers" target="_blank">
+        <img src="{{ img('social/fb.png') }}" alt="">
+      </a>
+      <a href="https://discord.gg/gFBdqmR" target="_blank">
+        <img src="{{ img('social/discord.png') }}" alt="">
+      </a>
+      <a href="https://www.instagram.com/priogames/" target="_blank">
+        <img src="{{ img('social/insta.png') }}" alt="">
+      </a>
     </div>
   </nav>
   <main id="main-page-wrapper" class="grid-box mt-3">

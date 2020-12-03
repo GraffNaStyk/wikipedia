@@ -3,6 +3,7 @@
 namespace App\Controllers\Http;
 
 use App\Core\Controller;
+use App\Facades\Parser\Saga;
 use App\Helpers\Pages;
 use App\Model\Achievement;
 use App\Model\Npc;

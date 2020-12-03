@@ -14,7 +14,7 @@ abstract class Controller
 {
     protected array $user;
     
-    const PER_PAGE = 25;
+    const PER_PAGE = 15;
     
     const REQUEST_PER_SECOND = 2;
     

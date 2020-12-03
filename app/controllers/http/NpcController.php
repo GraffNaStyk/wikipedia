@@ -10,6 +10,7 @@ class NpcController extends IndexController
     public function __construct()
     {
         parent::__construct();
+        $this->set(['title' => 'Npc']);
     }
 
     public function index()

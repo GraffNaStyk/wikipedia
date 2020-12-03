@@ -16,6 +16,7 @@ if ($job->do('parser') || $job->do('parse')) {
     \App\Facades\Parser\Npcs::parse();
     \App\Facades\Parser\Quests::parse();
     \App\Facades\Parser\Achievements::parse();
+    \App\Facades\Parser\Saga::parse();
 }
 
 $job->end();

@@ -2,10 +2,14 @@
 
 {% block content %}
   <div class="page__items">
-    {% for component in components %}
-      <div class="page__item">
-        {% include 'http/Pages/'~component.type~'.twig' %}
-      </div>
-    {% endfor %}
+    {% if components %}
+      {% for component in components %}
+        <div class="page__item">
+          {% include 'http/Pages/'~component.type~'.twig' %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="text-center">This page does not have a description yet.</p>
+    {% endif %}
   </div>
 {% endblock %}

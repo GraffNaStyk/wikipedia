@@ -28,7 +28,9 @@ class QuestsController extends IndexController
         }
         
         return $this->render([
-            'quests' => $quests
+            'quests' => $quests,
+            'snake_count' => Quest::getSnakeSum(),
+            'status_count' => Quest::getStatusSum()
         ]);
     }
 }
