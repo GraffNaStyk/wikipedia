@@ -2,12 +2,36 @@
 
 namespace App\Controllers\Http;
 
+use App\Facades\Http\Request;
 use App\Helpers\Pagination;
+use App\Helpers\Session;
 use App\Model\CtMonsterLoot;
 use App\Model\Monster;
 
 class MonstersController extends IndexController
 {
+    protected array $filters = [
+        [
+            'text' => 'hp',
+            'value' => 'health'
+        ],
+        [
+            'text' => 'experience',
+            'value' => 'experience'
+        ]
+    ];
+    
+    protected array $orders = [
+        [
+            'text' => 'ascending',
+            'value' => 'asc'
+        ],
+        [
+            'text' => 'descending',
+            'value' => 'desc'
+        ]
+    ];
+    
     public function __construct()
     {
         parent::__construct();
@@ -22,19 +46,27 @@ class MonstersController extends IndexController
         
         $monsters = Monster::select([
             'monsters.name', 'monsters.health', 'monsters.experience', 'monsters.id', 'i.hash', 'i.path', 'i.ext'
-        ])->leftJoin(['images as i', 'i.cid', '=', 'monsters.cid'])
-            ->order(['health', 'experience'], 'desc')
-            ->where(['experience', '<>', 0])
+        ])->leftJoin(['images as i', 'i.cid', '=', 'monsters.cid']);
+
+        
+        if (Session::has('filter')) {
+            $monsters->order(Session::get('filter'), Session::get('order') ?: 'desc');
+            $this->set(['search' => ['filter' => Session::get('filter'), 'order' => Session::get('order') ?: 'desc']]);
+        } else {
+            $monsters->order(['health', 'experience'], 'desc');
+        }
+
+        $monsters = $monsters->where(['experience', '<>', 0])
             ->limit(self::PER_PAGE)
             ->offset(($page-1)*self::PER_PAGE)
             ->get();
-
+        
         Pagination::make(
             Monster::where(['experience', '<>', 0])->count()['total'],
             $page,
             'monsters/'
         );
-        
+
         foreach ($monsters as $key => $monster) {
             $items = CtMonsterLoot::select(['i.name', 'chance', 'img.path', 'img.hash', 'i.description', 'img.ext'])
                 ->join(['items as i', 'i.cid', '=', 'item_id'])
@@ -53,7 +85,13 @@ class MonstersController extends IndexController
                 $monsters[$key]['loot'] = $items;
             }
         }
-        $this->render(['monsters' => $monsters]);
+
+        $this->render([
+            'monsters' => $monsters,
+            'filters'  => $this->filters,
+            'orders'   => $this->orders,
+            'page'     => $page
+        ]);
     }
     
     public function show(string $name)
@@ -80,5 +118,25 @@ class MonstersController extends IndexController
         } else {
             $this->redirect('');
         }
+    }
+    
+    public function search(Request $request)
+    {
+        if ($request->has('filter')) {
+            Session::set(['filter' => $request->get('filter')]);
+        }
+    
+        if ($request->has('order')) {
+            Session::set(['order' => $request->get('order')]);
+        }
+        
+        $this->redirect('monsters/'.$request->get('page'));
+    }
+    
+    public function clear()
+    {
+        Session::remove('filter');
+        Session::remove('order');
+        $this->redirect('monsters');
     }
 }

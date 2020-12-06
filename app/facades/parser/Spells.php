@@ -17,7 +17,7 @@ class Spells
         if (is_readable(app('spells_path'))) {
             foreach (simplexml_load_file(app('spells_path')) as $key => $item) {
                 $item = get_object_vars($item);
-       
+
                 if (substr($item['@attributes']['name'], 0, 3) === 'mon') {
                     continue;
                 }
@@ -28,7 +28,7 @@ class Spells
         } else {
             exit('file not exist');
         }
-        
+   
         self::$vocations = array_values(array_unique(array_filter(self::$vocations)));
 
         foreach (self::$vocations as $vocation) {
@@ -68,18 +68,18 @@ class Spells
         self::$iterator++;
     }
     
-    private static function vocationsFactory(array $vocations)
+    private static function vocationsFactory(array $vocations): array
     {
         $tmp = [];
         
         if (isset($vocations['@attributes'])) {
-            self::$vocations[] = $vocations['@attributes']['every-name'];
-            $tmp[] = $vocations['@attributes']['every-name'];
+            self::$vocations[] = $vocations['@attributes']['name'];
+            $tmp[] = $vocations['@attributes']['name'];
         } else {
             foreach ($vocations as $vocation) {
                 $vocation = get_object_vars($vocation);
-                self::$vocations[] = $vocation['@attributes']['every-name'];
-                $tmp[] = $vocation['@attributes']['every-name'];
+                self::$vocations[] = $vocation['@attributes']['name'];
+                $tmp[] = $vocation['@attributes']['name'];
             }
         }
         

@@ -3,6 +3,7 @@ namespace App\Core;
 
 use App\Facades\Http\Response;
 use App\Facades\Parser\Achievements;
+use App\Facades\Parser\Items;
 use App\Facades\Validator\Validator;
 use App\Helpers\Loader;
 use App\Helpers\Session;
@@ -14,7 +15,7 @@ abstract class Controller
 {
     protected array $user;
     
-    const PER_PAGE = 15;
+    const PER_PAGE = 60;
     
     const REQUEST_PER_SECOND = 2;
     

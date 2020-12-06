@@ -52,6 +52,11 @@ function fatalErrorHandler () {
         if ($lastError['type'] === E_ERROR || $lastError['type'] === E_USER_ERROR || $lastError['type'] === E_PARSE) {
             header("HTTP/1.0 500 Method Not Allowed");
             http_response_code(500);
+            
+            if (php_sapi_name() === 'cli') {
+                print_r($lastError);
+                exit;
+            }
         
             if (app['dev'] === false) {
                 exit (require_once view_path('errors/fatal.php'));

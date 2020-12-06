@@ -287,7 +287,7 @@ span.err {
   background: var(--orangecolor);
 }
 
-.red {
+.is_red {
   background: var(--redcolor);
 }
 
@@ -485,6 +485,16 @@ i {
   .grid-box-header {
     grid-template-columns: 17% 25% 25% 25%;
   }
+  aside .menu-item img {
+    display: none!important;
+  }
+  .left__menu__closer svg {
+    top: -10px;
+    right: -2px;
+  }
+  .wiki-box a {
+    padding: .5rem 0;
+  }
 }
 
 @media only screen and (min-width: 720px) {
@@ -553,4 +563,8 @@ td.position-relative span.counter {
 
 .social__items a img {
   width: 65px;
+}
+
+.ss-main .ss-multi-selected .ss-values .ss-value {
+  background-color: var(--mainbackground)!important;
 }

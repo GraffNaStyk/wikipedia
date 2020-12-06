@@ -14,6 +14,7 @@ class AchievementsController extends IndexController
     public function index()
     {
         $achievements = Achievement::select('*')
+            ->where(['name', '<>', 'Namek Event Fighter '])
             ->order(['status_points'])
             ->get();
         

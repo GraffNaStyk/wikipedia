@@ -9,7 +9,7 @@ class Monsters extends Facade
 {
     protected static array $monsters = [];
     protected static int $iterator = 0;
-    const MAX_DROP_CHANCE = 65535;
+    const MAX_DROP_CHANCE = 100000;
     const RATE_LOOT = 1.0;
     
     public static function parse()
@@ -18,17 +18,17 @@ class Monsters extends Facade
             foreach (simplexml_load_file(app('monsters_path')) as $key => $item) {
                 $item = get_object_vars($item);
         
-                if (is_file($file = dirname(app('monsters_path')) . '/' . $item['@attributes']['file'])) {
+                if (is_readable($file = dirname(app('monsters_path')) . '/' . $item['@attributes']['file'])) {
                     $monster = get_object_vars(simplexml_load_file($file));
                     self::basic($monster['@attributes']);
                     self::health(get_object_vars($monster['health']));
                     self::loot(get_object_vars($monster['loot']));
-                    self::$monsters[self::$iterator]['cid'] = (int)get_object_vars($monster['look'])['@attributes']['type'];
+                    self::$monsters[self::$iterator]['cid'] = (int) get_object_vars($monster['look'])['@attributes']['type'];
             
                     self::$iterator++;
                 }
             }
-    
+
             foreach (self::$monsters as $monster) {
         
                 if ($monster['cid'] === 0 || $monster['cid'] === null) {
@@ -37,7 +37,9 @@ class Monsters extends Facade
         
                 $tmp = $monster['loot'];
                 unset($monster['loot']);
+                
                 Monster::insert($monster);
+                
                 $monsterId = Monster::lastId();
                 self::getImage($monster['cid'], $monster['name'], 'outfits');
         
@@ -75,24 +77,21 @@ class Monsters extends Facade
         foreach ($monster['item'] as $item) {
             $item = get_object_vars($item);
             
-            self::$monsters[self::$iterator]['loot'][] = [
-                'id' => $item['@attributes']['id'],
-                'count' => $item['@attributes']['countmax'],
-                'chance' => self::getChance($item['@attributes']['chance']),
-            ];
-            
-            if (isset($item['inside'])) {
-                $inside = get_object_vars($item['inside'])['item'];
-                
-                foreach ($inside as $insideItem) {
-                    $item = get_object_vars($insideItem);
-                    
+            if ((int) $item['@attributes']['id'] === 1988) {
+                foreach ($item['item'] as $value) {
+                    $value = get_object_vars($value);
                     self::$monsters[self::$iterator]['loot'][] = [
-                        'id' => $item['@attributes']['id'],
-                        'count' => $item['@attributes']['countmax'],
-                        'chance' => self::getChance($item['@attributes']['chance']),
+                        'id' => $value['@attributes']['id'],
+                        'count' => $value['@attributes']['countmax'],
+                        'chance' => self::getChance($value['@attributes']['chance']),
                     ];
                 }
+            } else {
+                self::$monsters[self::$iterator]['loot'][] = [
+                    'id' => $item['@attributes']['id'],
+                    'count' => $item['@attributes']['countmax'],
+                    'chance' => self::getChance($item['@attributes']['chance']),
+                ];
             }
         }
     }

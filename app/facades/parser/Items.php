@@ -14,7 +14,10 @@ class Items extends Facade
     
     protected static array $attributes = [
         'attack', 'defense', 'armor',
-        'description', 'range', 'weight'
+        'description', 'range', 'weight',
+//        'extradef', 'hitChance', 'increaseMagicValue',
+//        'maxhitpoints', 'maxmanapoints', 'speed',
+//        'increaseHealingPercent', 'increaseMagicPercent'
     ];
     
     protected static array $mapTypeToModel = [
@@ -31,8 +34,6 @@ class Items extends Facade
     ];
     
     protected static array $return = [];
-    
-    private bool $isForceUpload = false;
     
     public static function parse()
     {

@@ -32,6 +32,8 @@ Router::get('page/show/{id}/{link}', 'Pages@show');
 
 Router::get('vocations/show/{name}', 'Vocations@show');
 
+Router::get('monsters/clear', 'monsters@clear');
+Router::post('monsters/filter/search', 'monsters@search');
 Router::get('monsters/{page}', 'monsters@index');
 
 Router::post('search', 'Search@index');
