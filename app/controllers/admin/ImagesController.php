@@ -39,7 +39,10 @@ class ImagesController extends DashController
             ])) $this->sendError();
         }
         
-        $hash = Faker::hash(50);
+        do {
+            $hash = Faker::hash(50);
+            $res = Image::where(['hash', '=', $hash])->findOrFail();
+        } while(! empty($res));
         
         if ((bool) strpos($request->get('img'), ',')) {
             $img = substr($request->get('img'), strpos($request->get('img'), ',') + 1);
@@ -72,8 +75,10 @@ class ImagesController extends DashController
     public function show(Request $request)
     {
         if ($request->has('search')) {
-            $images = Image::select(['hash', 'path', 'name', 'ext'])
-                ->where(['name', 'like', '%'.$request->get('search').'%'])
+            $images = Image::select(['images.hash', 'images.path', 'images.name', 'images.ext', 'i.name as item_name', 'm.name as monster_name'])
+                ->leftJoin(['items as i', 'images.cid', '=', 'i.cid'])
+                ->leftJoin(['monsters as m', 'images.cid', '=', 'm.cid'])
+                ->where(['images.name', 'like', '%'.$request->get('search').'%'])
                 ->get();
         } else {
             $images = Image::select(['hash', 'path', 'name', 'ext'])->get();

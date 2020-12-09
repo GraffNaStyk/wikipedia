@@ -10,18 +10,19 @@
   <script src="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.js"></script>
   <div class="box">
     <form class="tui">
-      <div style="height: 500px;" id="tui-image-editor-container"></div>
       {{ input({
         type: 'text',
         value: '',
         name: 'name',
-        class: 'form-control'
+        class: 'form-control',
+        placeholder: 'Nazwa nowego [edytowanego] zdjęcia'
       }) }}
       {{ input({
         type: 'submit',
         value: 'Zapisz',
         class: 'mt-3'
       }) }}
+      <div style="height: 500px;" id="tui-image-editor-container"></div>
     </form>
   </div>
   <script>

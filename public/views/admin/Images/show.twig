@@ -1,7 +1,15 @@
 {% block content %}
   <div class="d-flex flex-wrap align-items-center">
+    <span>click - kopia zdjęcia</span>
+    <br>
+    <span> double click - link do rzeczy na zdjęciu</span>
     {% for img in images %}
-      <img class="img-fluid" style="margin: 5px;" {{ tooltip(img.name) }} src="{{ img(img.path~img.hash~'.'~img.ext) }}" alt="">
+      <img
+       data-ismonster="{{ img.monster_name }}"
+       data-isitem="{{ img.item_name }}"
+       class="img-fluid"
+       style="margin: 5px;" {{ tooltip(img.name) }} src="{{ img(img.path~img.hash~'.'~img.ext) }}" alt=""
+      >
     {% endfor %}
   </div>
 {% endblock %}

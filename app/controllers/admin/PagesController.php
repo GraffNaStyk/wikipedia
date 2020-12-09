@@ -27,7 +27,7 @@ class PagesController extends DashController
             'text' => 'Saga'
         ],
         [
-            'value' => 'systems',
+            'value' => 'system',
             'text' => 'Systems'
         ],
     ];

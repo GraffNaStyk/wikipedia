@@ -423,6 +423,10 @@ i {
   margin: 0!important;
 }
 
+table thead tr td {
+  font-weight: bold!important;
+}
+
 .table-responsive {
   margin: 0!important;
 }

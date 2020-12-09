@@ -1,0 +1,32 @@
+{% extends layout %}
+
+{% block content %}
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Place</td>
+        <td>Min lvl</td>
+        <td>Max lvl</td>
+      </tr>
+    </thead>
+    <tbody>
+    {% for boss in bosses %}
+      <tr>
+        <td>
+          <a class="link d-flex align-items-center justify-content-between" href="{{ url(boss.link) }}">
+            <img src="{{ img(boss.path~boss.hash~'.'~boss.ext) }}" alt="">
+              &nbsp;
+            <b>{{ boss.name }}</b>
+          </a>
+        </td>
+        <td style="vertical-align: middle">{{ boss.place }}</td>
+        <td style="vertical-align: middle">{{ boss.min_lvl }}</td>
+        <td style="vertical-align: middle">{{ boss.max_lvl }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

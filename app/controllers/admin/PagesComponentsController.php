@@ -44,7 +44,7 @@ class PagesComponentsController extends DashController
         ])) $this->sendError();
         
         PageComponent::insert($request->all());
-        Page::where(['id', '=', $request->get('id')])->update(['updated_at' => date('Y-m-d H:i:s')]);
+        Page::where(['id', '=', $request->get('page_id')])->update(['updated_at' => date('Y-m-d H:i:s')]);
         
         $this->sendSuccess('Dodano poprawnie');
 
@@ -59,6 +59,8 @@ class PagesComponentsController extends DashController
         $request->set('data', json_encode($request->get('data'), JSON_UNESCAPED_UNICODE));
 
         PageComponent::update($request->all());
+        $id = PageComponent::select(['page_id'])->where(['id', '=', $request->get('id')])->findOrFail();
+        Page::where(['id', '=', $id['page_id']])->update(['updated_at' => date('Y-m-d H:i:s')]);
     
         $this->sendSuccess('Zaktualizowano poprawnie');
     }

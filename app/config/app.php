@@ -82,5 +82,7 @@ return [
     
     'sagas_path' => storage_path('private/saga_system.json'),
     
+    'bosses_path' => storage_path('private/boss_system.json'),
+    
     'force_update_images' => false
 ];

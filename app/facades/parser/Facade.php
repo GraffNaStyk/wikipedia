@@ -23,7 +23,11 @@ class Facade
         if (empty(Image::where(['cid', '=', $cid])->findOrFail())
             && is_file(storage_path('private/images/'.$from.'/'.$cid.'.'.$ext))
         ) {
-            $hash = Faker::hash(50);
+            do {
+                $hash = Faker::hash(50);
+                $res = Image::where(['hash', '=', $hash])->findOrFail();
+            } while(! empty($res));
+            
             copy (
                 storage_path('private/images/'.$from.'/'.$cid.'.'.$ext),
                 storage_path('public/images/'.$hash.'.'.$ext)
