@@ -46,18 +46,11 @@ class MonstersController extends IndexController
         
         $monsters = Monster::select([
             'monsters.name', 'monsters.health', 'monsters.experience', 'monsters.id', 'i.hash', 'i.path', 'i.ext'
-        ])->leftJoin(['images as i', 'i.cid', '=', 'monsters.cid']);
-
-        
-        if (Session::has('filter')) {
-            $monsters->order(Session::get('filter'), Session::get('order') ?: 'desc');
-            $this->set(['search' => ['filter' => Session::get('filter'), 'order' => Session::get('order') ?: 'desc']]);
-        } else {
-            $monsters->order(['health', 'experience'], 'desc');
-        }
-
-        $monsters = $monsters->where(['experience', '<>', 0])
+        ])
+        ->leftJoin(['images as i', 'i.cid', '=', 'monsters.cid'])
+        ->where(['experience', '<>', 0])
             ->limit(self::PER_PAGE)
+            ->order(['health', 'experience'], 'desc')
             ->offset(($page-1)*self::PER_PAGE)
             ->get();
         
@@ -118,25 +111,5 @@ class MonstersController extends IndexController
         } else {
             $this->redirect('');
         }
-    }
-    
-    public function search(Request $request)
-    {
-        if ($request->has('filter')) {
-            Session::set(['filter' => $request->get('filter')]);
-        }
-    
-        if ($request->has('order')) {
-            Session::set(['order' => $request->get('order')]);
-        }
-        
-        $this->redirect('monsters/'.$request->get('page'));
-    }
-    
-    public function clear()
-    {
-        Session::remove('filter');
-        Session::remove('order');
-        $this->redirect('monsters');
     }
 }

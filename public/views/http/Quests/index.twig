@@ -2,26 +2,26 @@
 
 {% block content %}
 <div class="table-responsive">
-  <table class="table table-striped table-bordered">
+  <table class="table table-striped table-bordered table-dark sortable">
     <thead>
       <tr>
-        <td>Name</td>
-        <td>Level</td>
-        <td>
+        <th>Name</th>
+        <th>Level</th>
+        <th>
           Snake Points
           &nbsp;
           <b style="color: green;">
             {{ snake_count }}
           </b>
-        </td>
-        <td>
+        </th>
+        <th>
           Status points
           &nbsp;
           <b style="color: green;">
             {{ status_count }}
           </b>
-        </td>
-        <td>Difficulty</td>
+        </th>
+        <th class="no-sort">Difficulty</th>
       </tr>
     </thead>
     <tbody>

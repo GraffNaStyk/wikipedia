@@ -572,3 +572,14 @@ td.position-relative span.counter {
 .ss-main .ss-multi-selected .ss-values .ss-value {
   background-color: var(--mainbackground)!important;
 }
+
+.click__wrapper {
+  position: fixed;
+  right: 30px;
+  background: var(--mainbackground);
+  z-index: 1001;
+  bottom: 65px;
+  color: white;
+  padding: 15px;
+  border-radius: 6px;
+}

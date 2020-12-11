@@ -113,3 +113,66 @@ App.on('click', '.mobile__search__closer', (e) => {
   App.toggle('.mobile__search__closer', 'd-flex');
   App.toggle('.wiki__box--search', 'd-flex');
 })
+
+
+App.on('input', 'input.wiki-input', debounce((e) => {
+  if (e.target.value !== '' && e.target.value.length > 3) {
+    App.post({data: {search: e.target.value}, url:'search'})
+    .then(res => res.text())
+    .then(data => {
+      document.querySelector('[data-component="app"]').innerHTML = data;
+    });
+  }
+}, 200));
+
+function debounce(func, wait, immediate){
+  var timeout, args, context, timestamp, result;
+  if (null == wait) wait = 100;
+
+  function later() {
+    var last = Date.now() - timestamp;
+
+    if (last < wait && last >= 0) {
+      timeout = setTimeout(later, wait - last);
+    } else {
+      timeout = null;
+      if (!immediate) {
+        result = func.apply(context, args);
+        context = args = null;
+      }
+    }
+  };
+
+  var debounced = function(){
+    context = this;
+    args = arguments;
+    timestamp = Date.now();
+    var callNow = immediate && !timeout;
+    if (!timeout) timeout = setTimeout(later, wait);
+    if (callNow) {
+      result = func.apply(context, args);
+      context = args = null;
+    }
+
+    return result;
+  };
+
+  debounced.clear = function() {
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+
+  debounced.flush = function() {
+    if (timeout) {
+      result = func.apply(context, args);
+      context = args = null;
+
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+
+  return debounced;
+};

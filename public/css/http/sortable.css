@@ -1,0 +1,65 @@
+.sortable {
+  border-spacing: 0
+}
+
+.sortable tbody tr:nth-child(odd) {
+  background: #e4e4e4
+}
+
+.sortable td, .sortable th {
+  padding: 10px
+}
+
+.sortable th {
+  color: #fff;
+  cursor: pointer;
+  vertical-align: baseline;
+  white-space: nowrap
+}
+
+.sortable th:hover {
+  color: #fff
+}
+
+.sortable th:hover::after {
+  color: inherit;
+  font-size: 1.2em;
+  content: " \025B8"
+}
+
+.sortable th::after {
+  font-size: 1.2em;
+  color: transparent;
+  content: " \025B8"
+}
+
+.sortable th.dir-d {
+  font-weight: bold;
+}
+
+.sortable th.dir-d::after {
+  color: inherit;
+  content: " \025BE"
+}
+
+.sortable th.dir-u {
+  font-weight: bold;
+}
+
+.sortable th.dir-u::after {
+  color: inherit;
+  content: " \025B4"
+}
+
+.sortable th::after {
+  color: inherit;
+  content: " \025B8";
+}
+
+th.no-sort {
+  pointer-events: none;
+}
+
+th.no-sort:after {
+  content: ''!important;
+}

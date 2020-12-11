@@ -1,46 +1,15 @@
 {% extends layout %}
 
 {% block content %}
-  {% if search %}
-    <div class="position-relative">
-      <a href="{{ url('monsters/clear') }}" class="position-absolute" style="right:6px; top:3px;">Wyczyść filtry</a>
-    </div>
-  {% endif %}
-  <div class="form_wrapper py-2 mx-2">
-    <form action="{{ url('monsters/filter/search') }}" method="post">
-      <div class="form__grid">
-        {{ select({
-          name: 'filter[]',
-          data: filters,
-          label: 'Fliter',
-          placeholder: 'filter...',
-          multiple: true,
-          selected: search.filter
-        }) }}
-        {{ select({
-          name: 'order',
-          data: orders,
-          label: 'Order',
-          placeholder: 'order...',
-          selected: search.order
-        }) }}
-        {{ input({
-          type: 'hidden',
-          name: 'page'
-        }) }}
-        <input type="Submit" class="mt-4" value="Search">
-      </div>
-    </form>
-  </div>
-  {% include 'components/pagination.twig' %}
+{% include 'components/pagination.twig' %}
 <div class="table-responsive">
-  <table class="table table-striped table-bordered">
+  <table class="table table-striped table-bordered table-dark sortable">
     <thead>
       <tr>
-        <td>Name</td>
-        <td>Hp</td>
-        <td>Experience</td>
-        <td>Loot</td>
+        <th>Name</th>
+        <th>Hp</th>
+        <th>Experience</th>
+        <th class="no-sort">Loot</th>
       </tr>
     </thead>
     <tbody>
@@ -57,10 +26,10 @@
         <td>
           {% for item in monster.loot %}
             <a href="{{ url('items/show/'~item.name) }}">
-              <b style="color: black;" {{ tooltip(item.description) }} >{{ item.name }} </b>
+              <b {{ tooltip(item.description) }} >{{ item.name }} </b>
               <img style=" cursor: pointer;" {{ tooltip(item.description) }} src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
             </a>
-            <b style="color: black;"> ({{ item.chance }}%)</b>
+            <b> ({{ item.chance }}%)</b>
             <br>
           {% endfor %}
         </td>

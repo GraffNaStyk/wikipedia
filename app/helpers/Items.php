@@ -20,6 +20,7 @@ class Items
             case 'balls':
                 $return['items'] = Item::select([...self::$tableHeaders[$type], ...['i.path', 'i.hash', 'i.ext']])
                     ->leftJoin(['images as i', 'items.cid', '=', 'i.cid'])
+                    ->where(['items.name', '<>', 'Small stone'])
                     ->where(['type', '=', $type])
                     ->where(['attack', '<>', 0])
                     ->order(['attack'])

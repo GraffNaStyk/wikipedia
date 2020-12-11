@@ -38,15 +38,16 @@ class Spells
         foreach (self::$spells as $spell) {
             $tmpVoc = $spell['vocations'];
             unset($spell['vocations']);
-            if ((bool) $spell['mana']) {
-                Spell::insert($spell);
-                $id = Spell::lastId();
     
-                if (!empty($tmpVoc) && (int) $id !== 0) {
-                    foreach ($tmpVoc as $vocation) {
-                        if ($vocId = Vocation::select(['id'])->where(['name', '=', $vocation])->findOrFail()) {
-                            CtVocSpell::insert(['vocation_id' => $vocId['id'], 'spell_id' => $id]);
-                        }
+            $spell['mana'] = $spell['mana'] ?: 0;
+            
+            Spell::insert($spell);
+            $id = Spell::lastId();
+
+            if (!empty($tmpVoc) && (int) $id !== 0) {
+                foreach ($tmpVoc as $vocation) {
+                    if ($vocId = Vocation::select(['id'])->where(['name', '=', $vocation])->findOrFail()) {
+                        CtVocSpell::insert(['vocation_id' => $vocId['id'], 'spell_id' => $id]);
                     }
                 }
             }

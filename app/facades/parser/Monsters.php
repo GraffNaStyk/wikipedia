@@ -39,11 +39,11 @@ class Monsters extends Facade
                 unset($monster['loot']);
                 
                 Monster::insert($monster);
+                $monsterId = Monster::select(['id'])->where(['name', '=', $monster['name']])->findOrFail()['id'];
                 
-                $monsterId = Monster::lastId();
                 self::getImage($monster['cid'], $monster['name'], 'outfits');
         
-                if ($tmp && (int)$monsterId !== 0) {
+                if ($tmp && (int) $monsterId !== 0) {
                     foreach ($tmp as $item) {
                         CtMonsterLoot::insert([
                             'item_id' => $item['id'],

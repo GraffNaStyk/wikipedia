@@ -1,7 +1,7 @@
 let loader = `<div class="preloader"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>`;
 let callbacks = [];
 
-export const post = async (args) => {
+export const post = (args) => {
   let data;
 
   if(args.form)
@@ -12,7 +12,7 @@ export const post = async (args) => {
     Object.keys(args.data).forEach(key => data.append(key, args.data[key]));
   }
 
-  return await fetch(document.url + args.url, {
+  return fetch(document.url + args.url, {
     method: 'POST',
     credentials: 'same-origin',
     headers: {

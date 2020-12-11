@@ -2,19 +2,18 @@ import * as App from '../../app.js';
 
 let myMethod = () => {
   App.on('click', 'img.img-fluid', (e) => {
+    document.querySelectorAll('img.img-fluid').forEach((e) => e.setAttribute('style', ''));
     let elem = document.createElement('textarea');
     document.body.appendChild(elem);
     elem.value = `<img class="img-fluid" src="${e.target.getAttribute('src')}"> `;
     elem.select();
     document.execCommand("copy");
     document.body.removeChild(elem);
-    e.target.setAttribute('style', 'border: 3px solid green');
-    setTimeout(() => {
-      e.target.setAttribute('style', '');
-    }, 1500);
+    e.target.setAttribute('style', 'border: 1px solid green; opacity: .7');
   })
 
   App.on('dblclick', 'img.img-fluid', (e) => {
+    document.querySelectorAll('img.img-fluid').forEach((e) => e.setAttribute('style', ''));
     let elem = document.createElement('textarea');
     document.body.appendChild(elem);
 
@@ -30,10 +29,7 @@ let myMethod = () => {
     elem.select();
     document.execCommand("copy");
     document.body.removeChild(elem);
-    e.target.setAttribute('style', 'border: 3px solid blue');
-    setTimeout(() => {
-      e.target.setAttribute('style', '');
-    }, 1500);
+    e.target.setAttribute('style', 'border: 1px solid blue; opacity: .7');
   })
 }
 
