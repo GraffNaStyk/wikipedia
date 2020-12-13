@@ -7,7 +7,7 @@ use App\Model\Page;
 
 class Pages
 {
-    public static function createLastAdded()
+    public static function createLastAdded(): array
     {
         $return = [];
         $pages = Page::select(['id', 'title', 'type', 'created_at'])
@@ -27,7 +27,7 @@ class Pages
         return $return;
     }
     
-    public static function createLastUpdated()
+    public static function createLastUpdated(): array
     {
         $return = [];
         $pages = Page::select(['id', 'title', 'type', 'updated_at'])

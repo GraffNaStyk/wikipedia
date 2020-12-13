@@ -59,23 +59,31 @@ class MonstersController extends IndexController
             $page,
             'monsters/'
         );
-
+    
+        $items = CtMonsterLoot::select(['i.name', 'chance', 'img.path', 'img.hash', 'i.description', 'img.ext', 'monster_id'])
+            ->join(['items as i', 'i.cid', '=', 'item_id'])
+            ->join(['images as img', 'i.cid', '=', 'img.cid'])
+            ->get();
+        
         foreach ($monsters as $key => $monster) {
-            $items = CtMonsterLoot::select(['i.name', 'chance', 'img.path', 'img.hash', 'i.description', 'img.ext'])
-                ->join(['items as i', 'i.cid', '=', 'item_id'])
-                ->join(['images as img', 'i.cid', '=', 'img.cid'])
-                ->where(['monster_id', '=', $monster['id']])
-                ->get();
             
-            if (empty($items)) {
+            $tmp = [];
+            
+            foreach ($items as $key2 => $item) {
+                if ((int) $item['monster_id'] === (int) $monster['id']) {
+                    $tmp[] = $item;
+                }
+            }
+            
+            if (empty($tmp)) {
                 unset($monsters[$key]);
             } else {
                 
-                usort($items, function ($a, $b) {
+                usort($tmp, function ($a, $b) {
                     return $a['chance'] < $b['chance'];
                 });
                 
-                $monsters[$key]['loot'] = $items;
+                $monsters[$key]['loot'] = $tmp;
             }
         }
 

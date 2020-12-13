@@ -9,7 +9,7 @@ class System
     public static function factory(): array
     {
         return [
-            'bosses' => (bool)Boss::select(['id'])->where(['id', '=', 1])->findOrFail(),
+            'bosses' => (bool) Boss::select(['id'])->where(['id', '=', 1])->findOrFail(),
         ];
     }
 }

@@ -92,13 +92,14 @@ class Storage
             $this->make($destination);
 
             $destination  = self::$disk . $destination;
-            $destination .= $as ? strtolower($as).'.'.pathinfo($file['name'], PATHINFO_EXTENSION) : strtolower($file['name']);
+            $destination .= $as ? strtolower($as).'.'.strtolower(pathinfo($file['name'], PATHINFO_EXTENSION)) : strtolower($file['name']);
 
             if(move_uploaded_file($file['tmp_name'], $destination)) {
                 if ($this->checkFile($destination) === true) {
                     chmod($destination, 0775);
                     return true;
                 }
+
                 return false;
             }
             
@@ -174,6 +175,7 @@ class Storage
     private function checkFile($destination)
     {
         $pathInfo = pathinfo($destination);
+        $pathInfo['extension'] = strtolower($pathInfo['extension']);
         if (isset($this->mimes[$pathInfo['extension']]) === true
             && (string) $this->mimes[$pathInfo['extension']] === (string) mime_content_type ($destination)
         ) {

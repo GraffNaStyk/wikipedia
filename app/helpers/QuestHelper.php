@@ -11,7 +11,7 @@ class QuestHelper
         2  => 4
     ];
     
-    public static function setDifficulty(?int $difficulty)
+    public static function setDifficulty(?int $difficulty): int
     {
         $stars = 0;
         

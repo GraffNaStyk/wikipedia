@@ -3,6 +3,7 @@
 namespace App\Controllers\Http;
 
 use App\Core\Controller;
+use App\Helpers\Map;
 use App\Helpers\Pages;
 use App\Helpers\System;
 use App\Model\Achievement;
@@ -27,7 +28,9 @@ class IndexController extends Controller
             'last_updated' => Pages::createLastUpdated(),
             'npc' => Npc::count()['total'],
             'achievements' => Achievement::all(),
-            'systems' => System::factory()
+            'systems' => System::factory(),
+            'maps' => Map::factory(),
+            'tutorials' => ''
         ]);
     }
 

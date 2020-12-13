@@ -15,7 +15,7 @@
     {% for boss in bosses %}
       <tr>
         <td>
-          <a class="link d-flex align-items-center justify-content-between" href="{{ url(boss.link) }}">
+          <a class="link d-flex align-items-center" href="{{ url(boss.link) }}">
             <img src="{{ img(boss.path~boss.hash~'.'~boss.ext) }}" alt="">
               &nbsp;
             <b>{{ boss.name }}</b>

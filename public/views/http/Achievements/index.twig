@@ -13,6 +13,9 @@
             {{ points }}
           </b>
         </th>
+        <th class="no-sort">
+          description
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -23,6 +26,9 @@
         </td>
         <td>
           {{ achievement.status_points }}
+        </td>
+        <td>
+          {{ achievement.description }}
         </td>
       </tr>
     {% endfor %}

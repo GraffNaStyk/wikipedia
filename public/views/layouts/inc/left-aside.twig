@@ -47,10 +47,15 @@
     {% endfor %}
   </div>
 
-  <a class="menu-item" href="{{ url('monsters') }}">
+  <a class="menu-item has__parent" href="#">
     <img src="{{ img('menu/monsters.png') }}" alt="">
     Monsters
   </a>
+  <div class="is__parent">
+    <a href="{{ url('monsters') }}">All</a>
+    <a href="{{ url('bosses') }}">Bosses</a>
+  </div>
+
   {% if menu.map is not empty %}
     <a class="menu-item" href="{{ url(menu.map.0.link) }}">
       <img src="{{ img('menu/maps.png') }}" alt="">
@@ -67,15 +72,5 @@
       Achievements
     </a>
   {% endif %}
-  {% if systems is not empty %}
-    <a class="menu-item has__parent" href="#">
-      <img style="width: 29px;" src="{{ img('menu/systems.png') }}" alt="">
-      Systems
-    </a>
-    <div class="is__parent">
-      {% if systems.bosses is not empty %}
-        <a href="{{ url('bosses') }}">Bosses</a>
-      {% endif %}
-    </div>
-  {% endif %}
+
 </aside>

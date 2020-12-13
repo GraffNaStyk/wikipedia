@@ -5,21 +5,11 @@
   <div class="col-md-6">
     <img class="text-center" src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
     <div class="my-2 pb-2" style="border-bottom: 1px solid white;">
-      {% if item.defense %}
-        <span>  <b>defense:</b> &nbsp; {{ item.defense }}</span>  &nbsp;
-      {% endif %}
-      {% if item.armor %}
-        <span> <b>armor:</b> &nbsp; {{ item.armor }}</span> &nbsp;
-      {% endif %}
-      {% if item.attack %}
-        <span> <b>attack:</b> &nbsp; {{ item.attack }}</span> &nbsp;
-      {% endif %}
-      {% if item.range %}
-        <span> <b>range:</b> &nbsp; {{ item.range }}</span> &nbsp;
-      {% endif %}
-      {% if item.weight %}
-        <span> <b>weight:</b> &nbsp; {{ item.weight }}</span> &nbsp;
-      {% endif %}
+      {% for key,value in item.attr %}
+        <div class="d-flex justify-content-between">
+            <b>{{ key }}:</b>  <span>{{ value }}</span>
+        </div>
+      {% endfor %}
     </div>
     {% if item.description %}
       <i>{{ item.description }}</i>
@@ -61,7 +51,7 @@
         {% for item in loot %}
            <a class="link d-flex justify-content-between p-1 loot__list align-items-center ju" href="{{ url('monsters/show/'~item.name) }}">
              <span>
-               <img style="width: 40px; height: 40px;" src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
+               <img src="{{ img(item.path~item.hash~'.'~item.ext) }}" alt="">
                &nbsp;
                <b>{{ item.name }}</b>
              </span>

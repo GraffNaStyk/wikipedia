@@ -57,7 +57,7 @@ class ItemsController extends IndexController
     
             return $this->render([
                 'title' => 'Item - '.ucfirst($item['name']),
-                'item' => $item,
+                'item' => Items::prepareForView(array_filter($item)),
                 'loot' => $loot,
                 'sellable' => $sellable
             ]);

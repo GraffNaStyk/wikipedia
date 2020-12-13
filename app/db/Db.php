@@ -223,7 +223,7 @@ class Db extends Builder
                     return true;
                 }
             } catch (\PDOException $e) {
-                Handle::throwException($e, $this->query);
+                Handle::throwException($e, $this->develop(true));
             }
             return false;
         } else {
@@ -237,7 +237,7 @@ class Db extends Builder
                 
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch (\PDOException $e) {
-                Handle::throwException($e, $this->query);
+                Handle::throwException($e, $this->develop(true));
             }
         }
         return false;
@@ -312,12 +312,16 @@ class Db extends Builder
         }
     }
 
-    private function develop()
+    private function develop($returnStatement = false)
     {
         $statement = $this->query;
         
         foreach ($this->data as $key => $item) {
             $statement = str_replace(':'.$key, "'".$item."'", $statement);
+        }
+        
+        if ($returnStatement) {
+            return $statement;
         }
 
         pd([

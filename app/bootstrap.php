@@ -59,6 +59,12 @@ function fatalErrorHandler () {
             }
         
             if (app['dev'] === false) {
+                $lastError['trace'] = ['Controller' => \App\Facades\Http\Router::getClass(), 'action' => \App\Facades\Http\Router::getAction()];
+                file_put_contents(
+                    storage_path('private/logs/php_' . date('d-m-Y') . '.log'),
+                    json_encode($lastError, JSON_PRETTY_PRINT),
+                    FILE_APPEND
+                );
                 exit (require_once view_path('errors/fatal.php'));
             } else {
                 exit (require_once view_path('errors/fatal-dev.php'));

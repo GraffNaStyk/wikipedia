@@ -13,11 +13,47 @@ class Items extends Facade
     ];
     
     protected static array $attributes = [
-        'attack', 'defense', 'armor',
-        'description', 'range', 'weight',
-//        'extradef', 'hitChance', 'increaseMagicValue',
-//        'maxhitpoints', 'maxmanapoints', 'speed',
-//        'increaseHealingPercent', 'increaseMagicPercent'
+        'attack' => 'attack',
+        'defense' => 'defense',
+        'armor' => 'defense',
+        'description' => 'description',
+        'range' => 'range',
+        'weight' => 'weight',
+        'extradef' => 'extra_def',
+        'hitchance' => 'hit_chance',
+        'increasemagicvalue' => 'increase_magic_value',
+        'maxhitpoints' => 'max_hit_points',
+        'maxmanapoints' => 'max_mana_points',
+        'speed' => 'speed',
+        'increasehealingpercent' => 'increase_healing_percent',
+        'increasemagicpercent' => 'increase_magic_percent',
+        'absorbpercentmagic' => 'absorb_percent_magic',
+        'absorbpercentphysical' => 'absorb_percent_psychical',
+        'manaleechchance' => 'mana_leech_chance',
+        'manaleechamount' => 'mana_leech_amount',
+        'lifeleechchance' => 'life_leech_chance',
+        'lifeleechamount' => 'life_leech_amount',
+        'absorbpercentall' => 'absorb_percent_all',
+        'criticalhitchance' => 'critical_hit_chance',
+        'criticalhitamount' => 'critical_hit_amount',
+        'magiclevelpoints' => 'magic_lvl_points',
+        'maxhitpointspercent' => 'max_hit_points_percent',
+        'maxmanapointspercent' => 'max_mana_points_percent',
+        'increasehealingvalue' => 'increase_healing_value',
+        'increasephysicalvalue' => 'increase_psychical_value',
+        'increasephysicalpercent' => 'increase_psychical_percent',
+        'magicpointspercent' => 'magic_points_percent',
+        'healthgain' => 'health_gain',
+        'managain' => 'mana_gain',
+        'healthticks' => 'health_ticks',
+        'manaticks' => 'mana_ticks',
+        'skillshield' => 'skill_shield',
+        'skillfist' => 'skill_fist',
+        'skillfish' => 'skill_fish',
+        'skilldist' => 'skill_dist',
+        'skillclub' => 'skill_club',
+        'skillaxe' => 'skill_axe',
+        'skillsword' => 'skill_sword',
     ];
     
     protected static array $mapTypeToModel = [
@@ -56,6 +92,11 @@ class Items extends Facade
         foreach (self::$return as $key => $items) {
             foreach ($items as $item) {
                 $item['type'] = self::$mapTypeToModel[$key];
+                
+                if (! isset($item['description'])) {
+                    $item['description'] = '';
+                }
+                
                 Item::insert($item);
                 self::getImage((int) $item['cid'], $item['name'], 'items');
             }
@@ -94,9 +135,9 @@ class Items extends Facade
 
         foreach ($item['attribute'] as $attr) {
             $attr = get_object_vars($attr)['@attributes'];
-            
-            if (in_array($attr['key'], self::$attributes)) {
-                $return[$attr['key']] = $attr['value'];
+     
+            if (isset(self::$attributes[strtolower($attr['key'])])) {
+                $return[self::$attributes[strtolower($attr['key'])]] = $attr['value'];
             }
         }
         

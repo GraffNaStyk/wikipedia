@@ -52,15 +52,18 @@ class ImagesController extends DashController
                 base64_decode($img)
             );
         } else {
-            Storage::disk('public')
-                ->upload($request->file('file'), '/images/', $hash);
+            if (! Storage::disk('public')
+                ->upload($request->file('file'), '/images/', $hash)
+            ) {
+                $this->sendError('Nie można załadować zdjęcia!');
+            }
         }
 
         Image::insert([
             'name' => $request->get('name'),
             'path' => 'images/',
             'hash' => $hash,
-            'ext'  => pathinfo($request->file('file')['name'], PATHINFO_EXTENSION),
+            'ext'  => strtolower(pathinfo($request->file('file')['name'], PATHINFO_EXTENSION)),
             'created_by' => $this->user['id']
         ]);
         

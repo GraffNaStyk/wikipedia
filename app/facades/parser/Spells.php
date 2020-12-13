@@ -42,7 +42,7 @@ class Spells
             $spell['mana'] = $spell['mana'] ?: 0;
             
             Spell::insert($spell);
-            $id = Spell::lastId();
+            $id = Spell::select(['id'])->where(['name', '=', $spell['name']])->findOrFail()['id'];
 
             if (!empty($tmpVoc) && (int) $id !== 0) {
                 foreach ($tmpVoc as $vocation) {
@@ -57,7 +57,7 @@ class Spells
     private static function spellFactory(array $spell)
     {
         self::$spells[self::$iterator]['name'] = $spell['@attributes']['name'];
-        self::$spells[self::$iterator]['lvl'] = $spell['@attributes']['lvl'];
+        self::$spells[self::$iterator]['lvl'] = (int) $spell['@attributes']['lvl'];
         self::$spells[self::$iterator]['mana'] = $spell['@attributes']['mana'];
         self::$spells[self::$iterator]['train_points'] = $spell['@attributes']['trainpoints'] ?? 0;
     

@@ -12,6 +12,20 @@ class Items
         'weapons' => ['name', 'level', 'attack', 'defense', 'description'],
     ];
     
+    private static array $toContinue = [
+        'hash', 'path', 'ext', 'id', 'name', 'cid', 'type', 'description'
+    ];
+    
+    private static array $mapValues = [
+        'skill_shield' => 'defense',
+        'skill_fist' => 'attack speed',
+        'skill_club' => 'train points',
+        'skill_fish' => 'energy',
+        'skill_dist' => 'ki blasting',
+        'skill_axe' => 'strength',
+        'magic_lvl_points' => 'ki lvl'
+    ];
+    
     public static function prepare(string $type): array
     {
         $return = [];
@@ -64,5 +78,21 @@ class Items
         
         $return['title'] = ucfirst($type);
         return $return;
+    }
+    
+    public static function prepareForView($item)
+    {
+        foreach ($item as $key => $value) {
+            if (! in_array($key, self::$toContinue)) {
+                if (isset(self::$mapValues[$key])) {
+                    $item['attr'][self::$mapValues[$key]] = $value;
+                } else {
+                    $item['attr'][str_replace('_', ' ', $key)] = $value;
+                }
+                unset($item[$key]);
+            }
+        }
+        
+        return $item;
     }
 }
