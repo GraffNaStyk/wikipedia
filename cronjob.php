@@ -18,6 +18,8 @@ if ($job->do('parser') || $job->do('parse')) {
     \App\Facades\Parser\Achievements::parse();
     \App\Facades\Parser\Saga::parse();
     \App\Facades\Parser\Bosses::parse();
+    \App\Facades\Parser\DailyTasks::parse();
+    \App\Facades\Parser\ExtremeTasks::parse();
 }
 
 $job->end();

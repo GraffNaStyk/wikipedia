@@ -62,15 +62,27 @@
       Maps
     </a>
   {% endif %}
+
   <a class="menu-item" href="{{ url('npc') }}">
     <img style="width: 29px;" src="{{ img('menu/npc.png') }}" alt="">
     Npc
   </a>
+
+  {% if systems is not empty %}
+    <a class="menu-item has__parent" href="#">
+      <img src="{{ img('menu/systems.png') }}" alt="">
+      Systems
+    </a>
+    <div class="is__parent">
+      <a href="{{ url('systems/task/daily') }}">Daily tasks</a>
+      <a href="{{ url('systems/task/extreme') }}">Extreme tasks</a>
+    </div>
+  {% endif %}
+
   {% if achievements %}
     <a class="menu-item" href="{{ url('achievements') }}">
       <img style="width: 29px;" src="{{ img('menu/achievement.png') }}" alt="">
       Achievements
     </a>
   {% endif %}
-
 </aside>

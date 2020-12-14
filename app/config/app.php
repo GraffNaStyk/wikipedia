@@ -84,5 +84,9 @@ return [
     
     'bosses_path' => storage_path('private/boss_system.json'),
     
+    'daily_task_path' => storage_path('private/daily_task_system.json'),
+    
+    'extreme_task_path' => storage_path('private/extreme_task_system.json'),
+    
     'force_update_images' => false
 ];

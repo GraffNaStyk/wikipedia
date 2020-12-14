@@ -23,7 +23,15 @@ class Items
         'skill_fish' => 'energy',
         'skill_dist' => 'ki blasting',
         'skill_axe' => 'strength',
-        'magic_lvl_points' => 'ki lvl'
+        'magic_lvl_points' => 'ki lvl',
+        'hit_points' => 'max health points'
+    ];
+    
+    private static array $attr  = [
+        'increase_healing_value', 'increase_psychical_percent', 'magic_points_percent',
+        'absorb_percent_all', 'health_gain', 'mana_gain', 'absorb_percent_psychical',
+        'absorb_percent_magic', 'max_hit_points', 'max_mana_points', 'increase_magic_percent',
+        'increase_magic_value'
     ];
     
     public static function prepare(string $type): array
@@ -32,7 +40,7 @@ class Items
         
         switch ($type) {
             case 'balls':
-                $return['items'] = Item::select([...self::$tableHeaders[$type], ...['i.path', 'i.hash', 'i.ext']])
+                $return['items'] = Item::select([...self::$attr, ...self::$tableHeaders[$type], ...['i.path', 'i.hash', 'i.ext']])
                     ->leftJoin(['images as i', 'items.cid', '=', 'i.cid'])
                     ->where(['items.name', '<>', 'Small stone'])
                     ->where(['type', '=', $type])
@@ -49,7 +57,7 @@ class Items
             case 'helmets':
             case 'belts':
             case 'robes':
-            $return['items'] = Item::select([...self::$tableHeaders['armors'], ...['i.path', 'i.hash', 'i.ext']])
+            $return['items'] = Item::select([...self::$attr, ...self::$tableHeaders['armors'], ...['i.path', 'i.hash', 'i.ext']])
                     ->leftJoin(['images as i', 'items.cid', '=', 'i.cid'])
                     ->where(['type', '=', $type])
                     ->where(['armor', '<>', 0])
@@ -62,7 +70,7 @@ class Items
             case 'swords':
             case 'glovers':
             case 'bands':
-            $return['items'] = Item::select([...self::$tableHeaders['weapons'], ...['i.path', 'i.hash', 'i.ext']])
+            $return['items'] = Item::select([...self::$attr, ...self::$tableHeaders['weapons'], ...['i.path', 'i.hash', 'i.ext']])
                     ->leftJoin(['images as i', 'items.cid', '=', 'i.cid'])
                     ->where(['type', '=', $type])
                     ->where(['attack', '<>', 0])
@@ -75,8 +83,10 @@ class Items
             $return['headerCount'] = count(self::$tableHeaders['weapons']);
                 break;
         }
-        
+    
+        $return['items'] = static::parseAttrToDescription($return['items']);
         $return['title'] = ucfirst($type);
+
         return $return;
     }
     
@@ -94,5 +104,31 @@ class Items
         }
         
         return $item;
+    }
+    
+    private static function parseAttrToDescription($items): array
+    {
+        foreach ($items as $key => $item) {
+            foreach ($item as $attr => $value) {
+                if (in_array($attr, self::$attr)) {
+                    if ((string) $value!== '') {
+                        
+                        if (isset($items[$key]['description'])) {
+                            $items[$key]['description'] .= '<br>';
+                        }
+                        
+                        if (isset(self::$mapValues[$attr])) {
+                            $items[$key]['description'] .= self::$mapValues[$attr] . ': ' . $value;
+                        } else {
+                            $items[$key]['description'] .= str_replace('_', ' ', $attr) . ': ' . $value;
+                        }
+                    }
+                    
+                    unset($items[$key][$attr]);
+                }
+            }
+        }
+
+        return $items;
     }
 }
