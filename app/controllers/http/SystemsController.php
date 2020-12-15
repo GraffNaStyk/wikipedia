@@ -62,6 +62,12 @@ class SystemsController extends IndexController
         }
         
         return $this->render(['extreme' => $tasks]);
-        
+    }
+    
+    public function status()
+    {
+        $this->render([
+            'title' => 'Status system'
+        ]);
     }
 }

@@ -583,3 +583,7 @@ td.position-relative span.counter {
   padding: 15px;
   border-radius: 6px;
 }
+
+.wiki__logo {
+  text-align: center;
+}

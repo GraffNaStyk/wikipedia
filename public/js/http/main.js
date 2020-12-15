@@ -175,4 +175,12 @@ function debounce(func, wait, immediate){
   };
 
   return debounced;
-};
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  let logo = document.querySelector('.wiki__logo');
+  let width = document.querySelector('.left__box').offsetWidth;
+  if (parseInt(width) !== 0) {
+    logo.setAttribute('style', `width:${width}px`);
+  }
+});
