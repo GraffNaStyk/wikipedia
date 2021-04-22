@@ -15,7 +15,7 @@ class Validator
         static::refactorRules($rules);
         static::run($request);
 
-        if(!empty(static::$validatorErrors = array_filter(static::$validatorErrors))) {
+        if(!empty(static::$validatorErrors = array_filter(static::$validatorErrors, 'strlen'))) {
             if(!View::isAjax()) {
                 Session::checkIfDataHasBeenProvided($request);
                 Session::msg(static::$validatorErrors, 'danger');
@@ -39,11 +39,11 @@ class Validator
     private static function run(array $request)
     {
         foreach (static::$rules as $key => $item) {
-            if (isset($request[$key])) {
+            if (isset($request[$key]) && isset($item['required'])) {
                 foreach ($item as $fnName => $validateRule) {
                     static::$validatorErrors[] = Rules::$fnName($request[$key], $validateRule, $key);
                 }
-            } else {
+            } else if (isset($item['required']) || !isset($request[$key])) {
                 static::$validatorErrors[] = ['msg' => 'Pole jest wymagane', 'field' => $key];
             }
         }

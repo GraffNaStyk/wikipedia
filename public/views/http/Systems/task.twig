@@ -1,0 +1,31 @@
+{% extends layout %}
+
+{% block content %}
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-dark sortable">
+      <thead>
+      <tr>
+        <th>Monsters race</th>
+        <th>Kills</th>
+        <th class="no-sort">Reward</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for task in tasks %}
+        <tr>
+          <td>
+            {{ task.monster }}
+          </td>
+          <td>{{ task.kills }}</td>
+          <td>
+            {% for item in task.rewards %}
+              <b> {{ item.type }}: {{ item.values }}</b>
+              <br>
+            {% endfor %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

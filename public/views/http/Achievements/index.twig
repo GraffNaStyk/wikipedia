@@ -5,6 +5,7 @@
   <table class="table table-striped table-bordered table-dark sortable">
     <thead>
       <tr>
+        <th>Number</th>
         <th class="no-sort">Name</th>
         <th>
           Status points
@@ -21,6 +22,9 @@
     <tbody>
     {% for achievement in achievements %}
       <tr>
+        <td>
+          <b style="color: #04b804">{{ achievement.number }} </b>
+        </td>
         <td>
           <b>{{ achievement.name }}</b>
         </td>

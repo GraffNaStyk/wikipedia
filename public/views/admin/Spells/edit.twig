@@ -1,0 +1,42 @@
+{% block content %}
+  <form data-action="spells/update" method="post">
+    <div class="modal-header">
+      <h5 class="modal-title">Dodaj krótki opis czaru</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form__grid">
+        {{ input({
+          label: 'Opis',
+          class: 'form-control',
+          type: 'text',
+          name: 'description',
+          placeholder: 'Opis',
+          value: description
+        }) }}
+        {{ input({
+          label: 'Typ',
+          class: 'form-control',
+          type: 'text',
+          name: 'type',
+          placeholder: 'typ',
+          value: type
+        }) }}
+        {{ select({
+          label: 'Zdjęcie',
+          class: 'form-control',
+          name: 'image_id',
+          placeholder: 'Zdjęcie',
+          url: 'images/find',
+          value: image_id
+        }) }}
+      </div>
+      <input type="hidden" name="id" value="{{ id }}">
+    </div>
+    <div class="modal-footer">
+      <input type="submit" value="Save changes">
+    </div>
+  </form>
+{% endblock %}

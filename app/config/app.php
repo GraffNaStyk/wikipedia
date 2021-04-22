@@ -88,5 +88,11 @@ return [
     
     'extreme_task_path' => storage_path('private/extreme_task_system.json'),
     
+    'vocations_path' => storage_path('private/vocations.xml'),
+    
+    'transform_path' => storage_path('private/transform_system.json'),
+    
+    'task_system_path' => storage_path('private/task_system.json'),
+    
     'force_update_images' => false
 ];

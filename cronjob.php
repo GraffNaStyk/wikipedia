@@ -20,6 +20,8 @@ if ($job->do('parser') || $job->do('parse')) {
     \App\Facades\Parser\Bosses::parse();
     \App\Facades\Parser\DailyTasks::parse();
     \App\Facades\Parser\ExtremeTasks::parse();
+    \App\Facades\Parser\Transforms::parse();
+    \App\Facades\Parser\Task::parse();
 }
 
 $job->end();

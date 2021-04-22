@@ -63,6 +63,7 @@ class ImagesController extends DashController
             'name' => $request->get('name'),
             'path' => 'images/',
             'hash' => $hash,
+            'cid'  => $request->get('cid') ?? null,
             'ext'  => strtolower(pathinfo($request->file('file')['name'], PATHINFO_EXTENSION)),
             'created_by' => $this->user['id']
         ]);
@@ -132,4 +133,32 @@ class ImagesController extends DashController
             return $this->render();
         }
     }
+    
+//    public function reload()
+//    {
+//        $img = Storage::disk('private')->get('images/outfits/', '*', GLOB_BRACE, false);
+//
+//        foreach ($img as $value) {
+//            $name = pathinfo($value);
+//            if (! Image::where(['cid', '=', $name['filename']])->findOrFail()) {
+//                do {
+//                    $hash = Faker::hash(50);
+//                    $res = Image::where(['hash', '=', $hash])->findOrFail();
+//                } while(! empty($res));
+//
+//                copy (
+//                    $value,
+//                    storage_path('public/images/'.$hash.'.'.$name['extension'])
+//                );
+//                Image::insert([
+//                    'name' => $name['filename'],
+//                    'cid' => $name['filename'],
+//                    'hash' => $hash,
+//                    'path' => 'images/',
+//                    'created_by' => 1,
+//                    'ext' => $name['extension']
+//                ]);
+//            }
+//        }
+//    }
 }

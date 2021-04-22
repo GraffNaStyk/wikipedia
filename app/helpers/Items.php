@@ -45,7 +45,7 @@ class Items
                     ->where(['items.name', '<>', 'Small stone'])
                     ->where(['type', '=', $type])
                     ->where(['attack', '<>', 0])
-                    ->order(['attack'])
+                    ->order(['attack', 'level'])
                     ->get();
                 $return['headers'] = self::$tableHeaders[$type];
                 $return['subType'] = 'balls';
@@ -61,7 +61,7 @@ class Items
                     ->leftJoin(['images as i', 'items.cid', '=', 'i.cid'])
                     ->where(['type', '=', $type])
                     ->where(['armor', '<>', 0])
-                    ->order(['armor'])
+                    ->order(['armor', 'level'])
                     ->get();
             $return['headers'] = self::$tableHeaders['armors'];
             $return['subType'] = 'armors';
@@ -76,7 +76,7 @@ class Items
                     ->where(['attack', '<>', 0])
                     ->where(['attack', '<=', 100])
                     ->where(['i.name', '<>', 'C16 Band'])
-                    ->order(['attack'])
+                    ->order(['attack', 'level'])
                     ->get();
             $return['headers'] = self::$tableHeaders['weapons'];
             $return['subType'] = 'weapons';

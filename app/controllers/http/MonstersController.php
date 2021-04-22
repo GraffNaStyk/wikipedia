@@ -5,6 +5,7 @@ namespace App\Controllers\Http;
 use App\Facades\Http\Request;
 use App\Helpers\Pagination;
 use App\Helpers\Session;
+use App\Model\Bestiary;
 use App\Model\CtMonsterLoot;
 use App\Model\Monster;
 
@@ -99,22 +100,28 @@ class MonstersController extends IndexController
     {
         $monster = Monster::select(['monsters.*', 'i.ext', 'i.path', 'i.hash'])
             ->where(['monsters.name', '=', $name])
-            ->join(['images as i', 'i.cid', '=', 'monsters.cid'])
+            ->leftJoin(['images as i', 'i.cid', '=', 'monsters.cid'])
             ->findOrFail();
         
         if ($monster) {
             $loot = CtMonsterLoot::select(['i.name', 'chance', 'img.path', 'img.hash', 'i.description', 'img.ext'])
-                ->join(['items as i', 'i.cid', '=', 'item_id'])
-                ->join(['images as img', 'i.cid', '=', 'img.cid'])
+                ->leftJoin(['items as i', 'i.cid', '=', 'item_id'])
+                ->leftJoin(['images as img', 'i.cid', '=', 'img.cid'])
                 ->where(['monster_id', '=', $monster['id']])
                 ->where(['i.name', '<>', 'backpack'])
                 ->order(['ct_monsters_loot.chance'], 'desc')
                 ->get();
             
+            $bestiary = Bestiary::select('*')
+                ->where(['monster_cid', '=', $monster['cid']])
+                ->order(['stage'])
+                ->get();
+            
             return $this->render([
                 'title' => 'Monster - '.ucfirst($monster['name']),
                 'monster' => $monster,
-                'loot' => $loot
+                'loot' => $loot,
+                'bestiary' => $bestiary
             ]);
         } else {
             $this->redirect('');

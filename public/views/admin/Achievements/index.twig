@@ -5,6 +5,7 @@
    <table class="table table-striped">
      <thead>
      <tr>
+       <td>Numer</td>
        <td>Nazwa</td>
        <td>Treść</td>
        <td class="position-sticky">
@@ -15,6 +16,7 @@
      <tbody>
      {% for achiv in achievements %}
        <tr>
+         <td>{{ achiv.number }}</td>
          <td>{{ achiv.name }}</td>
          <td>{{ achiv.description }}</td>
          <td class="position-sticky">

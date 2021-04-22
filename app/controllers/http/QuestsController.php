@@ -19,6 +19,7 @@ class QuestsController extends IndexController
         $quests = Quest::select(['quests.*', 'p.title', 'p.id as quest_id'])
             ->leftJoin(['pages as p', 'p.parent_id', '=', 'quests.id'])
             ->where(['p.type', '=', 'quest'])
+            ->where(['p.is_active', '=', '1'])
             ->order(['level'], 'asc')
             ->get();
 

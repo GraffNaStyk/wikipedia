@@ -21,10 +21,10 @@ class ExtremeTasks
                 
                 ExtremeTask::insert([
                     'monster' => $task->monster,
-                    'normal_exp' => $task->exp1,
-                    'special_exp' => $task->exp2,
-                    'kills' => $task->kills,
-                    'difficulty' => $task->Difficult
+                    'normal_exp' => (int) $task->exp1,
+                    'special_exp' => (int) $task->exp2,
+                    'kills' => (int) $task->kills,
+                    'difficulty' => (int) $task->Difficult
                 ]);
                 
                 if ($rewards) {

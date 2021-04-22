@@ -11,7 +11,7 @@ class Quests
     {
         if (is_readable(app('quests_path'))) {
             $quests = json_decode(file_get_contents(app('quests_path')));
-    
+
             foreach ($quests as $quest) {
                 Quest::insert([
                     'level' => $quest->level,
@@ -22,8 +22,8 @@ class Quests
                 ]);
         
                 $id = Quest::lastId();
-        
-                if ($id) {
+                
+                if ((int) $id !== 0) {
                     Page::insert([
                         'title' => $quest->message,
                         'is_active' => 1,

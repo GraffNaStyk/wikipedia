@@ -20,7 +20,7 @@ class PagesComponentsController extends DashController
         [
             'value' => 'separator',
             'text' => 'Separator'
-        ]
+        ],
     ];
     
     public function __construct()

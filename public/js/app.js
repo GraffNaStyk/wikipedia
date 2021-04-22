@@ -171,7 +171,7 @@ export const OnSubmitForms = () => {
             } else {
               response(res, '.right-panel', e.target.dataset.action)
             }
-            callback(res.ok, res.to ?? res.to);
+            callback(res.ok, res.to ? res.to : null);
           });
         } else {
           return res.text().then(res => {

@@ -1,0 +1,32 @@
+{% extends layout %}
+
+{% block content %}
+  <div class="box">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <td>Spell</td>
+        <td>Opis</td>
+        <td>Typ</td>
+        <td>Zdjęcie</td>
+        <td class="position-sticky">
+          #
+        </td>
+      </tr>
+      </thead>
+      <tbody>
+      {% for spell in spells %}
+        <tr>
+          <td>{{ spell.name }}</td>
+          <td>{{ spell.description }}</td>
+          <td>{{ spell.type }}</td>
+          <td>{{ spell.image }}</td>
+          <td class="position-sticky">
+            <button class="is_button btn-sm render" data-el="modal" data-url="spells/edit/{{ spell.id }}">Edycja</button>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

@@ -1,4 +1,5 @@
 <?php
+
 header("Content-Type: text/html; charset=utf-8");
 header("X-Frame-Options: sameorigin");
 header("Content-Security-Policy: block-all-mixed-content; upgrade-insecure-requests; reflected-xss;");

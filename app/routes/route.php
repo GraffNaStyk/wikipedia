@@ -36,6 +36,7 @@ Router::get('monsters/{page}', 'monsters@index');
 
 Router::post('search', 'Search@index');
 
+Router::get('systems/tasks', 'Systems@task');
 Router::get('systems/task/daily', 'Systems@dailyTask');
 Router::get('systems/task/extreme', 'Systems@extremeTask');
 Router::get('systems/status', 'Systems@status');

@@ -54,6 +54,7 @@ class Items extends Facade
         'skillclub' => 'skill_club',
         'skillaxe' => 'skill_axe',
         'skillsword' => 'skill_sword',
+        'upgradeclass' => 'upgrade_class'
     ];
     
     protected static array $mapTypeToModel = [
@@ -88,7 +89,7 @@ class Items extends Facade
         } else {
             exit('file not exist');
         }
-        
+
         foreach (self::$return as $key => $items) {
             foreach ($items as $item) {
                 $item['type'] = self::$mapTypeToModel[$key];
@@ -98,6 +99,7 @@ class Items extends Facade
                 }
                 
                 Item::insert($item);
+       
                 self::getImage((int) $item['cid'], $item['name'], 'items');
             }
         }
@@ -126,7 +128,7 @@ class Items extends Facade
         
     }
     
-    protected static function getAttributes($item)
+    protected static function getAttributes ($item)
     {
         $return = [
             'name' => $item['@attributes']['name'],

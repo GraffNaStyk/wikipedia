@@ -19,7 +19,5 @@ class SagaController extends IndexController
             ->leftJoin(['images as img', 'i.cid', '=', 'img.cid'])
             ->order(['sagas.order'])
             ->get();
-        
-        pd($res);
     }
 }

@@ -12,13 +12,8 @@
   <h5>Wiersze</h5>
   {% for key,row in data.rows %}
     {% for i in 1..iterations %}
-      {{ cycle(input({
-        type:'text',
-        name:'data[rows]['~key~']['~i~']',
-        class: 'form-control',
-        value: row[i]
-      }), i)
-      }}
+      {% set area = '<textarea name="data[rows]['~key~']['~i~']" cols="20" rows="1">'~row[i]~'</textarea>' %}
+      {{ cycle(area, i)|raw }}
     {% endfor %}
     <br>
   {% endfor %}

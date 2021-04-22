@@ -56,11 +56,16 @@
     <a href="{{ url('bosses') }}">Bosses</a>
   </div>
 
-  {% if menu.map is not empty %}
-    <a class="menu-item" href="{{ url(menu.map.0.link) }}">
+  {% if maps is not empty %}
+    <a class="menu-item has__parent" href="#">
       <img src="{{ img('menu/maps.png') }}" alt="">
       Maps
     </a>
+    <div class="is__parent">
+      {% for map in maps %}
+        <a href="{{ map.link }}">{{ map.title }}</a>
+      {% endfor %}
+    </div>
   {% endif %}
 
   <a class="menu-item" href="{{ url('npc') }}">
@@ -68,17 +73,21 @@
     Npc
   </a>
 
-  {% if systems is not empty %}
-    <a class="menu-item has__parent" href="#">
-      <img src="{{ img('menu/systems.png') }}" alt="">
-      Systems
-    </a>
-    <div class="is__parent">
-      <a href="{{ url('systems/task/daily') }}">Daily tasks</a>
-      <a href="{{ url('systems/task/extreme') }}">Extreme tasks</a>
-      <a href="{{ url('systems/status') }}">Status system</a>
-    </div>
-  {% endif %}
+  <a class="menu-item has__parent" href="#">
+    <img src="{{ img('menu/systems.png') }}" alt="">
+    Systems
+  </a>
+  <div class="is__parent">
+    <a href="{{ url('systems/task/daily') }}">Daily tasks</a>
+    <a href="{{ url('systems/task/extreme') }}">Extreme tasks</a>
+    <a href="{{ url('systems/status') }}">Status system</a>
+    <a href="{{ url('systems/tasks') }}">Tasks</a>
+    {% if systems is not empty %}
+      {% for system in systems %}
+        <a href="{{ system.link }}">{{ system.title }}</a>
+      {% endfor %}
+    {% endif %}
+  </div>
 
   {% if achievements %}
     <a class="menu-item" href="{{ url('achievements') }}">

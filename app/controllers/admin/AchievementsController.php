@@ -21,15 +21,16 @@ class AchievementsController extends DashController
     
     public function edit(int $id)
     {
-        $desc = Achievement::select(['description'])->where(['id', '=', $id])->findOrFail();
-        $this->render(['id' => $id, 'description' => $desc['description']]);
+        $desc = Achievement::select(['description', 'number'])->where(['id', '=', $id])->findOrFail();
+        $this->render(['id' => $id, 'description' => $desc['description'], 'number' => $desc['number']]);
     }
     
     public function update(Request $request)
     {
         if (! $this->validate($request->all(), [
             'id' => 'int|required',
-            'description' => 'string|max:255'
+            'number' => 'int|required',
+            'description' => 'string|max:255|required'
         ])) {
             $this->sendError();
         }

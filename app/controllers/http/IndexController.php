@@ -3,8 +3,6 @@
 namespace App\Controllers\Http;
 
 use App\Core\Controller;
-use App\Facades\Parser\DailyTasks;
-use App\Facades\Parser\ExtremeTasks;
 use App\Helpers\Map;
 use App\Helpers\Pages;
 use App\Helpers\System;

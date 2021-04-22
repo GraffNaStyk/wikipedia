@@ -2,6 +2,7 @@
 
 namespace App\Facades\Parser;
 
+use App\Model\Bestiary;
 use App\Model\CtMonsterLoot;
 use App\Model\Monster;
 
@@ -23,6 +24,7 @@ class Monsters extends Facade
                     self::basic($monster['@attributes']);
                     self::health(get_object_vars($monster['health']));
                     self::loot(get_object_vars($monster['loot']));
+                    self::bestiary($monster);
                     self::$monsters[self::$iterator]['cid'] = (int) get_object_vars($monster['look'])['@attributes']['type'];
             
                     self::$iterator++;
@@ -106,6 +108,27 @@ class Monsters extends Facade
             return 100;
         }  else {
            return round((($value / self::MAX_DROP_CHANCE ) * 100) * self::RATE_LOOT, 3);
+        }
+    }
+    
+    protected static function bestiary($monster)
+    {
+        if (isset($monster['bestiary'])) {
+            $cid = (int)get_object_vars($monster['look'])['@attributes']['type'];
+            $bestiary = get_object_vars($monster['bestiary']);
+            
+            if ((int) $cid !== 0) {
+                foreach ($bestiary['stage'] as $item) {
+                    $item = get_object_vars($item)['@attributes'];
+                    Bestiary::insert([
+                        'monster_cid' => $cid,
+                        'stage' => (int) $item['id'],
+                        'kills' => (int) $item['kills'],
+                        'reward_type' => (string) $item['rewardType'],
+                        'reward_value' => (int) $item['value'],
+                    ]);
+                }
+            }
         }
     }
 }

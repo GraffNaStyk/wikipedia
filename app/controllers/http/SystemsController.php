@@ -6,6 +6,8 @@ use App\Model\DailyTask;
 use App\Model\DailyTaskReward;
 use App\Model\ExtremeTask;
 use App\Model\ExtremeTaskReward;
+use App\Model\Task;
+use App\Model\TaskReward;
 
 class SystemsController extends IndexController
 {
@@ -68,6 +70,21 @@ class SystemsController extends IndexController
     {
         $this->render([
             'title' => 'Status system'
+        ]);
+    }
+    
+    public function task()
+    {
+        $tasks = Task::select('*')
+        ->order(['kills'], 'asc')
+        ->get();
+        
+        foreach ($tasks as $key => $task) {
+            $tasks[$key]['rewards'] = TaskReward::where(['task_id', '=', $task['id']])->get();
+        }
+        
+        return $this->render([
+            'tasks' => $tasks
         ]);
     }
 }

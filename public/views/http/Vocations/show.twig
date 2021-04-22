@@ -2,6 +2,55 @@
 
 {% block content %}
 <div class="table-responsive">
+  <div class="p-2">
+    <span><b>Hp:</b> {{ vocation.hp }}</span> &nbsp;
+    <span><b>Ki:</b> {{ vocation.ki }}</span> &nbsp;
+    <span><b>Cap:</b> {{ vocation.cap }}</span> &nbsp;
+  </div>
+  <div class="p-2">
+    <p class="voc__description">
+      {{ vocation.description|raw }}
+    </p>
+  </div>
+  <h3 class="p-2">Transforms</h3>
+  <table class="table table-striped table-bordered table-dark">
+    <thead>
+    <tr>
+      <th>Transform</th>
+      <th>Ki damage</th>
+      <th>Healing</th>
+      <th>Melee absorb</th>
+      <th>Ki absorb</th>
+      <th>Hp</th>
+      <th>Ki</th>
+      <th>Constant</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for transform in transforms %}
+      <tr>
+        <td>
+         <div class="d-flex align-items-center justify-content-between">
+           <img src="{{ img(transform.path~transform.hash~'.'~transform.ext) }}" alt="">
+           {{ transform.lvl }}
+         </div>
+        </td>
+        <td>{{ transform.ki_damage }} %</td>
+        <td>{{ transform.healing }} %</td>
+        <td>{{ transform.melee_absorb }} %</td>
+        <td>{{ transform.ki_absorb }} %</td>
+        <td>
+          + {{ transform.hp }}
+        </td>
+        <td>
+            + {{ transform.ki }}
+        </td>
+        <td>{{ transform.is_constant == 0 ? 'No' : 'Yes' }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <h3 class="p-2">Spells</h3>
   <table class="table table-striped table-bordered table-dark">
     <thead>
       <tr>
